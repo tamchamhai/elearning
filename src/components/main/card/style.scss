@@ -1,0 +1,151 @@
+@import "../../../sassStyle/global";
+@import "../../../sassStyle/mixin";
+@import "../../../sassStyle/variables";
+
+.cover {
+  .cards {
+    &:hover .overlay {
+      opacity: 1;
+    }
+    transition: all 0.7s;
+    position: relative;
+    cursor: pointer;
+    margin: 10px;
+    height: 350px;
+    background: #f8f9fa;
+    .head-img {
+      width: 100%;
+      height: 145px;
+      img {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .title {
+      padding-left: 10px;
+      height: 60px;
+      h2 {
+        text-transform: capitalize;
+        margin: 10px 0 5px 0;
+        font-size: 1.3rem;
+      }
+    }
+    .author {
+      padding-left: 10px;
+      p {
+        color: $color-gray-0;
+        font-size: 0.8rem;
+        text-transform: capitalize;
+        font-weight: 300;
+      }
+    }
+    .votes {
+      padding-left: 10px;
+      .score {
+        color: $color-orange;
+      }
+      .stars {
+        color: $color-yellow;
+        margin-left: 3px;
+      }
+      .views {
+        color: $color-gray-0;
+        font-size: 0.8rem;
+        margin-left: 5px;
+      }
+    }
+    .price {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      p {
+        font-weight: 700 !important;
+        margin-top: 5px;
+      }
+      .tag-best-seller {
+        button {
+          background: #ffe799;
+          color: #593d00;
+          margin: 10px 0;
+          border-radius: 4px;
+          border: none;
+          padding: 5px;
+          font-size: 0.8rem;
+          font-weight: 700;
+        }
+      }
+    }
+
+    // Overlay
+    .overlay {
+      opacity: 0;
+      transition: all 0.7s;
+      border-radius: 5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      .title-overlay {
+        height: 40px;
+        h2 {
+          text-transform: capitalize;
+          margin: 10px 0 5px 0;
+          font-size: 1.3rem;
+        }
+      }
+      .update {
+        button {
+          background: #ffe799;
+          color: #593d00;
+          margin: 10px 10px 10px 0;
+          border-radius: 4px;
+          border: none;
+          padding: 5px;
+          font-size: 0.8rem;
+          font-weight: 700;
+        }
+        span {
+          font-size: 0.8rem;
+          color: #2d8643;
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+      .detail {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+        span {
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+      .intro {
+        max-height: 120px;
+        overflow: hidden;
+      }
+      .btns {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        .btn-wishlist {
+          border: 2px solid $color-primary;
+          border-radius: 50%;
+          .hov {
+            transition: all 0.5s;
+          }
+          &:hover .hov {
+            transform: scale(1.3);
+          }
+        }
+      }
+    }
+  }
+}

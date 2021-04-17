@@ -1,0 +1,158 @@
+@import "../../../../src/sassStyle/global";
+@import "../../../../src/sassStyle/variables";
+@import "../../../../src/sassStyle/mixin";
+
+// Dropdown menu
+.navbar {
+  padding: 0 16px !important;
+  flex-wrap: nowrap;
+  .navbar-brand {
+    padding: 0;
+    &:hover .logo-part-one {
+      background-position: center right;
+    }
+    &:hover .logo-part-two {
+      background-position: left center;
+    }
+    .logo-part-one {
+      font-size: $fs-lg-logo-one;
+      font-family: "Lobster", cursive;
+      background: linear-gradient(
+        90deg,
+        #ffff00 3%,
+        #ffa500 12%,
+        #f14444 23%,
+        #d53567 27%,
+        #9a109a 47%,
+        #9a109a 53%,
+        #d53567 72%,
+        #f14444 77%,
+        #ffa500 88%,
+        #ffff00 97%
+      );
+      transition: 256ms all;
+      background-size: 200% 100%;
+      padding-right: 3px;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-position: left center;
+    }
+    .logo-part-two {
+      font-size: $fs-lg-logo-two;
+      font-family: "Lobster", cursive;
+      background: linear-gradient(
+        90deg,
+        #ffff00 3%,
+        #ffa500 12%,
+        #f14444 23%,
+        #d53567 27%,
+        #9a109a 47%,
+        #9a109a 53%,
+        #d53567 72%,
+        #f14444 77%,
+        #ffa500 88%,
+        #ffff00 97%
+      );
+      transition: 256ms all;
+      background-size: 200% 100%;
+      padding-right: 3px;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-position: center right;
+    }
+  }
+  .dropdown {
+    position: relative;
+    height: 82px;
+    #navbarDropdown {
+      color: $color-black-0;
+      line-height: 66px;
+    }
+    #navbarDropdown::after {
+      display: none;
+    }
+    .dropdown-menu {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      position: absolute;
+      top: 80px;
+      width: $width-1;
+      background: transparent;
+      border: 1px solid #ced4da;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 2px 2px 5px -4px black;
+      .dropdown-item {
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}
+.dropdown:hover > #navbarDropdown {
+  color: $color-primary;
+}
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+// Toggle menu
+.navbar {
+  .navbar-collapse {
+    height: 82px;
+    .user {
+      .button {
+        width: $width-button;
+      }
+      .afterLogin {
+        .userProfile {
+          width: $width-button-2;
+          margin-top: 5px;
+          min-width: 40px;
+          min-height: 39px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .form-inline {
+    // search icon
+    button {
+      height: $height-1;
+      background: $color-white-0;
+      border: 1px solid #ced4da;
+      border-right: none;
+      border-top-left-radius: 23px;
+      border-bottom-left-radius: 23px;
+      padding-left: 10px;
+      .MuiSvgIcon-root {
+        background: $color-white-0;
+        color: $color-black-1;
+      }
+    }
+    .form-control {
+      background: $color-white-0;
+      width: $width-1;
+      height: $height-1;
+      border-radius: 23px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+      &:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+      }
+    }
+  }
+  .sidebar-btn {
+    .MuiButton-root {
+      width: $width-button-2;
+      min-width: 37px;
+      border-radius: 50%;
+    }
+  }
+}

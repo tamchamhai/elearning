@@ -1,0 +1,14 @@
+@import "../../../sassStyle//global";
+@import "../../../sassStyle//mixin";
+@import "../../../sassStyle//variables";
+.MuiDrawer-root {
+  .Title {
+    .MuiListItemText-root {
+      .MuiTypography-root {
+        color: $color-white-0;
+        font-size: large;
+        font-weight: 700 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "../../../../src/sassStyle/global";
+@import "../../../../src/sassStyle/variables";
+@import "../../../../src/sassStyle/mixin";
+
+.my-carousel {
+  position: relative;
+  text-align: center;
+  .carousel-img {
+    width: 100%;
+    img {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+  .caption {
+    position: absolute;
+    top: 40%;
+    left: 100px !important;
+    transform: translateY(-50%);
+    width: 40%;
+    color: $color-white-0;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+    .registor-btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+  }
+  .caption-responsive {
+    padding: 10px 20px;
+  }
+}

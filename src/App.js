@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch } from "react-router-dom";
+import "./App.css";
+import Footer from "./components/main/footer";
+import Header from "./components/main/header";
+import { adminRouter, mainRouter } from "./config/router";
+import RouterAdminTemplate from "./templates/admin";
+import RouterMainTemplate from "./templates/main";
 
 function App() {
+  const renderMainRouter = () => {
+    return mainRouter.map(({ path, exact, component }, index) => {
+      return (
+        <RouterMainTemplate
+          path={path}
+          exact={exact}
+          Component={component}
+          key={index}
+        ></RouterMainTemplate>
+      );
+    });
+  };
+  const renderAdminRouter = () => {
+    return adminRouter.map(({ path, exact, component }, index) => {
+      return (
+        <RouterAdminTemplate
+          path={path}
+          exact={exact}
+          Component={component}
+          key={index}
+        ></RouterAdminTemplate>
+      );
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          {renderMainRouter()}
+          {renderAdminRouter()}
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
 
