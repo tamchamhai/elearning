@@ -13,8 +13,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Button, IconButton } from "@material-ui/core";
 
 let settings = {
-  dots: true,
-  infinite: false,
+  dots: false,
+  infinite: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 4,
