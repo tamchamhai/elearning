@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -8,15 +9,15 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import CreateIcon from "@material-ui/icons/Create";
 import InputIcon from "@material-ui/icons/Input";
 import PersonIcon from "@material-ui/icons/Person";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import "./style.scss";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   list: {
@@ -70,6 +71,8 @@ const topBarAfterLogin = [
 ];
 
 export default function Sidebar({ loginSwitch }) {
+  const { categories } = useSelector((state) => state.courses);
+
   const renderLoginSwitch = () => {
     if (loginSwitch) {
       return topBarBeforLogin.map((item, index) => (
@@ -127,17 +130,23 @@ export default function Sidebar({ loginSwitch }) {
       <List>{renderLoginSwitch()}</List>
       <Divider />
       <List>
-        {["Danh mục khóa học"].map((text, index) => (
+        {["Danh mục khóa học"].map((text) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {categories.map((item, index) => (
+          <ListItem button key={index}>
+            <NavLink
+              exact={true}
+              to={`/category/${item.maDanhMuc}`}
+              className="text-dark text-decoration-none"
+            >
+              <ListItemIcon>
+                <PlayArrowIcon />
+              </ListItemIcon>
+              <span className="category-tex ">{item.tenDanhMuc}</span>
+            </NavLink>
           </ListItem>
         ))}
       </List>

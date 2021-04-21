@@ -1,0 +1,19 @@
+@import "../../sassStyle/global";
+@import "../../sassStyle/mixin";
+@import "../../sassStyle/variables";
+
+.feature {
+  .feature-item {
+    padding: auto;
+    text-align: center;
+    .img {
+      img {
+        width: 76px;
+        height: 76px;
+      }
+    }
+    .cap {
+      padding: 10px 0;
+    }
+  }
+}

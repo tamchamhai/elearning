@@ -1,0 +1,14 @@
+@import "../../../sassStyle/variables";
+@import "../../../sassStyle/mixin";
+@import "../../../sassStyle/global";
+
+.pon {
+  #title {
+    text-transform: capitalize;
+    color: whitesmoke;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 300;
+    background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  }
+}

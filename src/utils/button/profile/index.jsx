@@ -4,9 +4,15 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 // Avatar
 import Avatar from "@material-ui/core/Avatar";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import { deepOrange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
+  popover: {
+    pointerEvents: "none",
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
   typography: {
     padding: theme.spacing(2),
   },
@@ -21,47 +27,45 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(deepOrange[500]),
     backgroundColor: deepOrange[500],
   },
-  purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
-  },
 }));
 
 export default function ProfileBtn() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
+  const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handlePopoverClose = () => {
     setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   return (
     <div className="justify-content-center align-items-center">
-      <div className={classes.root}>
-        <Avatar
-          alt="Jummy"
-          src="https://source.unsplash.com/random"
-          aria-describedby={id}
-          onClick={handleClick}
-          variant="circular"
-          aria-label="Profile"
-          className={`userProfile ml-3 ${classes.orange}`}
-        />
-        {/* <PersonIcon />
-        </Avatar> */}
-      </div>
+      <Avatar
+        color="primary"
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+        alt="Jummy"
+        src="https://source.unsplash.com/random"
+        variant="circular"
+        aria-label="Profile"
+        className={`userProfile ml-3 ${classes.orange}`}
+      />
+
       <Popover
-        id={id}
+        id="mouse-over-popover"
+        className={classes.popover}
+        classes={{
+          paper: classes.paper,
+        }}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",
@@ -70,10 +74,10 @@ export default function ProfileBtn() {
           vertical: "top",
           horizontal: "right",
         }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
       >
-        <Typography className={classes.typography}>
-          The content of the Popover.
-        </Typography>
+        <Typography>I use Popover.</Typography>
       </Popover>
     </div>
   );

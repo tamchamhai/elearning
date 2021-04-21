@@ -6,8 +6,11 @@ import { IconButton } from "@material-ui/core";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 
 const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
+  popover: {
+    pointerEvents: "none",
+  },
+  paper: {
+    padding: theme.spacing(1),
   },
 }));
 
@@ -15,33 +18,37 @@ export default function NotificationsBtn() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
+  const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handlePopoverClose = () => {
     setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   return (
     <div>
       <IconButton
-        aria-describedby={id}
-        onClick={handleClick}
         color="primary"
-        aria-label="notifications"
+        aria-label="add to shopping cart"
         className="ml-2"
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
       >
         <NotificationsActiveIcon />
       </IconButton>
       <Popover
-        id={id}
+        id="mouse-over-popover"
+        className={classes.popover}
+        classes={{
+          paper: classes.paper,
+        }}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",
@@ -50,10 +57,10 @@ export default function NotificationsBtn() {
           vertical: "top",
           horizontal: "right",
         }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
       >
-        <Typography className={classes.typography}>
-          The content of the Popover.
-        </Typography>
+        <Typography>I use Popover.</Typography>
       </Popover>
     </div>
   );

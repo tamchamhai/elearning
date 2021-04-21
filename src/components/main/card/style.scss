@@ -2,6 +2,23 @@
 @import "../../../sassStyle/mixin";
 @import "../../../sassStyle/variables";
 
+// slick carousel
+.slick-slider {
+  .slick-arrow,
+  .slick-dots {
+    display: none !important;
+  }
+}
+
+// Backdrop loading
+.backdrop-loading {
+  height: 300px;
+}
+
+// carousel content
+#card-container {
+  margin: 0 !important;
+}
 .cover {
   .cards {
     &:hover .overlay {

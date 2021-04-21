@@ -4,6 +4,9 @@
 .MuiDrawer-root {
   .Title {
     .MuiListItemText-root {
+      .category-text {
+        line-height: 24px;
+      }
       .MuiTypography-root {
         color: $color-white-0;
         font-size: large;

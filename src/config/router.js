@@ -2,6 +2,7 @@ import Courses from "../pages/admin/course";
 import Dashboard from "../pages/admin/dashboard";
 import Register from "../pages/admin/register";
 import User from "../pages/admin/user";
+import Category from "../pages/main/categories";
 import CourseDetail from "../pages/main/course-detail";
 import Home from "../pages/main/home";
 import UserProfile from "../pages/main/user-profile";
@@ -13,7 +14,7 @@ export const mainRouter = [
     component: Home,
   },
   {
-    path: "/course-detail",
+    path: "/course-detail/:courseId",
     exact: true,
     component: CourseDetail,
   },
@@ -21,6 +22,11 @@ export const mainRouter = [
     path: "/user-profile",
     exact: true,
     component: UserProfile,
+  },
+  {
+    path: "/category/:name",
+    exact: true,
+    component: Category,
   },
 ];
 
