@@ -13,10 +13,7 @@ function Category() {
   const { name } = useParams();
   const { loading } = useSelector((state) => state.loading);
   const { coursesOfCategory } = useSelector((state) => state.courses);
-  let categoryName;
-  coursesOfCategory
-    ? (categoryName = coursesOfCategory[0].danhMucKhoaHoc.tenDanhMucKhoaHoc)
-    : (categoryName = "Không tìm thấy khóa học");
+
   useEffect(function () {
     dispatch(getCategories());
   }, []);
@@ -27,14 +24,28 @@ function Category() {
     [name]
   );
 
-  return (
-    <div className="pon ">
-      <h1 className="title" id="title">
-        {categoryName}
-      </h1>
-      <Card renderList={coursesOfCategory} loading={loading} />;
-    </div>
-  );
+  const renderCategory = () => {
+    if (loading) {
+      return (
+        <div className="backdrop-loading col-12">
+          <div className="spinner-border text-secondary " role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="pon ">
+          <h1 className="title" id="title">
+            {coursesOfCategory[0]?.danhMucKhoaHoc.tenDanhMucKhoaHoc}
+          </h1>
+          <Card renderList={coursesOfCategory} loading={loading} />;
+        </div>
+      );
+    }
+  };
+
+  return renderCategory();
 }
 
 export default Category;

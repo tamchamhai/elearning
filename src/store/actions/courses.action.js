@@ -3,6 +3,8 @@ import {
   GET_CATEGORIES_SUCCESS,
   GET_COURSES_OF_CATEGORY_FAILE,
   GET_COURSES_OF_CATEGORY_SUCCESS,
+  GET_COURSE_DETAIL_FAILE,
+  GET_COURSE_DETAIL_SUCCESS,
   GET_LIST_COURSE_FAILE,
   GET_LIST_COURSE_SUCCESS,
 } from "../constants/courses.const";
@@ -18,13 +20,12 @@ export const getListCourses = () => {
         "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01",
     })
       .then((res) => {
-        dispatch(stopLoading());
         dispatch(getListCourseSuccess(res.data));
+        dispatch(stopLoading());
       })
       .catch((err) => {
-        dispatch(stopLoading());
         dispatch(getListCourseFaile(err));
-        console.log(err);
+        dispatch(stopLoading());
       });
   };
 };
@@ -42,8 +43,10 @@ const getListCourseFaile = (err) => {
   };
 };
 
+// Get categories
 export const getCategories = () => {
   return (dispatch) => {
+    dispatch(startLoading());
     axios({
       method: "GET",
       url:
@@ -52,9 +55,11 @@ export const getCategories = () => {
       .then((res) => {
         dispatch(getCategoriesSuccess(res.data));
         console.log(res.data);
+        dispatch(stopLoading());
       })
       .catch((err) => {
         dispatch(getCategoriesFaile(err));
+        dispatch(stopLoading());
       });
   };
 };
@@ -82,12 +87,12 @@ export const getCoursesOfCategory = (params) => {
       url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${params}&MaNhom=GP01`,
     })
       .then((res) => {
-        dispatch(stopLoading());
         dispatch(getCoursesOfCategorySuccess(res.data));
+        dispatch(stopLoading());
       })
       .catch((err) => {
-        dispatch(stopLoading());
         dispatch(getCourseOfCategoryFaile(err));
+        dispatch(stopLoading());
       });
   };
 };
@@ -101,6 +106,40 @@ const getCoursesOfCategorySuccess = (course) => {
 const getCourseOfCategoryFaile = (err) => {
   return {
     type: GET_COURSES_OF_CATEGORY_FAILE,
+    payload: err,
+  };
+};
+
+// Get course detail
+export const getCourseDetail = (params) => {
+  console.log(params);
+  return (dispatch) => {
+    dispatch(startLoading());
+    axios({
+      mothod: "GET",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${params}`,
+    })
+      .then((res) => {
+        dispatch(getCourseDetailSuccess(res.data));
+        dispatch(stopLoading());
+        console.log("ré", res);
+      })
+      .catch((err) => {
+        dispatch(getCourseDetailFaile(err));
+        dispatch(stopLoading());
+      });
+  };
+};
+
+export const getCourseDetailSuccess = (course) => {
+  return {
+    type: GET_COURSE_DETAIL_SUCCESS,
+    payload: course,
+  };
+};
+export const getCourseDetailFaile = (err) => {
+  return {
+    type: GET_COURSE_DETAIL_FAILE,
     payload: err,
   };
 };

@@ -1,1 +1,78 @@
-ECHO is on.
+@import "../../../sassStyle/global";
+@import "../../../sassStyle/mixin";
+@import "../../../sassStyle/variables";
+
+.course-detail {
+  .banner {
+    background: #1e1e1c;
+    // height: 400px;
+    padding: 40px 80px;
+    .content {
+      color: $color-white-1;
+      .nav-link {
+        text-decoration: none;
+        color: #8ed1dc;
+        padding: 0;
+        text-transform: capitalize;
+        font-weight: 700;
+      }
+      h1 {
+        font-size: 35px;
+        text-transform: capitalize;
+        padding: 20px 0 10px 0;
+      }
+      p {
+        font-size: 1.3rem;
+        line-height: 1.7rem;
+        margin-bottom: 1.2rem;
+        max-height: 60px;
+        overflow: hidden;
+      }
+      .points {
+        font-size: 1.4rem;
+        color: $color-orange;
+      }
+      .stars {
+        line-height: 27px;
+        color: $color-yellow;
+        margin-left: 3px;
+      }
+      .rating {
+        margin-left: 10px;
+      }
+      .student {
+        margin-left: 10px;
+      }
+      .author {
+        text-transform: capitalize;
+        font-weight: 300;
+        p {
+          font-size: 0.9rem;
+          a {
+            margin-left: 5px;
+            color: #8ed1dc !important;
+          }
+        }
+      }
+      .btns {
+        margin-top: 30px;
+        .registor {
+          display: flex;
+          align-items: center;
+          margin-left: -8px;
+          margin-right: 20px;
+        }
+        .btn-wishList {
+          border: 2px solid $color-primary;
+          border-radius: 50%;
+          .hov {
+            transition: all 0.5s;
+          }
+          &:hover .hov {
+            transform: scale(1.3);
+          }
+        }
+      }
+    }
+  }
+}

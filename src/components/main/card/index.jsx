@@ -1,6 +1,4 @@
 import React from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./style.scss";
 import StarIcon from "@material-ui/icons/Star";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
@@ -8,6 +6,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Button, IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import AddItemToCard from "../../../utils/button/addItemToCard";
 
 const styleBtn = {
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -34,7 +33,7 @@ function Card({ renderList, loading }) {
           return (
             <NavLink
               to={`/course-detail/${course.maKhoaHoc}`}
-              exact="true"
+              exact={true}
               key={index}
               className="cover text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
             >
@@ -86,9 +85,7 @@ function Card({ renderList, loading }) {
                     <p>{course.moTa}</p>
                   </div>
                   <div className="btns d-flex justify-content-between container">
-                    <div className="btn-add-to-card d-flex align-items-center">
-                      <Button style={styleBtn}>Thêm vào giỏ</Button>
-                    </div>
+                    <AddItemToCard />
                     <div className="btn-wishlist">
                       <IconButton color="primary" className="hov">
                         <FavoriteIcon />
@@ -106,7 +103,6 @@ function Card({ renderList, loading }) {
 
   return (
     <div className="row" id="card-container">
-      {/* <Slider {...settings}>{renderListCard()}</Slider> */}
       {renderListCard()}
     </div>
   );

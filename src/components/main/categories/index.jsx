@@ -4,21 +4,31 @@ import { NavLink } from "react-router-dom";
 
 export default function Categories() {
   const { categories } = useSelector((state) => state.courses);
-  // const { loading } = useSelector((state) => state.loading);
+  const { loading } = useSelector((state) => state.loading);
 
   const renderCategory = () => {
-    return categories.map((item, index) => {
+    if (loading) {
       return (
-        <NavLink
-          key={index}
-          exact={false}
-          className="dropdown-item"
-          to={`/category/${item.maDanhMuc}`}
-        >
-          {item.tenDanhMuc}
-        </NavLink>
+        <div className="backdrop-loading col-12">
+          <div className="spinner-border text-secondary " role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        </div>
       );
-    });
+    } else {
+      return categories.map((item, index) => {
+        return (
+          <NavLink
+            key={index}
+            exact={false}
+            className="dropdown-item"
+            to={`/category/${item.maDanhMuc}`}
+          >
+            {item.tenDanhMuc}
+          </NavLink>
+        );
+      });
+    }
   };
   return <div>{renderCategory()}</div>;
 }

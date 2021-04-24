@@ -10,7 +10,7 @@ import WishListBtn from "../../../utils/button/wishList";
 import ProfileBtn from "../../../utils/button/profile";
 import Registor from "../../../utils/button/registor";
 
-const loginSwitch = false;
+const loginSwitch = true;
 const renderUserLogin = () => {
   if (loginSwitch) {
     return (
