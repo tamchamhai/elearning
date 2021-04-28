@@ -5,6 +5,8 @@ import User from "../pages/admin/user";
 import Category from "../pages/main/categories";
 import CourseDetail from "../pages/main/course-detail";
 import Home from "../pages/main/home";
+import SignIn from "../pages/main/sign-in";
+import SignUp from "../pages/main/sign-up";
 import UserProfile from "../pages/main/user-profile";
 
 export const mainRouter = [
@@ -27,6 +29,16 @@ export const mainRouter = [
     path: "/category/:name",
     exact: true,
     component: Category,
+  },
+  {
+    path: "/signin",
+    exact: true,
+    component: SignIn,
+  },
+  {
+    path: "/signup",
+    exact: true,
+    component: SignUp,
   },
 ];
 

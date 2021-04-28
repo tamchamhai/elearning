@@ -1,10 +1,14 @@
 import { BrowserRouter, Switch } from "react-router-dom";
 import "./App.css";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import Footer from "./components/main/footer";
 import Header from "./components/main/header";
 import { adminRouter, mainRouter } from "./config/router";
 import RouterAdminTemplate from "./templates/admin";
 import RouterMainTemplate from "./templates/main";
+import { postUserSigninSuccess } from "./store/actions/user.action";
+import "./sassStyle/_main.scss";
 
 function App() {
   const renderMainRouter = () => {
@@ -32,6 +36,12 @@ function App() {
     });
   };
 
+  const dispatch = useDispatch();
+  const userSignin = JSON.parse(localStorage.getItem("userSignin"));
+  useEffect(() => {
+    console.log(userSignin);
+    dispatch(postUserSigninSuccess(userSignin));
+  });
   return (
     <>
       <BrowserRouter>

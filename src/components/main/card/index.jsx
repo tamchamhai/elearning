@@ -4,7 +4,7 @@ import StarIcon from "@material-ui/icons/Star";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { Button, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import AddItemToCard from "../../../utils/button/addItemToCard";
 
@@ -31,9 +31,7 @@ function Card({ renderList, loading }) {
       if (renderList) {
         return renderList.map((course, index) => {
           return (
-            <NavLink
-              to={`/course-detail/${course.maKhoaHoc}`}
-              exact={true}
+            <div
               key={index}
               className="cover text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
             >
@@ -67,23 +65,31 @@ function Card({ renderList, loading }) {
 
                 {/* Overlay */}
                 <div className="overlay">
-                  <div className="title-overlay">
-                    <h2>{course.tenKhoaHoc}</h2>
-                  </div>
-                  <div className="update">
-                    <button>BestSeller</button>
-                    <span>
-                      Đã Cập Nhật <span>April 2021</span>
-                    </span>
-                  </div>
-                  <div className="detail">
-                    <span>
-                      40 Giờ học<span>Tất cả cấp độ</span>
-                    </span>
-                  </div>
-                  <div className="intro">
-                    <p>{course.moTa}</p>
-                  </div>
+                  <NavLink
+                    to={`./course-detail/${course.maKhoaHoc}`}
+                    exact={true}
+                  >
+                    <div className="navlink">
+                      <div className="title-overlay">
+                        <h2>{course.tenKhoaHoc}</h2>
+                      </div>
+                      <div className="update">
+                        <button>BestSeller</button>
+                        <span>
+                          Đã Cập Nhật <span>April 2021</span>
+                        </span>
+                      </div>
+                      <div className="detail">
+                        <span>
+                          40 Giờ học<span>Tất cả cấp độ</span>
+                        </span>
+                      </div>
+                      <div className="intro">
+                        <p>{course.moTa}</p>
+                      </div>
+                    </div>
+                  </NavLink>
+
                   <div className="btns d-flex justify-content-between container">
                     <AddItemToCard />
                     <div className="btn-wishlist">
@@ -93,8 +99,10 @@ function Card({ renderList, loading }) {
                     </div>
                   </div>
                 </div>
+
+                {/* btns */}
               </div>
-            </NavLink>
+            </div>
           );
         });
       }

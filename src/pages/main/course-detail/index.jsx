@@ -20,10 +20,10 @@ export default function CourseDetail() {
   const dispatch = useDispatch();
   const { courseDetail } = useSelector((state) => state.courses);
   const { loading } = useSelector((state) => state.loading);
+  const { userSignin } = useSelector((state) => state.user);
 
-  const isLogin = true;
   const renderBtn = () => {
-    if (isLogin) {
+    if (userSignin) {
       return (
         <div className="registor">
           <AddItemToCard />
@@ -44,7 +44,6 @@ export default function CourseDetail() {
   }, []);
 
   const renderCourseDetail = () => {
-    console.log(loading);
     if (loading) {
       return (
         <div className="backdrop-loading col-12">
@@ -54,7 +53,6 @@ export default function CourseDetail() {
         </div>
       );
     } else {
-      console.log(courseDetail);
       return (
         <div className="course-detail">
           <div className="banner row">
@@ -102,8 +100,12 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
-            <div className="photo col-4">
-              <img src={courseDetail.hinhAnh} alt="photo of course" />
+            <div className="photo col-4 row">
+              <img
+                src={courseDetail.hinhAnh}
+                className="col-12"
+                alt="photo of course"
+              />
             </div>
           </div>
 

@@ -1,8 +1,4 @@
-@import "../../../sassStyle/global";
-@import "../../../sassStyle/mixin";
-@import "../../../sassStyle/variables";
-
-// slick carousel
+@import "../../../sassStyle/main"; // slick carousel
 .slick-slider {
   .slick-arrow,
   .slick-dots {
@@ -107,51 +103,59 @@
       background: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
       padding: 10px;
-      .title-overlay {
-        height: 40px;
-        h2 {
-          text-transform: capitalize;
-          margin: 10px 0 5px 0;
-          font-size: 1.3rem;
-        }
-      }
-      .update {
-        button {
-          background: #ffe799;
-          color: #593d00;
-          margin: 10px 10px 10px 0;
-          border-radius: 4px;
-          border: none;
-          padding: 5px;
-          font-size: 0.8rem;
-          font-weight: 700;
-        }
-        span {
-          font-size: 0.8rem;
-          color: #2d8643;
-          span {
-            font-weight: 700;
+      a {
+        text-decoration: none;
+        .navlink {
+          height: 270px;
+          color: black;
+          .title-overlay {
+            height: 40px;
+            h2 {
+              text-transform: capitalize;
+              margin: 10px 0 5px 0;
+              font-size: 1.3rem;
+            }
+          }
+          .update {
+            button {
+              background: #ffe799;
+              color: #593d00;
+              margin: 10px 10px 10px 0;
+              border-radius: 4px;
+              border: none;
+              padding: 5px;
+              font-size: 0.8rem;
+              font-weight: 700;
+            }
+            span {
+              font-size: 0.8rem;
+              color: #2d8643;
+              span {
+                font-weight: 700;
+              }
+            }
+          }
+          .detail {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            span {
+              span {
+                margin-left: 10px;
+              }
+            }
+          }
+          .intro {
+            max-height: 120px;
+            overflow: hidden;
           }
         }
-      }
-      .detail {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-        span {
-          span {
-            margin-left: 10px;
-          }
-        }
-      }
-      .intro {
-        max-height: 120px;
-        overflow: hidden;
       }
       .btns {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
+        z-index: 10;
         .btn-wishlist {
           border: 2px solid $color-primary;
           border-radius: 50%;

@@ -1,12 +1,11 @@
-@import "../../../sassStyle/global";
-@import "../../../sassStyle/mixin";
-@import "../../../sassStyle/variables";
+@import "../../../sassStyle/main";
 
 .course-detail {
   .banner {
     background: #1e1e1c;
     // height: 400px;
     padding: 40px 80px;
+    margin: 0 !important;
     .content {
       color: $color-white-1;
       .nav-link {
@@ -25,7 +24,7 @@
         font-size: 1.3rem;
         line-height: 1.7rem;
         margin-bottom: 1.2rem;
-        max-height: 60px;
+        max-height: 200px;
         overflow: hidden;
       }
       .points {
@@ -72,6 +71,11 @@
             transform: scale(1.3);
           }
         }
+      }
+    }
+    .photo {
+      img {
+        width: 100%;
       }
     }
   }

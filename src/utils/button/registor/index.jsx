@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const style = {
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -10,10 +11,10 @@ const style = {
 
 export default function Registor() {
   return (
-    <div>
+    <NavLink to="/signin" className="text-decoration-none">
       <Button variant="contained" style={style} className="ml-2 button mt-1">
-        đăng nhập/đăng kí
+        Sign In
       </Button>
-    </div>
+    </NavLink>
   );
 }

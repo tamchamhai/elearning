@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./_style.scss";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import Sidebar from "../sidebar";
 import Categories from "../categories";
@@ -10,38 +11,52 @@ import WishListBtn from "../../../utils/button/wishList";
 import ProfileBtn from "../../../utils/button/profile";
 import Registor from "../../../utils/button/registor";
 
-const loginSwitch = true;
-const renderUserLogin = () => {
-  if (loginSwitch) {
-    return (
-      //  {/* UI before log in */}
-      <div className="beforeLogin d-flex">
-        <AddToCartBtn />
-        <Registor />
-      </div>
-    );
-  } else {
-    return (
-      // {/* UI after log in */}
-      <div className="afterLogin d-flex">
-        <WishListBtn />
-        <AddToCartBtn />
-        <NotificationsBtn />
-        {/* user profile */}
-        <ProfileBtn />
-      </div>
-    );
-  }
-};
-
 export default function Header() {
+  const [isSignin, setIsSignin] = useState(true);
+  const { userSignin } = useSelector((state) => state.user);
+  console.log(userSignin);
+  useEffect(() => {
+    if (userSignin) {
+      setIsSignin(false);
+    } else {
+      setIsSignin(true);
+    }
+  }, [userSignin]);
+
+  // const token = JSON.parse(localStorage.getItem("userSignin"));
+
+  const renderUserLogin = () => {
+    if (isSignin) {
+      console.log(isSignin);
+      return (
+        //  {/* UI before log in */}
+        <div className="beforeLogin d-flex">
+          <AddToCartBtn />
+          <Registor />
+        </div>
+      );
+    } else {
+      console.log(isSignin);
+      return (
+        // {/* UI after log in */}
+        <div className="afterLogin d-flex">
+          <WishListBtn />
+          <AddToCartBtn />
+          <NotificationsBtn />
+          <ProfileBtn />
+        </div>
+      );
+    }
+  };
+
+  // render
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light ">
       <NavLink className="navbar-brand" to="/">
         <span className="logo-part-one">E</span>
         <span className="logo-part-two">Learn</span>
       </NavLink>
-
+      {console.log("render")}
       <div
         className="collapse navbar-collapse d-sm-flex justify-content-end"
         id="navbarSupportedContent"
@@ -84,7 +99,7 @@ export default function Header() {
 
       {/* Sidebar toggle buttun */}
       <div className="sidebar-btn ml-2 d-lg-none">
-        <Sidebar loginSwitch={loginSwitch} />
+        <Sidebar loginSwitch={isSignin} />
       </div>
     </nav>
   );
