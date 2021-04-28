@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./style.scss";
 import StarIcon from "@material-ui/icons/Star";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
@@ -18,6 +19,7 @@ const styleBtn = {
 };
 
 function Card({ renderList, loading }) {
+  const history = useHistory();
   const renderListCard = () => {
     if (loading) {
       return (
@@ -66,7 +68,7 @@ function Card({ renderList, loading }) {
                 {/* Overlay */}
                 <div className="overlay">
                   <NavLink
-                    to={`./course-detail/${course.maKhoaHoc}`}
+                    to={`/course-detail/${course.maKhoaHoc}`}
                     exact={true}
                   >
                     <div className="navlink">
