@@ -3,42 +3,83 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./style.scss";
 import { postUserSignUp } from "../../../store/actions/user.action";
+// import useForm from "react-hook-form";
 
 function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [userSignup, setUserSignup] = useState({
-    userName: "",
-    password: "",
-    name: "",
-    phone: "",
-    maNhom: "GP01",
-    email: "",
-  });
-  // const manhom = "GP01";
-
-  const [isValid, setErrorSignup] = useState({
-    name: "",
-    userName: "",
-    password: "",
-    repassword: "",
-    phone: "",
-    email: "",
+    userInput: {
+      userName: "",
+      name: "",
+      password: "",
+      repassword: "",
+      phone: "",
+      maNhom: "GP01",
+      email: "",
+    },
+    errors: {
+      name: "",
+      userName: "",
+      password: "",
+      repassword: "",
+      phone: "",
+      email: "",
+    },
   });
 
   // Handle function
   const handleOnchange = (event) => {
-    const { name, value } = event.target;
-
+    const { name, value, type, pattern } = event.target;
+    const { password, repassword } = userSignup.userInput;
+    console.log(password, repassword);
     // Validation function
     let errorSMS = "";
     if (value.trim() === "") {
       errorSMS = name + " is empty";
     }
 
-    setUserSignup({ ...userSignup, [name]: value });
-    setErrorSignup({ ...isValid, [name]: errorSMS });
+    if (type === "email") {
+      // new RegExp transform pattern string to regex
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorSMS = name + " is invalid";
+      }
+    }
+    if (type === "password") {
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorSMS =
+          name +
+          " containing at least 8 characters 1 number 1 upper and 1 lowrecase";
+      }
+    }
+    if (name === "repassword") {
+      console.log(password, repassword);
+      if (value !== password) {
+        errorSMS = name + " is incorrect";
+      }
+    }
+    if (name === "phone") {
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorSMS = name + " is invalid";
+      }
+      if (value.length < 9) {
+        errorSMS = name + " number is less than 9";
+      }
+    }
+
+    let users = { ...userSignup.userInput, [name]: value };
+    let error = { ...userSignup.errors, [name]: errorSMS };
+
+    setUserSignup({
+      userInput: users,
+      errors: error,
+    });
+    // setErrorSignup({ ...userSignup.errors, [name]: errorSMS });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -81,7 +122,7 @@ function SignUp() {
                 name="name"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.name}</div>
+              <div className="form-error">{userSignup.errors.name}</div>
             </div>
             <div className="form-group">
               <label htmlFor="userName" className="form-label">
@@ -95,7 +136,7 @@ function SignUp() {
                 name="userName"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.userName}</div>
+              <div className="form-error">{userSignup.errors.userName}</div>
             </div>
             <div className="form-group">
               <label htmlFor="password" className="form-label">
@@ -104,12 +145,13 @@ function SignUp() {
               <input
                 type="password"
                 id="password"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                 className="form-input"
                 placeholder="************"
                 name="password"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.password}</div>
+              <div className="form-error">{userSignup.errors.password}</div>
             </div>
             <div className="form-group">
               <label htmlFor="repassword" className="form-label">
@@ -118,12 +160,13 @@ function SignUp() {
               <input
                 type="password"
                 id="repassword"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                 className="form-input"
                 placeholder="************"
                 name="repassword"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.repassword}</div>
+              <div className="form-error">{userSignup.errors.repassword}</div>
             </div>
 
             <div className="form-group">
@@ -136,9 +179,10 @@ function SignUp() {
                 className="form-input"
                 placeholder="Ex: 0909888777"
                 name="phone"
+                pattern="^[0-9]+$"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.phone}</div>
+              <div className="form-error">{userSignup.errors.phone}</div>
             </div>
             <div className="form-group">
               <label htmlFor="email" className="form-label">
@@ -150,9 +194,10 @@ function SignUp() {
                 className="form-input"
                 placeholder="Ex: johndoe@email.com"
                 name="email"
+                pattern="^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]"
                 onChange={handleOnchange}
               />
-              <div className="form-error">{isValid.email}</div>
+              <div className="form-error">{userSignup.errors.email}</div>
             </div>
 
             <div className="form-group switch-to-signin">
@@ -161,7 +206,7 @@ function SignUp() {
                 Sign In now
               </NavLink>
             </div>
-            <button type="submit" className="btn btn--gradient">
+            <button type="submit" className="btn--gradient">
               Sign up
             </button>
           </form>

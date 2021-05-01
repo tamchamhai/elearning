@@ -22,7 +22,7 @@
     padding-top: -10px;
     display: block;
     width: 100%;
-    height: 850px;
+    height: 950px;
     object-fit: cover;
   }
   .signup-container {
@@ -65,8 +65,8 @@
           }
         }
         .form-error {
-          background: rgba(0, 0, 0, 0.13);
           font-size: 87.2%;
+          margin-top: 20px;
           text-transform: capitalize;
           color: rgb(254, 107, 139);
         }
@@ -92,6 +92,17 @@
       font-size: 14px;
       padding: 15px;
       text-transform: uppercase;
+      transition: all 0.3s;
+      &:active {
+        transform: translateY(3px);
+      }
+      &:hover {
+        background-image: linear-gradient(
+          -45deg,
+          rgb(254, 107, 139) 30%,
+          rgb(255, 142, 83) 90%
+        );
+      }
     }
   }
 }

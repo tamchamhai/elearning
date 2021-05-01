@@ -1,8 +1,8 @@
-import { SIGNIN_FAILE, SIGNIN_SUCCESS } from "../constants/user.const";
+import { LOGOUT, SIGNIN_FAILE, SIGNIN_SUCCESS } from "../constants/user.const";
 
 const initialState = {
   userSignin: null,
-  error: [],
+  error: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,6 +12,7 @@ const userReducer = (state = initialState, action) => {
       return { ...state, userSignin: payload };
     case SIGNIN_FAILE:
       return { ...state, error: payload };
+
     default:
       return state;
   }

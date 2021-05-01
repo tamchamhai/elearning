@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  LOGOUT,
   SIGNIN_FAILE,
   SIGNIN_SUCCESS,
   SIGNUP_FAILE,
@@ -24,7 +25,7 @@ export const postUserSignIn = (Username, password, history) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(postUserSigninFaile());
+        dispatch(postUserSigninFaile(err));
       });
   };
 };

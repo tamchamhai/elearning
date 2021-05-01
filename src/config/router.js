@@ -7,7 +7,7 @@ import CourseDetail from "../pages/main/course-detail";
 import Home from "../pages/main/home";
 import SignIn from "../pages/main/sign-in";
 import SignUp from "../pages/main/sign-up";
-import UserProfile from "../pages/main/user-profile";
+import UserProfile from "../pages/main/user";
 
 export const mainRouter = [
   {
@@ -21,7 +21,7 @@ export const mainRouter = [
     component: CourseDetail,
   },
   {
-    path: "/user-profile",
+    path: "/user",
     exact: true,
     component: UserProfile,
   },

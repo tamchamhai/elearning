@@ -8,6 +8,10 @@ import { adminRouter, mainRouter } from "./config/router";
 import RouterAdminTemplate from "./templates/admin";
 import RouterMainTemplate from "./templates/main";
 import { postUserSigninSuccess } from "./store/actions/user.action";
+import {
+  getCategories,
+  getCategoriesSuccess,
+} from "./store/actions/courses.action";
 import "./sassStyle/_main.scss";
 
 function App() {
@@ -38,9 +42,11 @@ function App() {
 
   const dispatch = useDispatch();
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
+  const categories = JSON.parse(localStorage.getItem("categories"));
   useEffect(() => {
-    console.log(userSignin);
     dispatch(postUserSigninSuccess(userSignin));
+    dispatch(getCategories());
+    dispatch(getCategoriesSuccess(categories));
   });
   return (
     <>

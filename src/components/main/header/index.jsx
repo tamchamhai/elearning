@@ -23,8 +23,6 @@ export default function Header() {
     }
   }, [userSignin]);
 
-  // const token = JSON.parse(localStorage.getItem("userSignin"));
-
   const renderUserLogin = () => {
     if (isSignin) {
       console.log(isSignin);
@@ -56,7 +54,6 @@ export default function Header() {
         <span className="logo-part-one">E</span>
         <span className="logo-part-two">Learn</span>
       </NavLink>
-      {console.log("render")}
       <div
         className="collapse navbar-collapse d-sm-flex justify-content-end"
         id="navbarSupportedContent"
@@ -73,7 +70,7 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Danh mục khóa học
+              Categories
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               {/* Categories courses here */}

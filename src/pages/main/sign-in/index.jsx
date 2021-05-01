@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import { NavLink, useHistory } from "react-router-dom";
 import { postUserSignIn } from "../../../store/actions/user.action";
@@ -7,6 +7,7 @@ import { postUserSignIn } from "../../../store/actions/user.action";
 function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { error } = useSelector((state) => state.user);
 
   const [user, setUser] = useState({
     Username: "",
@@ -16,7 +17,6 @@ function SignIn() {
   const handleSignin = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   };
 
   const handleSubmit = (e) => {
@@ -25,8 +25,8 @@ function SignIn() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center signup-cover ">
-      <div className="signup row">
+    <div className="d-flex justify-content-center align-items-center signin-cover ">
+      <div className="signin row">
         <img
           src="https://imgur.com/aILP3CD.png"
           alt="sign in img"
@@ -74,7 +74,11 @@ function SignIn() {
                 Sign up now
               </NavLink>
             </div>
-            <button type="submit" className="btn btn--gradient">
+            <div className="errorSignin">
+              <p>{error ? "username or password is wrong!" : ""}</p>
+              {console.log(error)}
+            </div>
+            <button type="submit" className="btn--gradient">
               Sign In
             </button>
           </form>

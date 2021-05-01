@@ -16,7 +16,7 @@ export default function Categories() {
         </div>
       );
     } else {
-      return categories.map((item, index) => {
+      return categories?.map((item, index) => {
         return (
           <NavLink
             key={index}

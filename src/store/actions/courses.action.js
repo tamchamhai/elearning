@@ -54,6 +54,7 @@ export const getCategories = () => {
     })
       .then((res) => {
         dispatch(getCategoriesSuccess(res.data));
+        localStorage.setItem("categories", JSON.stringify(res.data));
         console.log(res.data);
         dispatch(stopLoading());
       })
@@ -64,7 +65,7 @@ export const getCategories = () => {
   };
 };
 
-const getCategoriesSuccess = (categories) => {
+export const getCategoriesSuccess = (categories) => {
   return {
     type: GET_CATEGORIES_SUCCESS,
     payload: categories,

@@ -135,7 +135,7 @@ export default function Sidebar({ loginSwitch }) {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-        {categories.map((item, index) => (
+        {categories?.map((item, index) => (
           <ListItem button key={index}>
             <NavLink
               exact={true}

@@ -1,7 +1,3 @@
-@import "../../../../src/sassStyle/global";
-@import "../../../../src/sassStyle/variables";
-@import "../../../../src/sassStyle/mixin";
-
 // Dropdown menu
 .navbar {
   padding: 0 16px !important;
@@ -15,7 +11,7 @@
       background-position: left center;
     }
     .logo-part-one {
-      font-size: $fs-lg-logo-one;
+      font-size: 55px;
       font-family: "Lobster", cursive;
       background: linear-gradient(
         90deg,
@@ -39,7 +35,7 @@
       background-position: left center;
     }
     .logo-part-two {
-      font-size: $fs-lg-logo-two;
+      font-size: 38px;
       font-family: "Lobster", cursive;
       background: linear-gradient(
         90deg,
@@ -67,7 +63,7 @@
     position: relative;
     height: 82px;
     #navbarDropdown {
-      color: $color-black-0;
+      color: #202020;
       line-height: 66px;
     }
     #navbarDropdown::after {
@@ -79,20 +75,20 @@
       border: 0;
       position: absolute;
       top: 80px;
-      width: $width-1;
+      width: 300px;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 2px 2px 15px -4px black;
       .dropdown-item {
         &:hover {
-          color: $color-primary;
+          color: #1830b9;
         }
       }
     }
   }
 }
 .dropdown:hover > #navbarDropdown {
-  color: $color-primary;
+  color: #1830b9;
 }
 .dropdown:hover > .dropdown-menu {
   display: block;
@@ -104,11 +100,11 @@
     height: 82px;
     .user {
       .button {
-        width: $width-button;
+        width: 180px;
       }
       .afterLogin {
         .userProfile {
-          width: $width-button-2;
+          width: 37px;
           margin-top: 5px;
           min-width: 40px;
           min-height: 39px;
@@ -120,22 +116,22 @@
   .form-inline {
     // search icon
     button {
-      height: $height-1;
-      background: $color-white-0;
+      height: 46px;
+      background: #fff;
       border: 1px solid #ced4da;
       border-right: none;
       border-top-left-radius: 23px;
       border-bottom-left-radius: 23px;
       padding-left: 10px;
       .MuiSvgIcon-root {
-        background: $color-white-0;
-        color: $color-black-1;
+        background: #fff;
+        color: #f8f9fa;
       }
     }
     .form-control {
-      background: $color-white-0;
-      width: $width-1;
-      height: $height-1;
+      background: #fff;
+      width: 300px;
+      height: 46px;
       border-radius: 23px;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -148,7 +144,7 @@
   }
   .sidebar-btn {
     .MuiButton-root {
-      width: $width-button-2;
+      width: 37px;
       min-width: 37px;
       border-radius: 50%;
     }
