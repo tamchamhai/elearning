@@ -41,32 +41,39 @@ const topBarBeforLogin = [
   {
     text: "Đăng kí",
     icon: <CreateIcon />,
+    to: "/signup",
   },
   {
     text: "Đăng nhập",
     icon: <InputIcon />,
+    to: "/signin",
   },
   {
     text: "Tìm khóa học",
     icon: <SearchIcon />,
+    to: "/search-course",
   },
   {
     text: "Giỏ hàng",
     icon: <AddShoppingCartIcon />,
+    to: "/carts",
   },
 ];
 const topBarAfterLogin = [
   {
     text: "Profile",
     icon: <PersonIcon />,
+    to: "/user",
   },
   {
     text: "Tìm khóa học",
     icon: <SearchIcon />,
+    to: "/search-course",
   },
   {
     text: "Giỏ hàng",
     icon: <AddShoppingCartIcon />,
+    to: "/carts",
   },
 ];
 
@@ -76,17 +83,21 @@ export default function Sidebar({ loginSwitch }) {
   const renderLoginSwitch = () => {
     if (loginSwitch) {
       return topBarBeforLogin.map((item, index) => (
-        <ListItem button key={item.text}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItem>
+        <NavLink to={item.to} exact={true} className="linkItem">
+          <ListItem button key={item.text}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        </NavLink>
       ));
     } else {
       return topBarAfterLogin.map((item, index) => (
-        <ListItem button key={item.text}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItem>
+        <NavLink to={item.to} exact={true} className="linkItem">
+          <ListItem button key={item.text}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        </NavLink>
       ));
     }
   };

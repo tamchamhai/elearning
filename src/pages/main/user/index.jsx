@@ -30,12 +30,41 @@ export default function UserProfile() {
   });
 
   const handleUserProfile = (event) => {
-    const { name, value } = event.target;
+    const { name, value, pattern, type } = event.target;
     let errorMess = "";
+
+    if (value.trim() === "") {
+      errorMess = "empty input!";
+    }
 
     if (name === "confirmpassword") {
       if (value !== userProfile.user.newpassword) {
         errorMess = "Confirm password is not correct!";
+      }
+    }
+
+    if (name === "soDT") {
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorMess = "phone is invalid";
+      }
+      if (value.length < 9) {
+        errorMess = "phone number is less than 9";
+      }
+    }
+
+    if (type === "email") {
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorMess = name + " is invalid";
+      }
+    }
+
+    if (name === "newpassword") {
+      let regex = new RegExp(pattern);
+      if (!regex.test(value)) {
+        errorMess =
+          "password have to contain at least 8 characters 1 uppercase 1 lowercase and 1 number!";
       }
     }
 
@@ -106,6 +135,7 @@ export default function UserProfile() {
                     value={userProfile.user.hoTen}
                     onChange={handleUserProfile}
                   />
+                  <div className="form-error">{userProfile.errors.hoTen}</div>
                 </div>
 
                 <div className="form-group">
@@ -117,9 +147,11 @@ export default function UserProfile() {
                     id="soDT"
                     className="form-input"
                     name="soDT"
+                    pattern="^[0-9]+$"
                     value={userProfile.user.soDT}
                     onChange={handleUserProfile}
                   />
+                  <div className="form-error">{userProfile.errors.soDT}</div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">
@@ -131,8 +163,10 @@ export default function UserProfile() {
                     className="form-input"
                     name="email"
                     value={userProfile.user.email}
+                    pattern="^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]"
                     onChange={handleUserProfile}
                   />
+                  <div className="form-error">{userProfile.errors.email}</div>
                 </div>
                 <div className="cover-btn">
                   <button type="submit" className="btn--gradient">
@@ -163,10 +197,10 @@ export default function UserProfile() {
                   <input
                     type="newpassword"
                     id="newpassword"
-                    // pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                     className="form-input"
                     name="newpassword"
-                    // value={userProfile.user.newpassword}
+                    value={userProfile.user.newpassword}
                     onChange={handleUserProfile}
                   />
                   <div className="form-error">
@@ -184,7 +218,7 @@ export default function UserProfile() {
                     // pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                     className="form-input"
                     name="confirmpassword"
-                    // value={userProfile.user.confirmpassword}
+                    value={userProfile.user.confirmpassword}
                     onChange={handleUserProfile}
                   />
                   <div className="form-error">
@@ -235,7 +269,7 @@ export default function UserProfile() {
                     className="form-input"
                     name="taiKhoan"
                     disabled
-                    value={userProfile.taiKhoan}
+                    value={userProfile.user.taiKhoan}
                     onChange={handleUserProfile}
                   />
                 </div>
@@ -249,7 +283,7 @@ export default function UserProfile() {
                     id="hoTen"
                     className="form-input"
                     name="hoTen"
-                    value={userProfile.hoTen}
+                    value={userProfile.user.hoTen}
                     onChange={handleUserProfile}
                   />
                 </div>
@@ -263,9 +297,11 @@ export default function UserProfile() {
                     id="soDT"
                     className="form-input"
                     name="soDT"
-                    value={userProfile.soDT}
+                    pattern="^[0-9]+$"
+                    value={userProfile.user.soDT}
                     onChange={handleUserProfile}
                   />
+                  <div className="form-error">{userProfile.errors.soDT}</div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">
@@ -276,9 +312,11 @@ export default function UserProfile() {
                     id="email"
                     className="form-input"
                     name="email"
-                    value={userProfile.email}
+                    pattern="^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]"
+                    value={userProfile.user.email}
                     onChange={handleUserProfile}
                   />
+                  <div className="form-error">{userProfile.errors.email}</div>
                 </div>
                 <div className="cover-btn">
                   <button type="submit" className="btn--gradient">

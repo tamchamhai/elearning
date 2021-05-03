@@ -76,7 +76,6 @@ function SignIn() {
             </div>
             <div className="errorSignin">
               <p>{error ? "username or password is wrong!" : ""}</p>
-              {console.log(error)}
             </div>
             <button type="submit" className="btn--gradient">
               Sign In

@@ -56,7 +56,7 @@ export default function CourseDetail() {
       return (
         <div className="course-detail">
           <div className="banner row">
-            <div className="content col-8">
+            <div className="content col-12 col-md-8">
               <NavLink to="/category" exact={true} className="nav-link">
                 {courseDetail?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
               </NavLink>
@@ -70,25 +70,26 @@ export default function CourseDetail() {
                 <StarHalfIcon viewBox="0 0 30 30" />
                 <StarBorderIcon viewBox="0 0 30 30" />
               </span>
-              <span className="rating">({courseDetail.luotXem} bình chọn)</span>
+              <span className="rating">({courseDetail.luotXem} votes)</span>
               <span className="student">
                 {" "}
-                {courseDetail.soLuongHocVien} Học viên
+                {courseDetail.soLuongHocVien} Students
               </span>
               <div className="author">
                 <p>
-                  được tạo bởi <NavLink to="/">Vinh vật vờ</NavLink>,
-                  <NavLink to="/">Vinh vất vưỡng</NavLink>
+                  được tạo bởi <NavLink to="/">Russo</NavLink>,
+                  <NavLink to="/">Tony Stark</NavLink>
                 </p>
               </div>
               <div className="update">
                 <span>
                   {" "}
-                  <UpdateIcon /> Cập nhật lần cuối 3/21
+                  <UpdateIcon />
+                  Lastest Update 3/21
                 </span>
                 <span>
                   {" "}
-                  <LanguageIcon /> Tiếng việt
+                  <LanguageIcon /> Vietnamese
                 </span>
               </div>
               <div className="btns d-flex justify-content-start">
@@ -100,7 +101,7 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
-            <div className="photo col-4 row">
+            <div className="photo col-12 col-md-4 row">
               <img
                 src={courseDetail.hinhAnh}
                 className="col-12"

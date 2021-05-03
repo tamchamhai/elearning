@@ -13,7 +13,7 @@ function Feature() {
             <img src={feature1} alt="feature 1" />
           </div>
           <div className="cap">
-            <p>Hơn 5000 học viên</p>
+            <p>5000+ Students</p>
           </div>
         </div>
 
@@ -22,7 +22,7 @@ function Feature() {
             <img src={feature2} alt="feature 2" />
           </div>
           <div className="cap">
-            <p>+30 Khóa Học Dành Cho Bạn</p>
+            <p>+30 Courses</p>
           </div>
         </div>
 
@@ -31,7 +31,7 @@ function Feature() {
             <img src={feature3} alt="feature 3" />
           </div>
           <div className="cap">
-            <p>Học Mọi Lúc, Mọi Nơi</p>
+            <p>Learn Anytime, Anywhere</p>
           </div>
         </div>
       </div>

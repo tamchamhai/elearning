@@ -14,7 +14,7 @@ const styleBtn = {
 export default function BuyNowBtn() {
   return (
     <div className="btn-add-to-card mx-2 d-flex align-items-center">
-      <Button style={styleBtn}>Mua ngay</Button>
+      <Button style={styleBtn}>Learn Now</Button>
     </div>
   );
 }

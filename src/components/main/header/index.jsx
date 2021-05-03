@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./_style.scss";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import Sidebar from "../sidebar";
 import Categories from "../categories";
@@ -10,9 +10,11 @@ import NotificationsBtn from "../../../utils/button/notifications";
 import WishListBtn from "../../../utils/button/wishList";
 import ProfileBtn from "../../../utils/button/profile";
 import Registor from "../../../utils/button/registor";
+import { getSearchCourse } from "../../../store/actions/courses.action";
 
 export default function Header() {
   const [isSignin, setIsSignin] = useState(true);
+  const dispatch = useDispatch();
   const { userSignin } = useSelector((state) => state.user);
   useEffect(() => {
     if (userSignin) {
@@ -21,6 +23,12 @@ export default function Header() {
       setIsSignin(true);
     }
   }, [userSignin]);
+
+  const handleSearch = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    dispatch(getSearchCourse(value));
+  };
 
   const renderUserLogin = () => {
     if (isSignin) {
@@ -83,8 +91,9 @@ export default function Header() {
           <input
             className="form-control mr-sm-2"
             type="search"
-            placeholder="Tìm khóa học"
+            placeholder="Search"
             aria-label="Search"
+            onChange={handleSearch}
           />
         </form>
         {/* User Log in and log out  */}

@@ -1,6 +1,10 @@
 @import "../../../sassStyle//global";
 @import "../../../sassStyle//mixin";
 @import "../../../sassStyle//variables";
+.linkItem {
+  color: black;
+  text-decoration: none;
+}
 .MuiDrawer-root {
   .Title {
     .MuiListItemText-root {

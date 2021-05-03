@@ -10,7 +10,7 @@ import {
 } from "../constants/courses.const";
 import { startLoading, stopLoading } from "./common.action";
 import axios from "axios";
-
+// Get all course from the list
 export const getListCourses = () => {
   return (dispatch) => {
     dispatch(startLoading());
@@ -40,6 +40,23 @@ const getListCourseFaile = (err) => {
   return {
     type: GET_LIST_COURSE_FAILE,
     payload: err,
+  };
+};
+
+// Get the course from search
+export const getSearchCourse = (courseName) => {
+  return (dispatch) => {
+    axios({
+      method: "",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP01`,
+    })
+      .then((res) => {
+        localStorage.setItem("searchCourse", JSON.stringigy(res.data));
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };
 

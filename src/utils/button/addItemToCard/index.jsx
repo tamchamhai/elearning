@@ -13,7 +13,7 @@ const styleBtn = {
 export default function AddItemToCard() {
   return (
     <div className="btn-add-to-card d-flex align-items-center">
-      <Button style={styleBtn}>Thêm vào giỏ</Button>
+      <Button style={styleBtn}>Add To Cart</Button>
     </div>
   );
 }

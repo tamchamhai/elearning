@@ -68,53 +68,49 @@ function Footer() {
       </div>
       <div className="info my-4 w-100 text-center">
         <p>
-          Định hướng và Chuẩn hóa lộ trình từ trái ngành mất gốc lập trình đến
-          Có việc làm
+          Orientation and STANDARDIZATION of the roadmap from LEFT-SET to HAVING
+          a job
         </p>
         <h1 className="my-2">
-          Học Thật, Dự Án Thật, Giảng Viên Kinh Nghiệm, Tận Tâm
+          Real Learning, Real Project, Experienced Teacher, Dedication
         </h1>
       </div>
       <div className="row container-fluid">
         <div className="col-md-4 mb-4 our-lacation">
           <div>
-            <h2>Trụ sở: 112 Cao Thắng, Quận 3</h2>
+            <h2>Headquarters:112 Cao Thang, District 3</h2>
             <p>
-              Hotline: 096.105.1014 – 077.886.1911 Địa chỉ: Tầng 5, toà nhà
-              Suri, 112 Cao Thắng, Quận 3, TPHCM
+              Hotline: 096.105.1014 – 077.886.1911 Address: 5th floor, Suri
+              building,112 Cao Thang, District 3, TPHCM
             </p>
           </div>
           <div>
-            <h2>Trụ sở: 112 Cao Thắng, Quận 3</h2>
+            <h2>Headquarters:112 Cao Thang, District 3</h2>
             <p>
-              Hotline: 096.105.1014 – 077.886.1911 Địa chỉ: Tầng 5, toà nhà
-              Suri, 112 Cao Thắng, Quận 3, TPHCM
+              Hotline: 096.105.1014 – 077.886.1911 Address: 5th floor, Suri
+              building,112 Cao Thang, District 3, TPHCM
             </p>
           </div>
           <div>
-            <h2>Trụ sở: 112 Cao Thắng, Quận 3</h2>
+            <h2>Headquarters: 112 Cao Thang, District 3</h2>
             <p>
-              Hotline: 096.105.1014 – 077.886.1911 Địa chỉ: Tầng 5, toà nhà
-              Suri, 112 Cao Thắng, Quận 3, TPHCM
+              Hotline: 096.105.1014 – 077.886.1911 Address: 5th floor, Suri
+              building, 112 Cao Thắng, Quận 3, TPHCM
             </p>
           </div>
         </div>
         <div className="col-md-4 mb-4 consultant-signup">
           <div className="my-2">
-            <p>Đăng Ký Nhận Email Tư Vấn</p>
+            <p>If You Need Consulting Through Email</p>
           </div>
           <div className=" input-name  input-email">
-            <input type="text" className="w-100" placeholder="Tên của bạn" />
+            <input type="text" className="w-100" placeholder="Your name" />
           </div>
           <div className=" input-email ">
-            <input
-              type="text"
-              className="w-100"
-              placeholder="Địa chỉ Email của bạn"
-            />
+            <input type="text" className="w-100" placeholder="Email" />
           </div>
           <div className=" input-email ">
-            <input type="text" className="w-100" placeholder="Số điện thoại " />
+            <input type="text" className="w-100" placeholder="Phone number" />
           </div>
           <SaleEmail />
         </div>
