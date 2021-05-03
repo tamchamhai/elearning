@@ -1,4 +1,4 @@
-import { LOGOUT, SIGNIN_FAILE, SIGNIN_SUCCESS } from "../constants/user.const";
+import { SIGNIN_FAILE, SIGNIN_SUCCESS } from "../constants/user.const";
 
 const initialState = {
   userSignin: null,

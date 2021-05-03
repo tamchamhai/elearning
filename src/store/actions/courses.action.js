@@ -55,7 +55,6 @@ export const getCategories = () => {
       .then((res) => {
         dispatch(getCategoriesSuccess(res.data));
         localStorage.setItem("categories", JSON.stringify(res.data));
-        console.log(res.data);
         dispatch(stopLoading());
       })
       .catch((err) => {

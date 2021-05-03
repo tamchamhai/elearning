@@ -1,16 +1,70 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { postUserUpdate } from "../../../store/actions/user.action";
 import "./style.scss";
 
 export default function UserProfile() {
+  const dispatch = useDispatch();
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
-
+  const token = userSignin.accessToken;
   const [keyChange, setKey] = useState({ keyword: "profile" });
-  const [userUpdata, setUserUpdata] = useState(userSignin);
-  const handleChangeProfile = (key) => {
-    console.log(userUpdata);
-    setKey({ ...keyChange, keyword: key });
+  const [userProfile, setUserUpdate] = useState({
+    user: {
+      taiKhoan: userSignin.taiKhoan,
+      hoTen: userSignin.hoTen,
+      soDT: userSignin.soDT,
+      maNhom: userSignin.maNhom,
+      email: userSignin.email,
+      newpassword: "",
+      confirmpassword: "",
+    },
+    errors: {
+      taiKhoan: "",
+      hoTen: "",
+      soDT: "",
+      maNhom: "",
+      email: "",
+      newpassword: "",
+      confirmpassword: "",
+    },
+  });
+
+  const handleUserProfile = (event) => {
+    const { name, value } = event.target;
+    let errorMess = "";
+
+    if (name === "confirmpassword") {
+      if (value !== userProfile.user.newpassword) {
+        errorMess = "Confirm password is not correct!";
+      }
+    }
+
+    const user = { ...userProfile.user, [name]: value };
+    const error = { ...userProfile.error, [name]: errorMess };
+    setUserUpdate({
+      user: user,
+      errors: error,
+    });
   };
 
+  const handleSubmitChangeProfile = (event) => {
+    event.preventDefault();
+    dispatch(
+      postUserUpdate(
+        userProfile.user.taiKhoan,
+        userProfile.user.hoTen,
+        userProfile.user.soDT,
+        userProfile.user.email,
+        userProfile.user.maNhom,
+        userProfile.user.newpassword,
+        token
+      )
+    );
+  };
+
+  const handleChangeProfile = (key) => {
+    setKey({ ...keyChange, keyword: key });
+  };
   const renderProfile = () => {
     switch (keyChange.keyword) {
       case "profile":
@@ -21,41 +75,50 @@ export default function UserProfile() {
               <p>Updata information about yourself</p>
             </div>
             <div className="information">
-              <form autoComplete="off" className="form-profile">
+              <form
+                autoComplete="off"
+                className="form-profile"
+                onSubmit={handleSubmitChangeProfile}
+              >
                 <div className="form-group">
-                  <label htmlFor="name" className="form-label">
-                    Full name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="form-input"
-                    name="name"
-                    placeholder={userSignin.hoTen}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="userName" className="form-label">
+                  <label htmlFor="taiKhoan" className="form-label">
                     Username
                   </label>
                   <input
                     type="text"
-                    id="userName"
+                    id="taiKhoan"
                     className="form-input"
-                    name="userName"
-                    placeholder={userSignin.taiKhoan}
+                    name="taiKhoan"
+                    disabled
+                    value={userProfile.user.taiKhoan}
+                    onChange={handleUserProfile}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone" className="form-label">
+                  <label htmlFor="hoTen" className="form-label">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="hoTen"
+                    className="form-input"
+                    name="hoTen"
+                    value={userProfile.user.hoTen}
+                    onChange={handleUserProfile}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="soDT" className="form-label">
                     Phone Number
                   </label>
                   <input
                     type="text"
-                    id="phone"
+                    id="soDT"
                     className="form-input"
-                    name="phone"
-                    placeholder={userSignin.soDT}
+                    name="soDT"
+                    value={userProfile.user.soDT}
+                    onChange={handleUserProfile}
                   />
                 </div>
                 <div className="form-group">
@@ -67,7 +130,8 @@ export default function UserProfile() {
                     id="email"
                     className="form-input"
                     name="email"
-                    placeholder={userSignin.email}
+                    value={userProfile.user.email}
+                    onChange={handleUserProfile}
                   />
                 </div>
                 <div className="cover-btn">
@@ -87,22 +151,11 @@ export default function UserProfile() {
               <p>Change your password</p>
             </div>
             <div className="information">
-              <form autoComplete="off" className="form-profile">
-                <div className="form-group">
-                  <label htmlFor="oldpassword" className="form-label">
-                    Your last password
-                  </label>
-                  <input
-                    type="oldpassword"
-                    id="oldpassword"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
-                    className="form-input"
-                    placeholder="************"
-                    name="oldpassword"
-                  />
-                  <div className="form-error">{}</div>
-                </div>
-
+              <form
+                autoComplete="off"
+                className="form-profile"
+                onSubmit={handleSubmitChangeProfile}
+              >
                 <div className="form-group">
                   <label htmlFor="newpassword" className="form-label">
                     Your new password
@@ -110,12 +163,15 @@ export default function UserProfile() {
                   <input
                     type="newpassword"
                     id="newpassword"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+                    // pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                     className="form-input"
-                    placeholder="************"
                     name="newpassword"
+                    // value={userProfile.user.newpassword}
+                    onChange={handleUserProfile}
                   />
-                  <div className="form-error">{}</div>
+                  <div className="form-error">
+                    {userProfile.errors.newpassword}
+                  </div>
                 </div>
 
                 <div className="form-group">
@@ -125,17 +181,26 @@ export default function UserProfile() {
                   <input
                     type="confirmpassword"
                     id="confirmpassword"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+                    // pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
                     className="form-input"
-                    placeholder="************"
                     name="confirmpassword"
+                    // value={userProfile.user.confirmpassword}
+                    onChange={handleUserProfile}
                   />
-                  <div className="form-error">{}</div>
+                  <div className="form-error">
+                    {userProfile.errors.confirmpassword}
+                  </div>
                 </div>
                 <div className="cover-btn">
-                  <button type="submit" className="btn--gradient">
-                    Save
-                  </button>
+                  {userProfile.newpassword === userProfile.confirmpassword ? (
+                    <button type="submit" className="btn--gradient">
+                      Save
+                    </button>
+                  ) : (
+                    <button type="submit" className="btn--gradient" disabled>
+                      Save
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
@@ -149,66 +214,57 @@ export default function UserProfile() {
         );
       default:
         return (
-          <>
+          <div className="profile">
             <div className="header">
               <h1>Public profile</h1>
               <p>Updata information about yourself</p>
             </div>
             <div className="information">
-              <form autoComplete="off" className="form-profile">
+              <form
+                onSubmit={handleSubmitChangeProfile}
+                autoComplete="off"
+                className="form-profile"
+              >
                 <div className="form-group">
-                  <label htmlFor="name" className="form-label">
-                    Full name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="form-input"
-                    name="name"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="userName" className="form-label">
+                  <label htmlFor="taiKhoan" className="form-label">
                     Username
                   </label>
                   <input
                     type="text"
-                    id="userName"
+                    id="taiKhoan"
                     className="form-input"
-                    name="userName"
+                    name="taiKhoan"
+                    disabled
+                    value={userProfile.taiKhoan}
+                    onChange={handleUserProfile}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="password" className="form-label">
-                    Password
+                  <label htmlFor="hoTen" className="form-label">
+                    Full Name
                   </label>
                   <input
-                    type="password"
-                    id="password"
+                    type="text"
+                    id="hoTen"
                     className="form-input"
-                    name="password"
+                    name="hoTen"
+                    value={userProfile.hoTen}
+                    onChange={handleUserProfile}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="repassword" className="form-label">
-                    Repeat password
-                  </label>
-                  <input
-                    type="password"
-                    id="repassword"
-                    className="form-input"
-                    name="repassword"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone" className="form-label">
+                  <label htmlFor="soDT" className="form-label">
                     Phone Number
                   </label>
                   <input
                     type="text"
-                    id="phone"
+                    id="soDT"
                     className="form-input"
-                    name="phone"
+                    name="soDT"
+                    value={userProfile.soDT}
+                    onChange={handleUserProfile}
                   />
                 </div>
                 <div className="form-group">
@@ -220,6 +276,8 @@ export default function UserProfile() {
                     id="email"
                     className="form-input"
                     name="email"
+                    value={userProfile.email}
+                    onChange={handleUserProfile}
                   />
                 </div>
                 <div className="cover-btn">
@@ -229,7 +287,7 @@ export default function UserProfile() {
                 </div>
               </form>
             </div>
-          </>
+          </div>
         );
     }
   };

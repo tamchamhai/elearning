@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
-  LOGOUT,
+  CHANGE_PROFILE_FAILE,
+  CHANGE_PROFILE_SUCCESS,
   SIGNIN_FAILE,
   SIGNIN_SUCCESS,
   SIGNUP_FAILE,
@@ -86,6 +87,57 @@ export const postSignUpSuccess = (user) => {
 export const postSignUpFaile = (err) => {
   return {
     type: SIGNUP_FAILE,
+    payload: err,
+  };
+};
+
+export const postUserUpdate = (
+  taiKhoan,
+  hoTen,
+  soDT,
+  email,
+  maNhom,
+  matKhau,
+  token
+) => {
+  return (dispatch) => {
+    axios({
+      method: "PUT",
+      url:
+        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+      data: {
+        taiKhoan: taiKhoan,
+        matKhau: matKhau,
+        hoTen: hoTen,
+        soDT: soDT,
+        maLoaiNguoiDung: "HV",
+        maNhom: maNhom,
+        email: email,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        alert("üpdate success");
+        dispatch(putUserUpdateSuccess(res.data));
+      })
+      .catch((err) => {
+        console.log(err.message);
+        dispatch(putUserUpdateFaile(err));
+      });
+  };
+};
+export const putUserUpdateSuccess = (user) => {
+  return {
+    type: CHANGE_PROFILE_SUCCESS,
+    payload: user,
+  };
+};
+export const putUserUpdateFaile = (err) => {
+  return {
+    type: CHANGE_PROFILE_FAILE,
     payload: err,
   };
 };

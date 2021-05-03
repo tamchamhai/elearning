@@ -14,7 +14,6 @@ import Registor from "../../../utils/button/registor";
 export default function Header() {
   const [isSignin, setIsSignin] = useState(true);
   const { userSignin } = useSelector((state) => state.user);
-  console.log(userSignin);
   useEffect(() => {
     if (userSignin) {
       setIsSignin(false);
@@ -25,7 +24,6 @@ export default function Header() {
 
   const renderUserLogin = () => {
     if (isSignin) {
-      console.log(isSignin);
       return (
         //  {/* UI before log in */}
         <div className="beforeLogin d-flex">
@@ -34,7 +32,6 @@ export default function Header() {
         </div>
       );
     } else {
-      console.log(isSignin);
       return (
         // {/* UI after log in */}
         <div className="afterLogin d-flex">
