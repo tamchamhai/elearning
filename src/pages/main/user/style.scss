@@ -167,6 +167,54 @@
           }
         }
       }
+      .course {
+        .title {
+          padding: 20px 15px;
+          background: #f8f9fa;
+          margin: 0 !important;
+          h1 {
+            padding: 0 !important;
+            line-height: 41px;
+          }
+          .search-form {
+            padding: 0 !important;
+            margin-left: auto;
+            display: flex;
+            justify-content: flex-end;
+            .search-input {
+              border: 1px solid #ced4da;
+              border-left: none;
+              padding: 10px;
+              border-top-right-radius: 30px;
+              border-bottom-right-radius: 30px;
+              &:focus-visible {
+                outline: none;
+              }
+            }
+            button {
+              border: 1px solid #ced4da;
+              background: white;
+              border-right: none;
+              color: #7a7b7c;
+              border-top-left-radius: 30px;
+              border-bottom-left-radius: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media screen and(max-width:768px) {
+  .course {
+    .title {
+      .search-form {
+        .search-input {
+          width: 100%;
+        }
+      }
     }
   }
 }

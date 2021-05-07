@@ -11,16 +11,16 @@ function Carousel() {
           <img src={slider2} alt="carousel img" />
         </div>
         <div className="caption d-none d-lg-block">
-          <h2>Đầu tư cho bản thân chưa bao giờ dễ dàng đến thế!!!</h2>
-          <p>Đăng kí ngay trong hè này để nhận những ưu đãi hấp dẫn</p>
+          <h2>self taught has never been so easy!!!</h2>
+          <p>Register now this summer to receive attractive deals</p>
           <div className="registor-btn d-sm-none">
             <Registor />
           </div>
         </div>
         {/* responsive */}
         <div className="caption-responsive d-lg-none">
-          <h2>Đầu tư cho bản thân chưa bao giờ dễ dàng đến thế!!!</h2>
-          <p>Đăng kí ngay trong hè này để nhận những ưu đãi hấp dẫn</p>
+          <h2>self taught has never been so easy!!</h2>
+          <p>Register now this summer to receive attractive deals </p>
           <div className="registor-btn-responsive d-sm-none">
             <Registor />
           </div>

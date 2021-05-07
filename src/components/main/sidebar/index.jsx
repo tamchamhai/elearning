@@ -83,7 +83,7 @@ export default function Sidebar({ loginSwitch }) {
   const renderLoginSwitch = () => {
     if (loginSwitch) {
       return topBarBeforLogin.map((item, index) => (
-        <NavLink to={item.to} exact={true} className="linkItem">
+        <NavLink to={item.to} exact={true} className="linkItem" key={index}>
           <ListItem button key={item.text}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
@@ -92,7 +92,7 @@ export default function Sidebar({ loginSwitch }) {
       ));
     } else {
       return topBarAfterLogin.map((item, index) => (
-        <NavLink to={item.to} exact={true} className="linkItem">
+        <NavLink to={item.to} exact={true} className="linkItem" key={index}>
           <ListItem button key={item.text}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />

@@ -8,9 +8,9 @@ function AdminTemplate(props) {
   );
 }
 
-function RouterAdminTemplate({ path, exact, Component, key }) {
+function RouterAdminTemplate({ path, exact, Component }) {
   return (
-    <Route path={path} exact={exact} key={key}>
+    <Route path={path} exact={exact}>
       <AdminTemplate>
         <Component />
       </AdminTemplate>

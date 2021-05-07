@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { postUserUpdate } from "../../../store/actions/user.action";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import UserCourseList from "../../../components/main/userCourseList";
+import {
+  getUserDetail,
+  postUserUpdate,
+} from "../../../store/actions/user.action";
 import "./style.scss";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
   const token = userSignin.accessToken;
+  const { userDetail } = useSelector((state) => state.user);
   const [keyChange, setKey] = useState({ keyword: "profile" });
+  const [keySearch, setKeySearch] = useState("");
   const [userProfile, setUserUpdate] = useState({
     user: {
       taiKhoan: userSignin.taiKhoan,
@@ -28,7 +35,9 @@ export default function UserProfile() {
       confirmpassword: "",
     },
   });
-
+  useEffect(() => {
+    dispatch(getUserDetail(userSignin.taiKhoan, token));
+  }, []);
   const handleUserProfile = (event) => {
     const { name, value, pattern, type } = event.target;
     let errorMess = "";
@@ -94,6 +103,12 @@ export default function UserProfile() {
   const handleChangeProfile = (key) => {
     setKey({ ...keyChange, keyword: key });
   };
+
+  const handleSearchMyCourse = (event) => {
+    const { value } = event.target;
+    setKeySearch(value);
+  };
+
   const renderProfile = () => {
     switch (keyChange.keyword) {
       case "profile":
@@ -242,8 +257,28 @@ export default function UserProfile() {
         );
       case "courses":
         return (
-          <div className="courses">
-            <div>courses</div>
+          <div className="course">
+            {console.log(userDetail)}
+            <div className="title  row ">
+              <h1 className="col-12 col-md-4">My Courses</h1>
+              <form className="col-12 col-md-4 search-form ">
+                <button>
+                  <SearchOutlinedIcon />
+                </button>
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Search my course"
+                  onChange={handleSearchMyCourse}
+                />
+              </form>
+            </div>
+            <UserCourseList
+              userDetail={userDetail.chiTietKhoaHocGhiDanh}
+              keySearch={keySearch}
+              userId={userSignin.taiKhoan}
+              token={token}
+            />
           </div>
         );
       default:

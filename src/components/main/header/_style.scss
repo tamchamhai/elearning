@@ -79,7 +79,11 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 2px 2px 15px -4px black;
+      opacity: 0;
+      transform: scaleX(0.5);
+      transition: all 0.4s;
       .dropdown-item {
+        padding: 10px 20px;
         &:hover {
           color: #1830b9;
         }
@@ -92,6 +96,8 @@
 }
 .dropdown:hover > .dropdown-menu {
   display: block;
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 // Toggle menu

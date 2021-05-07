@@ -13,29 +13,34 @@ import {
   getCategoriesSuccess,
 } from "./store/actions/courses.action";
 import "./sassStyle/_main.scss";
+import React from "react";
 
 function App() {
   const renderMainRouter = () => {
     return mainRouter.map(({ path, exact, component }, index) => {
       return (
+        // <React.Fragment key={index}>
         <RouterMainTemplate
           path={path}
           exact={exact}
           Component={component}
           key={index}
         ></RouterMainTemplate>
+        // </React.Fragment>
       );
     });
   };
   const renderAdminRouter = () => {
     return adminRouter.map(({ path, exact, component }, index) => {
       return (
+        // <React.Fragment key={index}>
         <RouterAdminTemplate
           path={path}
           exact={exact}
           Component={component}
           key={index}
         ></RouterAdminTemplate>
+        // </React.Fragment>
       );
     });
   };
@@ -51,12 +56,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
         <Switch>
           {renderMainRouter()}
           {renderAdminRouter()}
         </Switch>
-        <Footer />
       </BrowserRouter>
     </>
   );

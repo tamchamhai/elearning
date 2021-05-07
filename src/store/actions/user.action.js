@@ -2,6 +2,10 @@ import axios from "axios";
 import {
   CHANGE_PROFILE_FAILE,
   CHANGE_PROFILE_SUCCESS,
+  GET_USER_DETAIL_FAILE,
+  GET_USER_DETAIL_SUCCESS,
+  REGISTER_COURSE_FAILE,
+  REGISTER_COURSE_SUCCESS,
   SIGNIN_FAILE,
   SIGNIN_SUCCESS,
   SIGNUP_FAILE,
@@ -138,6 +142,78 @@ export const putUserUpdateSuccess = (user) => {
 export const putUserUpdateFaile = (err) => {
   return {
     type: CHANGE_PROFILE_FAILE,
+    payload: err,
+  };
+};
+
+export const registerCourse = (courseId, userName, token) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url:
+        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/DangKyKhoaHoc",
+      data: {
+        maKhoaHoc: courseId,
+        taiKhoan: userName,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        alert("Register success");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("You have registered this course already!");
+      });
+  };
+};
+export const registerCourseSuccess = (res) => {
+  return {
+    type: REGISTER_COURSE_SUCCESS,
+    payload: res,
+  };
+};
+export const registerCourseFaile = (err) => {
+  return {
+    type: REGISTER_COURSE_FAILE,
+    payload: err,
+  };
+};
+
+export const getUserDetail = (userId, token) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url:
+        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+      data: {
+        taiKhoan: userId,
+        // matKhau: "string",
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        dispatch(getUserDetailSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(getUserDetailFaile(err));
+      });
+  };
+};
+export const getUserDetailSuccess = (res) => {
+  return {
+    type: GET_USER_DETAIL_SUCCESS,
+    payload: res,
+  };
+};
+export const getUserDetailFaile = (err) => {
+  return {
+    type: GET_USER_DETAIL_FAILE,
     payload: err,
   };
 };

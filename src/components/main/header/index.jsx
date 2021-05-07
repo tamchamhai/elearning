@@ -14,6 +14,7 @@ import { getSearchCourse } from "../../../store/actions/courses.action";
 
 export default function Header() {
   const [isSignin, setIsSignin] = useState(true);
+  const [searchKey, setSearchKey] = useState("");
   const dispatch = useDispatch();
   const { userSignin } = useSelector((state) => state.user);
   useEffect(() => {
@@ -25,9 +26,13 @@ export default function Header() {
   }, [userSignin]);
 
   const handleSearch = (event) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    dispatch(getSearchCourse(value));
+    const { value } = event.target;
+    setSearchKey(value);
+  };
+  const handleSubmitSearch = (event) => {
+    event.preventDefault();
+    dispatch(getSearchCourse(searchKey));
+    setSearchKey("");
   };
 
   const renderUserLogin = () => {
@@ -84,7 +89,10 @@ export default function Header() {
           </li>
         </ul>
         {/* Input search */}
-        <form className="form-inline my-2 my-lg-0 d-sm-none d-lg-block">
+        <form
+          onSubmit={handleSubmitSearch}
+          className="form-inline my-2 my-lg-0 d-sm-none d-lg-block"
+        >
           <button>
             <SearchOutlinedIcon />
           </button>
@@ -94,6 +102,7 @@ export default function Header() {
             placeholder="Search"
             aria-label="Search"
             onChange={handleSearch}
+            value={searchKey}
           />
         </form>
         {/* User Log in and log out  */}

@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import "./style.scss";
 import StarIcon from "@material-ui/icons/Star";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
@@ -8,18 +7,30 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import AddItemToCard from "../../../utils/button/addItemToCard";
-
-const styleBtn = {
-  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-  border: 0,
-  paddingLeft: 30,
-  paddingRight: 30,
-  color: "white",
-  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-};
+import Registor from "../../../utils/button/registor";
 
 function Card({ renderList, loading }) {
-  const history = useHistory();
+  const userSignin = JSON.parse(localStorage.getItem("userSignin"));
+  const renderBtns = () => {
+    if (userSignin) {
+      return (
+        <div className="btns d-flex justify-content-between container">
+          <AddItemToCard />
+          <div className="btn-wishlist">
+            <IconButton color="primary" className="hov">
+              <FavoriteIcon />
+            </IconButton>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="btns d-flex justify-content-center container">
+          <Registor />
+        </div>
+      );
+    }
+  };
   const renderListCard = () => {
     if (loading) {
       return (
@@ -92,14 +103,15 @@ function Card({ renderList, loading }) {
                     </div>
                   </NavLink>
 
-                  <div className="btns d-flex justify-content-between container">
+                  {/* <div className="btns d-flex justify-content-between container">
                     <AddItemToCard />
                     <div className="btn-wishlist">
                       <IconButton color="primary" className="hov">
                         <FavoriteIcon />
                       </IconButton>
                     </div>
-                  </div>
+                  </div> */}
+                  {renderBtns()}
                 </div>
 
                 {/* btns */}

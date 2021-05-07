@@ -1,6 +1,5 @@
 import Courses from "../pages/admin/course";
 import Dashboard from "../pages/admin/dashboard";
-import Register from "../pages/admin/register";
 import User from "../pages/admin/user";
 import Category from "../pages/main/categories";
 import CourseDetail from "../pages/main/course-detail";
@@ -53,11 +52,6 @@ export const adminRouter = [
     path: "/admin/courses",
     exact: true,
     component: Courses,
-  },
-  {
-    path: "/admin/register",
-    exact: true,
-    component: Register,
   },
   {
     path: "/admin/user",

@@ -7,6 +7,8 @@ import {
   GET_COURSE_DETAIL_SUCCESS,
   GET_LIST_COURSE_FAILE,
   GET_LIST_COURSE_SUCCESS,
+  POST_CANCEL_REGISTER_FAILE,
+  POST_CANCEL_REGISTER_SUCCESS,
 } from "../constants/courses.const";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   categories: [],
   coursesOfCategory: [],
   courseDetail: [],
+  cancelRegister: [],
   error: [],
 };
 
@@ -35,6 +38,10 @@ const courseReducer = (state = initialState, action) => {
     case GET_COURSE_DETAIL_SUCCESS:
       return { ...state, courseDetail: payload };
     case GET_COURSE_DETAIL_FAILE:
+      return { ...state, error: payload };
+    case POST_CANCEL_REGISTER_SUCCESS:
+      return { ...state, cancelRegister: payload };
+    case POST_CANCEL_REGISTER_FAILE:
       return { ...state, error: payload };
     default:
       return { ...state };

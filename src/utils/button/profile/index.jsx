@@ -52,7 +52,7 @@ export default function ProfileBtn() {
                 </NavLink>
               </li>
               <li className="item" onClick={handleLogout}>
-                <a href="#">Logout</a>
+                Logout
               </li>
             </ul>
           </div>

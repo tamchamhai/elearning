@@ -27,7 +27,11 @@ export default function CourseDetail() {
       return (
         <div className="registor">
           <AddItemToCard />
-          <BuyNowBtn />
+          <BuyNowBtn
+            courseID={courseId}
+            userName={userSignin.taiKhoan}
+            token={userSignin.accessToken}
+          />
         </div>
       );
     } else {
@@ -56,7 +60,7 @@ export default function CourseDetail() {
       return (
         <div className="course-detail">
           <div className="banner row">
-            <div className="content col-12 col-md-8">
+            <div className="content col-12 col-lg-8">
               <NavLink to="/category" exact={true} className="nav-link">
                 {courseDetail?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
               </NavLink>
@@ -77,7 +81,7 @@ export default function CourseDetail() {
               </span>
               <div className="author">
                 <p>
-                  được tạo bởi <NavLink to="/">Russo</NavLink>,
+                  Created by <NavLink to="/">Russo</NavLink>,
                   <NavLink to="/">Tony Stark</NavLink>
                 </p>
               </div>
@@ -101,7 +105,7 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
-            <div className="photo col-12 col-md-4 row">
+            <div className="photo col-12 col-lg-4 row  pl-md-1">
               <img
                 src={courseDetail.hinhAnh}
                 className="col-12"

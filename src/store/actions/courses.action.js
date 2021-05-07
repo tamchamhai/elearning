@@ -7,9 +7,12 @@ import {
   GET_COURSE_DETAIL_SUCCESS,
   GET_LIST_COURSE_FAILE,
   GET_LIST_COURSE_SUCCESS,
+  POST_CANCEL_REGISTER_SUCCESS,
+  POST_CANCEL_REGISTER_FAILE,
 } from "../constants/courses.const";
 import { startLoading, stopLoading } from "./common.action";
 import axios from "axios";
+import { getUserDetail } from "./user.action";
 // Get all course from the list
 export const getListCourses = () => {
   return (dispatch) => {
@@ -30,6 +33,24 @@ export const getListCourses = () => {
   };
 };
 
+// Get the course from search
+export const getSearchCourse = (courseName) => {
+  return (dispatch) => {
+    dispatch(startLoading());
+    axios({
+      method: "",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP01`,
+    })
+      .then((res) => {
+        dispatch(getListCourseSuccess(res.data));
+        dispatch(stopLoading());
+      })
+      .catch((err) => {
+        dispatch(getListCourseFaile(err));
+        dispatch(stopLoading());
+      });
+  };
+};
 const getListCourseSuccess = (listCourse) => {
   return {
     type: GET_LIST_COURSE_SUCCESS,
@@ -40,23 +61,6 @@ const getListCourseFaile = (err) => {
   return {
     type: GET_LIST_COURSE_FAILE,
     payload: err,
-  };
-};
-
-// Get the course from search
-export const getSearchCourse = (courseName) => {
-  return (dispatch) => {
-    axios({
-      method: "",
-      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP01`,
-    })
-      .then((res) => {
-        localStorage.setItem("searchCourse", JSON.stringigy(res.data));
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 };
 
@@ -129,7 +133,6 @@ const getCourseOfCategoryFaile = (err) => {
 
 // Get course detail
 export const getCourseDetail = (params) => {
-  console.log(params);
   return (dispatch) => {
     dispatch(startLoading());
     axios({
@@ -139,7 +142,6 @@ export const getCourseDetail = (params) => {
       .then((res) => {
         dispatch(getCourseDetailSuccess(res.data));
         dispatch(stopLoading());
-        console.log("ré", res);
       })
       .catch((err) => {
         dispatch(getCourseDetailFaile(err));
@@ -157,6 +159,46 @@ export const getCourseDetailSuccess = (course) => {
 export const getCourseDetailFaile = (err) => {
   return {
     type: GET_COURSE_DETAIL_FAILE,
+    payload: err,
+  };
+};
+
+export const postCancelRegisterCourse = (courseId, userName, token) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url:
+        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/HuyGhiDanh",
+      data: {
+        maKhoaHoc: courseId,
+        taiKhoan: userName,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(postCancelRegisterSuccess(res.data));
+        dispatch(getUserDetail(userName, token));
+        alert("Cancel register success!");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(postCancelRegisterFaile(err));
+        alert("Cancel register faile!");
+      });
+  };
+};
+export const postCancelRegisterSuccess = (res) => {
+  return {
+    type: POST_CANCEL_REGISTER_SUCCESS,
+    payload: res,
+  };
+};
+export const postCancelRegisterFaile = (err) => {
+  return {
+    type: POST_CANCEL_REGISTER_FAILE,
     payload: err,
   };
 };
