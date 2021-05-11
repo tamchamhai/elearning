@@ -102,6 +102,7 @@ export const postUserUpdate = (
   email,
   maNhom,
   matKhau,
+  maLoaiNguoiDung,
   token
 ) => {
   return (dispatch) => {
@@ -114,7 +115,7 @@ export const postUserUpdate = (
         matKhau: matKhau,
         hoTen: hoTen,
         soDT: soDT,
-        maLoaiNguoiDung: "HV",
+        maLoaiNguoiDung: maLoaiNguoiDung,
         maNhom: maNhom,
         email: email,
       },
@@ -124,8 +125,9 @@ export const postUserUpdate = (
     })
       .then((res) => {
         console.log(res.data);
-        alert("üpdate success");
+        alert("update success");
         dispatch(putUserUpdateSuccess(res.data));
+        dispatch(postUserSigninSuccess(res.data));
       })
       .catch((err) => {
         console.log(err.message);

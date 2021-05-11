@@ -14,6 +14,16 @@ function AdiminSignIn() {
     password: "",
   });
 
+  const renderError = () => {
+    if (error === null) {
+      return "";
+    } else if (error === "you are not a teacher!") {
+      return "you are not a teacher!";
+    } else {
+      return "username or password is wrong!";
+    }
+  };
+
   const handleSignin = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
@@ -75,7 +85,7 @@ function AdiminSignIn() {
               </NavLink>
             </div>
             <div className="errorSignin">
-              <p>{error ? "username or password is wrong!" : ""}</p>
+              <p>{renderError()}</p>
             </div>
             <button type="submit" className="btn--gradient">
               Sign In

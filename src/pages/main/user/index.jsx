@@ -22,6 +22,7 @@ export default function UserProfile() {
       soDT: userSignin.soDT,
       maNhom: userSignin.maNhom,
       email: userSignin.email,
+      userType: userSignin.maLoaiNguoiDung,
       newpassword: "",
       confirmpassword: "",
     },
@@ -31,6 +32,7 @@ export default function UserProfile() {
       soDT: "",
       maNhom: "",
       email: "",
+      userType: "",
       newpassword: "",
       confirmpassword: "",
     },
@@ -95,6 +97,7 @@ export default function UserProfile() {
         userProfile.user.email,
         userProfile.user.maNhom,
         userProfile.user.newpassword,
+        userProfile.user.userType,
         token
       )
     );
@@ -168,6 +171,24 @@ export default function UserProfile() {
                   />
                   <div className="form-error">{userProfile.errors.soDT}</div>
                 </div>
+
+                <div className="form-group">
+                  <label htmlFor="userType" className="form-label">
+                    User Type
+                  </label>
+                  <input
+                    type="text"
+                    id="userType"
+                    className="form-input"
+                    name="userType"
+                    value={userProfile.user.userType}
+                    onChange={handleUserProfile}
+                  />
+                  <div className="form-error">
+                    {userProfile.errors.userType}
+                  </div>
+                </div>
+
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">
                     Email

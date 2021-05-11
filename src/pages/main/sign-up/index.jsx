@@ -15,7 +15,7 @@ function SignUp() {
       password: "",
       repassword: "",
       phone: "",
-      maNhom: "GP01",
+      maNhom: "GP02",
       email: "",
     },
     errors: {
@@ -32,7 +32,14 @@ function SignUp() {
   const handleOnchange = (event) => {
     const { name, value, type, pattern } = event.target;
     const { password, repassword } = userSignup.userInput;
-    console.log(password, repassword);
+    console.log(
+      userSignup.userInput.userName,
+      userSignup.userInput.password,
+      userSignup.userInput.name,
+      userSignup.userInput.phone,
+      userSignup.userInput.maNhom,
+      userSignup.userInput.email
+    );
     // Validation function
     let errorSMS = "";
     if (value.trim() === "") {
@@ -84,12 +91,12 @@ function SignUp() {
     e.preventDefault();
     dispatch(
       postUserSignUp(
-        userSignup.userName,
-        userSignup.password,
-        userSignup.name,
-        userSignup.phone,
-        userSignup.maNhom,
-        userSignup.email,
+        userSignup.userInput.userName,
+        userSignup.userInput.password,
+        userSignup.userInput.name,
+        userSignup.userInput.phone,
+        userSignup.userInput.maNhom,
+        userSignup.userInput.email,
         history
       )
     );

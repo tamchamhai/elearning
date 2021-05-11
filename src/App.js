@@ -14,6 +14,7 @@ import {
 } from "./store/actions/courses.action";
 import "./sassStyle/_main.scss";
 import React from "react";
+import { postAdminSigninSuccess } from "./store/actions/admin.action";
 
 function App() {
   const renderMainRouter = () => {
@@ -47,11 +48,15 @@ function App() {
 
   const dispatch = useDispatch();
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
+  const adminSignin = JSON.parse(localStorage.getItem("adminSignin"));
   const categories = JSON.parse(localStorage.getItem("categories"));
   useEffect(() => {
     dispatch(postUserSigninSuccess(userSignin));
     dispatch(getCategories());
     dispatch(getCategoriesSuccess(categories));
+    if (adminSignin) {
+      dispatch(postAdminSigninSuccess(adminSignin));
+    }
   });
   return (
     <>
