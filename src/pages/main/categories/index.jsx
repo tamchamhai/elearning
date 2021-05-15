@@ -7,6 +7,7 @@ import {
 } from "../../../store/actions/courses.action";
 import Card from "../../../components/main/card";
 import "./style.scss";
+import SpinnerLoading from "../../../components/spinner-loading";
 
 function Category() {
   const dispatch = useDispatch();
@@ -27,10 +28,8 @@ function Category() {
   const renderCategory = () => {
     if (loading) {
       return (
-        <div className="backdrop-loading col-12">
-          <div className="spinner-border text-secondary " role="status">
-            <span className="visually-hidden"></span>
-          </div>
+        <div className="spinner-loading">
+          <SpinnerLoading />
         </div>
       );
     } else {

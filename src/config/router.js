@@ -1,6 +1,8 @@
-import Courses from "../pages/admin/course";
+// Admin
+import AdminCourseManage from "../pages/admin/adminCourseManage";
+import AdminUserManage from "../pages/admin/adminUserManage";
 import Dashboard from "../pages/admin/dashboard";
-import User from "../pages/admin/user";
+// Main
 import Category from "../pages/main/categories";
 import CourseDetail from "../pages/main/course-detail";
 import Home from "../pages/main/home";
@@ -49,13 +51,13 @@ export const adminRouter = [
     component: Dashboard,
   },
   {
-    path: "/admin/courses",
+    path: "/admin/user-manage",
     exact: true,
-    component: Courses,
+    component: AdminUserManage,
   },
   {
-    path: "/admin/user",
+    path: "/admin/course-manage",
     exact: true,
-    component: User,
+    component: AdminCourseManage,
   },
 ];

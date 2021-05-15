@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.cover-admin-header {
+  display: flex;
+  justify-content: space-between;
+  background: #7a8cd7;
+  height: 80px;
+  padding: 0 20px;
+  box-shadow: 1px 1px 7px 0px #aeaeae;
+  .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .logo {
+      text-decoration: none;
+      padding: 0;
+      &:hover .logo-part-one {
+        background-position: center right;
+      }
+      &:hover .logo-part-two {
+        background-position: left center;
+      }
+      .logo-part-one {
+        font-size: 55px;
+        font-family: "Lobster", cursive;
+        background: linear-gradient(
+          90deg,
+          #ffff00 3%,
+          #ffa500 12%,
+          #f14444 23%,
+          #d53567 27%,
+          #9a109a 47%,
+          #9a109a 53%,
+          #d53567 72%,
+          #f14444 77%,
+          #ffa500 88%,
+          #ffff00 97%
+        );
+        transition: 256ms all;
+        background-size: 200% 100%;
+        padding-right: 3px;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-position: left center;
+      }
+      .logo-part-two {
+        font-size: 38px;
+        font-family: "Lobster", cursive;
+        background: linear-gradient(
+          90deg,
+          #ffff00 3%,
+          #ffa500 12%,
+          #f14444 23%,
+          #d53567 27%,
+          #9a109a 47%,
+          #9a109a 53%,
+          #d53567 72%,
+          #f14444 77%,
+          #ffa500 88%,
+          #ffff00 97%
+        );
+        transition: 256ms all;
+        background-size: 200% 100%;
+        padding-right: 3px;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-position: center right;
+      }
+    }
+    .toggle-btn {
+      button {
+        border: none;
+        margin-right: 20px;
+        background: none;
+        .MuiSvgIcon-root {
+          font-size: 2.5rem;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .username {
+      color: #fff;
+      font-weight: 700;
+    }
+    .logout-btn {
+      margin-left: 10px;
+      button {
+        border: none;
+        margin-right: 20px;
+        background: none;
+        .MuiSvgIcon-root {
+          font-size: 2rem;
+          color: #fff;
+          transition: all 0.3s;
+          &:hover {
+            color: crimson;
+          }
+        }
+      }
+    }
+    .avatar {
+      background-image: linear-gradient(
+        to right,
+        rgb(26, 188, 244),
+        rgb(93, 239, 184)
+      );
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

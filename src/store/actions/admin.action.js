@@ -1,5 +1,7 @@
 import {
   ADMIN_LOGOUT,
+  DELETE_USER_FAILE,
+  DELETE_USER_SUCCESS,
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
   POST_ADMIN_SIGNIN_FAILE,
@@ -7,12 +9,11 @@ import {
 } from "../constants/admin.const";
 import axios from "axios";
 
-export const postAdminSignin = (username, password) => {
+export const postAdminSignin = (username, password, history) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
       data: {
         taiKhoan: username,
         matKhau: password,
@@ -21,6 +22,7 @@ export const postAdminSignin = (username, password) => {
       .then((res) => {
         dispatch(postAdminSigninSuccess(res.data));
         localStorage.setItem("adminSignin", JSON.stringify(res.data));
+        history.push("/admin/dashboard");
       })
       .catch((err) => {
         dispatch(postAdminSigninFaile(err));
@@ -73,5 +75,38 @@ export const postAdminLogout = (data) => {
   return {
     type: ADMIN_LOGOUT,
     payload: data,
+  };
+};
+
+// Delete user
+export const deleteUser = (userName, token) => {
+  return (dispatch) => {
+    axios({
+      method: "DELETE",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${userName}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        dispatch(deleteUserSuccess(true));
+        alert("Delete success!");
+      })
+      .catch((err) => {
+        dispatch(deleteUserFaile(err));
+        alert("This account is still alive!");
+      });
+  };
+};
+export const deleteUserSuccess = (res) => {
+  return {
+    type: DELETE_USER_SUCCESS,
+    payload: res,
+  };
+};
+export const deleteUserFaile = (err) => {
+  return {
+    type: DELETE_USER_FAILE,
+    payload: err,
   };
 };

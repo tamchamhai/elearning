@@ -1,289 +1,125 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import "./style.scss";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import SettingsIcon from "@material-ui/icons/Settings";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
+import React, { useState } from "react";
 import AdiminSignIn from "../admin-signin";
-import SearchIcon from "@material-ui/icons/Search";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import {
-  getUserAdminPage,
-  postAdminLogout,
-} from "../../../store/actions/admin.action";
+import AdminHeader from "../adminHeader";
+import Sidebar from "../sidebar";
+import { useSelector } from "react-redux";
+import "./style.scss";
+import Chart from "react-google-charts";
 
-export default function Dashboard() {
-  const dispatch = useDispatch();
-  const { userAdminPage } = useSelector((state) => state.admin);
-  const [toggle, setToggle] = useState("");
-  const [page, setPage] = useState({
-    groupID: "GP01",
-    pageNum: "1",
-    searchKey: null,
-  });
-  const handleGroupID = (event) => {
-    const { value } = event.target;
-    setPage({ ...page, groupID: value });
-  };
-  const handlePickPage = (num) => {
-    setPage({ ...page, pageNum: num });
-  };
-  const handleSearchKey = (event) => {
-    const { value } = event.target;
-    setPage({ ...page, searchKey: value });
-    console.log(page.searchKey);
-    console.log(userAdminPage);
-  };
-
-  const handleToggleSidebar = () => {
-    toggle === "-open" ? setToggle("") : setToggle("-open");
-  };
-
-  const handleAdminLogout = () => {
-    console.log("logout");
-    localStorage.removeItem("adminSignin");
-    dispatch(postAdminLogout("signin"));
-  };
-
+function Dashboard() {
+  // useSelector/useDispatch
   const { renderKey } = useSelector((state) => state.admin);
-  const { adminSignin } = useSelector((state) => state.admin);
 
-  useEffect(() => {
-    dispatch(getUserAdminPage(page.groupID, page.pageNum, page.searchKey));
-  }, [page]);
+  // useState
+  const [toggleVar, setToggleVar] = useState(true);
 
-  // Render signin form
-  const renderAdminSignin = () => {
-    return <AdiminSignIn />;
-  };
+  return renderKey === "dashboard" ? (
+    <div className="dashboard">
+      {/* Header */}
+      <div className="header">
+        <AdminHeader setToggleVar={setToggleVar} />
+      </div>
 
-  // Render Dashboard
-  const renderDashboard = () => {
-    return (
-      <div className="dashboard">
-        <div className="cover-dashboard">
-          <div className={`sidebar${toggle}`}>
-            <div className="navbar-logo">
-              <div className="toggle-btn">
-                <button onClick={handleToggleSidebar}>
-                  <ReorderIcon />
-                </button>
-              </div>
-              <div className="logo">
-                <span className="logo-part-one">E</span>
-                <span className="logo-part-two">Learn</span>
-              </div>
+      {/* Body */}
+      <div className="body-dashboard">
+        <div className={`${toggleVar ? "sidebar" : "toggle-click"}`}>
+          <Sidebar />
+        </div>
+        <div className="content-dashboard">
+          <div className="google-chart-one">
+            <div className="user-chart">
+              <Chart
+                width={400}
+                height={300}
+                chartType="ColumnChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ["City", "2010 Population", "2000 Population"],
+                  ["New York City, NY", 8175000, 8008000],
+                  ["Los Angeles, CA", 3792000, 3694000],
+                  ["Chicago, IL", 2695000, 2896000],
+                  ["Houston, TX", 2099000, 1953000],
+                  ["Philadelphia, PA", 1526000, 1517000],
+                ]}
+                options={{
+                  title: "Population of Largest U.S. Cities",
+                  chartArea: { width: "30%" },
+                  hAxis: {
+                    title: "Total Population",
+                    minValue: 0,
+                  },
+                  vAxis: {
+                    title: "City",
+                  },
+                }}
+                legendToggle
+              />
             </div>
-
-            <div className="menu">
-              <ul>
-                <li className="menu-item">
-                  <a href="#">
-                    <AssignmentIndIcon />
-                    <span>User Management</span>
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="#">
-                    <ChromeReaderModeIcon />
-                    <span>Courses Management</span>
-                  </a>
-                </li>
-              </ul>
+            <div className="course-chart">
+              <Chart
+                width={400}
+                height={"300px"}
+                chartType="AreaChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ["Year", "Sales", "Expenses"],
+                  ["2013", 1000, 400],
+                  ["2014", 1170, 460],
+                  ["2015", 660, 1120],
+                  ["2016", 1030, 540],
+                ]}
+                options={{
+                  title: "Company Performance",
+                  hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
+                  vAxis: { minValue: 0 },
+                  // For the legend to fit, we make the chart area smaller
+                  chartArea: { width: "50%", height: "70%" },
+                  // lineWidth: 25
+                }}
+              />
             </div>
           </div>
-
-          <div className="cover-content">
-            <div className="header">
-              <div className="toggle-btn">
-                <button onClick={handleToggleSidebar}>
-                  <ReorderIcon />
-                </button>
-              </div>
-              <div className="user-login">
-                <p>Hello! {adminSignin.hoTen}</p>
-                <div className="avatar">
-                  <img
-                    src="https://source.unsplash.com/random"
-                    alt="img admin"
-                  />
-                </div>
-                <div className="logout-icon" onClick={handleAdminLogout}>
-                  <ExitToAppIcon />
-                </div>
-              </div>
-            </div>
-
-            <div className="table-content">
-              <div className="cover-content">
-                <div className="title">
-                  <h1>User Management</h1>
-                  <div className="btns">
-                    <div className="groupID">
-                      <form className="groupForm">
-                        <label htmlFor="selectGroup"></label>
-                        <select
-                          className="selectGroup"
-                          name="selectGroup"
-                          onChange={handleGroupID}
-                        >
-                          <option value="GP01" className="item">
-                            GP01
-                          </option>
-                          <option value="GP02" className="item">
-                            GP02
-                          </option>
-                          <option value="GP03" className="item">
-                            GP03
-                          </option>
-                          <option value="GP04" className="item">
-                            GP04
-                          </option>
-                          <option value="GP05" className="item">
-                            GP05
-                          </option>
-                          <option value="GP06" className="item">
-                            GP06
-                          </option>
-                          <option value="GP07" className="item">
-                            GP07
-                          </option>
-                        </select>
-                      </form>
-                    </div>
-                    <button>Add User</button>
-                  </div>
-                </div>
-                <div className="search-bar">
-                  <input
-                    type="text"
-                    name="search"
-                    placeholder="Username"
-                    onChange={handleSearchKey}
-                  />
-                  <button>
-                    <SearchIcon />
-                  </button>
-                </div>
-                <div className="table-list">
-                  <table className="user-table">
-                    <thead className="table-head text-primary">
-                      <tr>
-                        <th className="head-item">No.</th>
-                        <th className="head-item">Username</th>
-                        <th className="head-item">Password</th>
-                        <th className="head-item">Fullname</th>
-                        <th className="head-item">Email</th>
-                        <th className="head-item">Phone </th>
-                        <th className="head-item">
-                          <SettingsIcon />
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="table-body" id="tableDanhSach"></tbody>
-                  </table>
-                </div>
-                <div className="list-page">
-                  <ul>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(1);
-                      }}
-                    >
-                      1
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(2);
-                      }}
-                    >
-                      2
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(3);
-                      }}
-                    >
-                      3
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(4);
-                      }}
-                    >
-                      4
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(5);
-                      }}
-                    >
-                      5
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(6);
-                      }}
-                    >
-                      6
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(7);
-                      }}
-                    >
-                      7
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(8);
-                      }}
-                    >
-                      8
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(9);
-                      }}
-                    >
-                      9
-                    </li>
-                    <li
-                      className="item"
-                      onClick={() => {
-                        handlePickPage(10);
-                      }}
-                    >
-                      10
-                    </li>
-                  </ul>
-                </div>
-              </div>
+          <div className="google-chart-two">
+            <div className="profit-chart">
+              <h1>Profit chart</h1>
+              <Chart
+                width={800}
+                height={300}
+                chartType="LineChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  [
+                    { type: "number", label: "x" },
+                    { type: "number", label: "values" },
+                    { id: "i0", type: "number", role: "interval" },
+                    { id: "i1", type: "number", role: "interval" },
+                    { id: "i2", type: "number", role: "interval" },
+                    { id: "i2", type: "number", role: "interval" },
+                    { id: "i2", type: "number", role: "interval" },
+                    { id: "i2", type: "number", role: "interval" },
+                  ],
+                  [1, 100, 90, 110, 85, 96, 104, 120],
+                  [2, 120, 95, 130, 90, 113, 124, 140],
+                  [3, 130, 105, 140, 100, 117, 133, 139],
+                  [4, 90, 85, 95, 85, 88, 92, 95],
+                  [5, 70, 74, 63, 67, 69, 70, 72],
+                  [6, 30, 39, 22, 21, 28, 34, 40],
+                  [7, 80, 77, 83, 70, 77, 85, 90],
+                  [8, 100, 90, 110, 85, 95, 102, 110],
+                ]}
+                options={{
+                  intervals: { style: "sticks" },
+                  legend: "none",
+                }}
+              />
             </div>
           </div>
         </div>
       </div>
-    );
-  };
-  // render signin form or dashboard
-  const mainRender = () => {
-    if (renderKey === "signin") {
-      return renderAdminSignin();
-    }
-    if (renderKey === "dashboard") {
-      return renderDashboard();
-    }
-  };
-
-  return mainRender();
+    </div>
+  ) : (
+    <AdiminSignIn />
+  );
 }
+
+export default Dashboard;

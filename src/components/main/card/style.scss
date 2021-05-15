@@ -15,9 +15,11 @@
 #card-container {
   margin: 0 !important;
 }
-.cover {
+.cover-main-card {
   margin: 0 !important;
   .cards {
+    box-shadow: 2px 2px 8px 0px #000000a3;
+    border-radius: 3px;
     &:hover .overlay {
       opacity: 1;
     }

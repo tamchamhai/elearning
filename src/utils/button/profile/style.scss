@@ -133,6 +133,7 @@
       .profile {
         .item {
           padding: 5px 20px;
+          cursor: pointer;
           a {
             line-height: 30px;
             color: black;
@@ -140,6 +141,9 @@
             &:hover {
               color: rgba(35, 192, 240, 0.733);
             }
+          }
+          &:hover {
+            color: rgba(35, 192, 240, 0.733);
           }
         }
       }

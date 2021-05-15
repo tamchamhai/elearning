@@ -17,9 +17,8 @@ export default function ProfileBtn() {
       <NavLink to="/user" exact={true} className=" user-avatar-icon">
         <div className="avatar-center avatar-flash ">
           <img
-            src="https://source.unsplash.com/random"
-            alt="img"
-            className="image-cover avatar-image"
+            src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=GraphicShirt&clotheColor=Black&graphicType=Bear&eyeType=Dizzy&eyebrowType=AngryNatural&mouthType=Default&skinColor=Tanned"
+            alt="avatar"
           />
         </div>
       </NavLink>
@@ -30,10 +29,14 @@ export default function ProfileBtn() {
           <div className="header row">
             <div className="avatar col-3">
               <div className="avatar-center avatar-flash ">
-                <img
+                {/* <img
                   src="https://source.unsplash.com/random"
                   alt="img"
                   className="image-cover avatar-image"
+                /> */}
+                <img
+                  src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=GraphicShirt&clotheColor=Black&graphicType=Bear&eyeType=Dizzy&eyebrowType=AngryNatural&mouthType=Default&skinColor=Tanned"
+                  alt="avatar"
                 />
               </div>
             </div>

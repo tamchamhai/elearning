@@ -395,9 +395,8 @@ export default function UserProfile() {
               <div className="avatar">
                 <div className="avatar-center avatar-flash">
                   <img
-                    src="https://source.unsplash.com/random"
-                    alt="img"
-                    className="image-cover avatar-image"
+                    src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=GraphicShirt&clotheColor=Black&graphicType=Bear&eyeType=Dizzy&eyebrowType=AngryNatural&mouthType=Default&skinColor=Tanned"
+                    alt="avatar"
                   />
                 </div>
               </div>

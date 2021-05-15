@@ -14,7 +14,7 @@ function Card({ renderList, loading }) {
   const renderBtns = () => {
     if (userSignin) {
       return (
-        <div className="btns d-flex justify-content-between container">
+        <div className="btns d-flex justify-content-between container mb-2">
           <AddItemToCard />
           <div className="btn-wishlist">
             <IconButton color="primary" className="hov">
@@ -46,7 +46,7 @@ function Card({ renderList, loading }) {
           return (
             <div
               key={index}
-              className="cover text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
+              className="cover-main-card text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
             >
               <div className="cards">
                 <div className="head-img">

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import SpinnerLoading from "../../spinner-loading";
 
 export default function Categories() {
   const { categories } = useSelector((state) => state.courses);
@@ -8,13 +9,7 @@ export default function Categories() {
 
   const renderCategory = () => {
     if (loading) {
-      return (
-        <div className="backdrop-loading col-12">
-          <div className="spinner-border text-secondary " role="status">
-            <span className="visually-hidden"></span>
-          </div>
-        </div>
-      );
+      return <SpinnerLoading />;
     } else {
       return categories?.map((item, index) => {
         return (
