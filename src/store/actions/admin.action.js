@@ -4,8 +4,10 @@ import {
   DELETE_USER_SUCCESS,
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
+  KEY_ADD_EDIT,
   POST_ADMIN_SIGNIN_FAILE,
   POST_ADMIN_SIGNIN_SUCCESS,
+  USER_MODAL,
 } from "../constants/admin.const";
 import axios from "axios";
 
@@ -108,5 +110,18 @@ export const deleteUserFaile = (err) => {
   return {
     type: DELETE_USER_FAILE,
     payload: err,
+  };
+};
+
+export const userModal = (data) => {
+  return {
+    type: USER_MODAL,
+    payload: data,
+  };
+};
+export const keyAddEdit = (data) => {
+  return {
+    type: KEY_ADD_EDIT,
+    payload: data,
   };
 };

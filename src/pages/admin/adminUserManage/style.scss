@@ -7,15 +7,16 @@
 .admin-user-manage {
   .body-admin-user-manage {
     display: flex;
+    transition: all 0.15s ease-in;
     .sidebar {
-      transition: all 0.5s;
-      display: none;
+      transition: all 0.15s ease-in;
+      // display: none;
       width: 0;
     }
     .toggle-click {
-      transition: all 0.5s;
+      transition: all 0.15s ease-in;
       width: 300px;
-      display: block;
+      // display: block;
     }
     .content {
       background: linear-gradient(to right, #acb6e5, #74ebd5);

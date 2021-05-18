@@ -1,16 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 
-function ModalUser({ data, id }) {
+function ModalUser() {
+  const dispatch = useDispatch();
+  const { userModal } = useSelector((state) => state.admin);
+  const { keyAddEdit } = useSelector((state) => state.admin);
+
   // useState
   const [dismissModal, setDismissModal] = useState("");
+  const [user, setUser] = useState({
+    data: {
+      Username: userModal?.taiKhoan,
+      fullname: userModal?.hoTen,
+      password: userModal?.matKhau,
+      email: userModal?.email,
+      phonenumber: userModal?.soDT,
+      role: userModal?.maLoaiNguoiDung,
+    },
+    keyAddEdit: keyAddEdit,
+  });
 
   // handle function
-  const handleAddUser = () => {};
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    const tempUser = { ...user.data, [name]: value };
+    setUser({ data: tempUser });
+    console.log(name, value);
+  };
   const handleSubmitAddUser = () => {};
 
   // render function
   const renderErrorAddUser = () => {};
+  const renderBtn = () => {
+    if (user.keyAddEdit === "edit-btn") {
+      return (
+        <button type="submit" className="btn btn-primary">
+          Save changes
+        </button>
+      );
+    } else if (user.keyAddEdit === "add-btn") {
+      return (
+        <button type="submit" className="btn btn-primary">
+          Add
+        </button>
+      );
+    }
+  };
+
+  // componentDidmount
+  useEffect(() => {
+    if (userModal) {
+      setUser({
+        ...user,
+        data: {
+          Username: userModal?.taiKhoan,
+          fullname: userModal?.hoTen,
+          password: userModal?.matKhau,
+          email: userModal?.email,
+          phonenumber: userModal?.soDT,
+          role: userModal?.maLoaiNguoiDung,
+        },
+        keyAddEdit: keyAddEdit,
+      });
+    } else {
+      setUser({
+        ...user,
+        data: {
+          Username: null,
+          fullname: null,
+          password: null,
+          email: null,
+          phonenumber: null,
+          role: null,
+        },
+        keyAddEdit: keyAddEdit,
+      });
+    }
+    console.log(user.data);
+    console.log(user.keyAddEdit);
+  }, [userModal, keyAddEdit]);
 
   return (
     <div>
@@ -56,15 +125,13 @@ function ModalUser({ data, id }) {
                     placeholder="Ex: John Doe"
                     required
                     name="Username"
-                    onChange={handleAddUser}
-                    value={data?.taiKhoan}
+                    onChange={handleOnChange}
+                    value={user.data.Username ? user.data?.Username : ""}
                   />
-                  <div className="errorAddUser">
-                    <p>{renderErrorAddUser()}</p>
-                  </div>
+                  <div className="error">{renderErrorAddUser()}</div>
                 </div>
 
-                <div className="form-group">
+                <div className={"form-group"}>
                   <label htmlFor="password" className="form-label">
                     Password
                   </label>
@@ -75,11 +142,9 @@ function ModalUser({ data, id }) {
                     placeholder="************"
                     required
                     name="password"
-                    onChange={handleAddUser}
+                    onChange={handleOnChange}
+                    value={user.data.password ? user.data.password : ""}
                   />
-                  <div className="errorAddUser">
-                    <p>{renderErrorAddUser()}</p>
-                  </div>
                 </div>
 
                 <div className="form-group">
@@ -93,11 +158,9 @@ function ModalUser({ data, id }) {
                     placeholder="Ex: JohnDoe"
                     required
                     name="fullname"
-                    onChange={handleAddUser}
+                    onChange={handleOnChange}
+                    value={user.data.fullname ? user.data.fullname : ""}
                   />
-                  <div className="errorAddUser">
-                    <p>{renderErrorAddUser()}</p>
-                  </div>
                 </div>
 
                 <div className="form-group">
@@ -111,11 +174,9 @@ function ModalUser({ data, id }) {
                     placeholder="Ex: John@email.com"
                     required
                     name="email"
-                    onChange={handleAddUser}
+                    onChange={handleOnChange}
+                    value={user.data.email ? user.data.email : ""}
                   />
-                  <div className="errorAddUser">
-                    <p>{renderErrorAddUser()}</p>
-                  </div>
                 </div>
 
                 <div className="form-group">
@@ -128,11 +189,9 @@ function ModalUser({ data, id }) {
                     className="form-add-user"
                     placeholder="Phone number"
                     name="phonenumber"
-                    onChange={handleAddUser}
+                    onChange={handleOnChange}
+                    value={user.data.phonenumber ? user.data.phonenumber : ""}
                   />
-                  <div className="errorAddUser">
-                    <p>{renderErrorAddUser()}</p>
-                  </div>
                 </div>
 
                 <div className="form-group">
@@ -142,7 +201,9 @@ function ModalUser({ data, id }) {
                   <select
                     className="form-add-user"
                     id="role"
-                    onChange={handleAddUser}
+                    name="role"
+                    onChange={handleOnChange}
+                    value={user.data.role ? user.data.role : ""}
                   >
                     <option value="GV">Tutor</option>
                     <option value="HV">Student</option>
@@ -167,9 +228,7 @@ function ModalUser({ data, id }) {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
+              {renderBtn()}
             </div>
           </div>
         </div>

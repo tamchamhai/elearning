@@ -4,8 +4,10 @@ import {
   DELETE_USER_SUCCESS,
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
+  KEY_ADD_EDIT,
   POST_ADMIN_SIGNIN_FAILE,
   POST_ADMIN_SIGNIN_SUCCESS,
+  USER_MODAL,
 } from "../constants/admin.const";
 
 const initialState = {
@@ -13,6 +15,8 @@ const initialState = {
   renderKey: "signin",
   userAdminPage: null,
   deleteUserAdmin: true,
+  userModal: null,
+  keyAddEdit: null,
   error: null,
 };
 
@@ -38,6 +42,10 @@ const adminReducer = (state = initialState, action) => {
       return { ...state, deleteUserAdmin: !change };
     case DELETE_USER_FAILE:
       return { ...state, error: payload };
+    case USER_MODAL:
+      return { ...state, userModal: payload };
+    case KEY_ADD_EDIT:
+      return { ...state, keyAddEdit: payload };
     default:
       return { ...state };
   }

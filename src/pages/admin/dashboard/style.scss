@@ -10,13 +10,13 @@
     height: 100%;
     .sidebar {
       transition: all 0.5s;
-      display: none;
+      // display: none;
       width: 0;
     }
     .toggle-click {
       transition: all 0.5s;
       width: 300px;
-      display: block;
+      // display: block;
     }
     .content-dashboard {
       background: linear-gradient(to right, #acb6e5, #74ebd5);

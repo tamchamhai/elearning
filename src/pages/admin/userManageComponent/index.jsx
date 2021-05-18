@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteUser,
   getUserAdminPage,
+  keyAddEdit,
+  userModal,
 } from "../../../store/actions/admin.action";
 import ModalUser from "../../../components/admin/modal-user";
 
@@ -21,7 +23,8 @@ function UserManage() {
   const [groupID, setGroupID] = useState("GP01");
   const [keySearch, setKeySearch] = useState("");
   const [modalData, setModalData] = useState({
-    data: null,
+    keySetBtn: null,
+    data: {},
   });
 
   // Handle function
@@ -31,8 +34,13 @@ function UserManage() {
   const handleDeleteUser = (userName) => {
     dispatch(deleteUser(userName, token));
   };
-  const handleEditUser = (user) => {
-    setModalData({ ...modalData, data: user });
+  const handleAddUser = () => {
+    dispatch(userModal({}));
+    dispatch(keyAddEdit("add-btn"));
+  };
+  const handleEditUser = (item) => {
+    dispatch(userModal(item));
+    dispatch(keyAddEdit("edit-btn"));
   };
 
   // Render Function
@@ -66,7 +74,7 @@ function UserManage() {
           <th className="item">
             <span className="btns register">register</span>
             <span
-              data-target="user-modal"
+              data-target="#user-modal"
               data-toggle="modal"
               className="btns edit"
               id="edit-user"
@@ -103,7 +111,7 @@ function UserManage() {
   return (
     <div className="cover-user-manage">
       {/* Modal */}
-      <ModalUser data={modalData.data} />;{/* title/add user btn */}
+      <ModalUser />
       <div className="title">
         <h1>user management</h1>
         <div className="add-user-btn">
@@ -129,11 +137,9 @@ function UserManage() {
             </select>
           </div>
           <button
-            data-target="user-modal"
+            data-target="#user-modal"
             data-toggle="modal"
-            onClick={() => {
-              setModalData({ ...modalData, data: null });
-            }}
+            onClick={handleAddUser}
           >
             add user
           </button>
