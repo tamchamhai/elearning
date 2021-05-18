@@ -5,11 +5,16 @@ import {
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
   KEY_ADD_EDIT,
+  POST_ADD_USER_FAILE,
+  POST_ADD_USER_SUCCESS,
   POST_ADMIN_SIGNIN_FAILE,
   POST_ADMIN_SIGNIN_SUCCESS,
+  PUT_UPDATA_USER_FAILE,
+  PUT_UPDATA_USER_SUCCESS,
   USER_MODAL,
 } from "../constants/admin.const";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const postAdminSignin = (username, password, history) => {
   return (dispatch) => {
@@ -123,5 +128,105 @@ export const keyAddEdit = (data) => {
   return {
     type: KEY_ADD_EDIT,
     payload: data,
+  };
+};
+
+export const postAddUser = (
+  username,
+  password,
+  fullname,
+  phonenumber,
+  role,
+  groupID,
+  email,
+  token
+) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
+      data: {
+        taiKhoan: username,
+        matKhau: password,
+        hoTen: fullname,
+        soDT: phonenumber,
+        maLoaiNguoiDung: role,
+        maNhom: groupID,
+        email: email,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        dispatch(postAddUserFaile(null));
+        swal("Good job!", "Add user Success!", "success");
+      })
+      .catch((err) => {
+        dispatch(postAddUserFaile(err));
+        swal("Opps!", "Add user Faile!", "error");
+      });
+  };
+};
+export const postAddUserSuccess = (res) => {
+  return {
+    type: POST_ADD_USER_SUCCESS,
+    payload: res,
+  };
+};
+export const postAddUserFaile = (err) => {
+  return {
+    type: POST_ADD_USER_FAILE,
+    payload: err,
+  };
+};
+
+export const putUpdataUser = (
+  username,
+  password,
+  fullname,
+  phonenumber,
+  role,
+  groupID,
+  email,
+  token
+) => {
+  return (dispatch) => {
+    axios({
+      method: "PUT",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+      data: {
+        taiKhoan: username,
+        matKhau: password,
+        hoTen: fullname,
+        soDT: phonenumber,
+        maLoaiNguoiDung: role,
+        maNhom: groupID,
+        email: email,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch(putUpdataUserFaile(null));
+        alert("updata success");
+      })
+      .catch((err) => {
+        dispatch(putUpdataUserFaile(err));
+      });
+  };
+};
+export const putUpdataUserSuccess = (res) => {
+  return {
+    type: PUT_UPDATA_USER_SUCCESS,
+    payload: res,
+  };
+};
+export const putUpdataUserFaile = (err) => {
+  return {
+    type: PUT_UPDATA_USER_FAILE,
+    payload: err,
   };
 };

@@ -5,8 +5,10 @@ import {
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
   KEY_ADD_EDIT,
+  POST_ADD_USER_FAILE,
   POST_ADMIN_SIGNIN_FAILE,
   POST_ADMIN_SIGNIN_SUCCESS,
+  PUT_UPDATA_USER_FAILE,
   USER_MODAL,
 } from "../constants/admin.const";
 
@@ -46,6 +48,10 @@ const adminReducer = (state = initialState, action) => {
       return { ...state, userModal: payload };
     case KEY_ADD_EDIT:
       return { ...state, keyAddEdit: payload };
+    case PUT_UPDATA_USER_FAILE:
+      return { ...state, error: payload };
+    case POST_ADD_USER_FAILE:
+      return { ...state, error: payload };
     default:
       return { ...state };
   }

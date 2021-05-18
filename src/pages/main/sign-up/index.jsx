@@ -84,7 +84,6 @@ function SignUp() {
       userInput: users,
       errors: error,
     });
-    // setErrorSignup({ ...userSignup.errors, [name]: errorSMS });
   };
 
   const handleSubmit = (e) => {
