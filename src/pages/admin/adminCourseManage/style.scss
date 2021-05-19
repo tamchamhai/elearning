@@ -9,13 +9,11 @@
     display: flex;
     .sidebar {
       transition: all 0.5s;
-      display: none;
       width: 0;
     }
     .toggle-click {
       transition: all 0.5s;
       width: 300px;
-      display: block;
     }
     .content {
       background: linear-gradient(to right, #acb6e5, #74ebd5);

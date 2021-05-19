@@ -32,14 +32,7 @@ function SignUp() {
   const handleOnchange = (event) => {
     const { name, value, type, pattern } = event.target;
     const { password, repassword } = userSignup.userInput;
-    console.log(
-      userSignup.userInput.userName,
-      userSignup.userInput.password,
-      userSignup.userInput.name,
-      userSignup.userInput.phone,
-      userSignup.userInput.maNhom,
-      userSignup.userInput.email
-    );
+
     // Validation function
     let errorSMS = "";
     if (value.trim() === "") {

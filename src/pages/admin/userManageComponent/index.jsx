@@ -64,7 +64,7 @@ function UserManage() {
   const renderUserList = () => {
     return userAdminPage?.map((item, index) => {
       return (
-        <tr key={index}>
+        <tr key={index} className={`${index % 2 == 0 ? "bg-list" : ""}`}>
           <th className="item">{index + 1}</th>
           <th className="item">{item.taiKhoan}</th>
           <th className="item">{item.hoTen}</th>

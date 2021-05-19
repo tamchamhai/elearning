@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.page-not-found {
+  padding: 80px 0;
+  text-align: center;
+  background: url(https://images.unsplash.com/photo-1621328619089-013e2bf39a59?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1460&q=80)
+    center/cover no-repeat;
+  background-clip: text;
+  h1 {
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.001);
+    font-size: 200px;
+    font-weight: 700;
+  }
+  p {
+    padding: 40px;
+  }
+}

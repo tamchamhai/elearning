@@ -7,6 +7,9 @@
   color: rgb(255, 0, 51);
   text-shadow: 2px 4px 5px crimson;
 }
+.bg-list {
+  background: #ddd;
+}
 /////////////////////////////////////////////////////////////////////////
 .cover-user-manage {
   background: #fff;
@@ -102,7 +105,8 @@
         .body-table {
           .item {
             border: 1px solid #00000020;
-            padding: 15px 10px;
+            font-weight: 400;
+            padding: 8px 10px;
             .btns {
               padding: 8px;
               color: #fff;

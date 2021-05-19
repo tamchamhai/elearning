@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AdiminSignIn from "../admin-signin";
 import AdminHeader from "../adminHeader";
+import CourseManage from "../courseManageComponent";
 import Sidebar from "../sidebar";
 import "./style.scss";
 
@@ -25,7 +26,7 @@ function AdminCourseManage() {
           <Sidebar />
         </div>
         <div className="content">
-          <p>This is course manage</p>
+          <CourseManage />
         </div>
       </div>
     </div>

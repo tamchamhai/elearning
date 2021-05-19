@@ -2,6 +2,8 @@ import {
   ADMIN_LOGOUT,
   DELETE_USER_FAILE,
   DELETE_USER_SUCCESS,
+  GET_COURSE_ADMIN_PAGE_FAILE,
+  GET_COURSE_ADMIN_PAGE_SUCCESS,
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
   KEY_ADD_EDIT,
@@ -227,6 +229,35 @@ export const putUpdataUserSuccess = (res) => {
 export const putUpdataUserFaile = (err) => {
   return {
     type: PUT_UPDATA_USER_FAILE,
+    payload: err,
+  };
+};
+
+export const getCourseAdminPage = (searchKey, pageIndex, group) => {
+  return (dispatch) => {
+    axios({
+      method: "GET",
+      url: searchKey
+        ? `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?tenKhoaHoc=${searchKey}&page=${pageIndex}&pageSize=10&MaNhom=${group}`
+        : `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${pageIndex}&pageSize=10&MaNhom=${group}`,
+    })
+      .then((res) => {
+        dispatch(getCourseAdminPageSuccess(res.data.items));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+export const getCourseAdminPageSuccess = (res) => {
+  return {
+    type: GET_COURSE_ADMIN_PAGE_SUCCESS,
+    payload: res,
+  };
+};
+export const getCourseAdminPageFaile = (err) => {
+  return {
+    type: GET_COURSE_ADMIN_PAGE_FAILE,
     payload: err,
   };
 };
