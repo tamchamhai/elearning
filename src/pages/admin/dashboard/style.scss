@@ -22,6 +22,20 @@
       background: linear-gradient(to right, #acb6e5, #74ebd5);
       width: 100%;
       padding: 20px;
+      .dashboard-banner {
+        display: flex;
+        justify-content: space-between;
+        .banner {
+          .heading {
+            justify-content: space-between;
+            display: flex;
+          }
+          .footing {
+            justify-content: space-between;
+            display: flex;
+          }
+        }
+      }
       .google-chart-one {
         width: 100%;
         margin-bottom: 10px;

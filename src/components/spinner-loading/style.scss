@@ -1,0 +1,36 @@
+.dashed-loading {
+  position: relative;
+  height: 90px;
+  left: 47%;
+}
+.dashed-loading:after,
+.dashed-loading:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}
+.dashed-loading:before {
+  z-index: 5;
+  border: 5px dashed #ff6bcb;
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  -webkit-animation: dashed 1s linear infinite;
+  animation: dashed 1s linear infinite;
+}
+.dashed-loading:after {
+  z-index: 10;
+  border: 5px solid #ff6bcb;
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  -webkit-animation: dashed 1s ease infinite;
+  animation: dashed 1s ease infinite;
+}
+@keyframes dashed {
+  to {
+    transform: rotate(360deg);
+  }
+}

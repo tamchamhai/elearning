@@ -1,5 +1,7 @@
 import {
   ADMIN_LOGOUT,
+  DELETE_COURSE_FAILE,
+  DELETE_COURSE_SUCCESS,
   DELETE_USER_FAILE,
   DELETE_USER_SUCCESS,
   GET_COURSE_ADMIN_PAGE_FAILE,
@@ -7,6 +9,8 @@ import {
   GET_USER_ADMIN_PAGE_FAILE,
   GET_USER_ADMIN_PAGE_SUCCESS,
   KEY_ADD_EDIT,
+  POST_ADD_COURSE_FAILE,
+  POST_ADD_COURSE_SUCCESS,
   POST_ADD_USER_FAILE,
   POST_ADD_USER_SUCCESS,
   POST_ADMIN_SIGNIN_FAILE,
@@ -14,6 +18,10 @@ import {
   PUT_UPDATA_USER_FAILE,
   PUT_UPDATA_USER_SUCCESS,
   USER_MODAL,
+  COURSE_MODAL,
+  COURSE_KEY_MODAL,
+  GET_USER_LIST_SUCCESS,
+  GET_USER_LIST_FAILE,
 } from "../constants/admin.const";
 import axios from "axios";
 import swal from "sweetalert";
@@ -99,11 +107,11 @@ export const deleteUser = (userName, token) => {
     })
       .then((res) => {
         dispatch(deleteUserSuccess(true));
-        alert("Delete success!");
+        swal("Good job!", "Delete user Success!", "success");
       })
       .catch((err) => {
         dispatch(deleteUserFaile(err));
-        alert("This account is still alive!");
+        swal("Opps!", "This account is still alive!", "error");
       });
   };
 };
@@ -244,9 +252,7 @@ export const getCourseAdminPage = (searchKey, pageIndex, group) => {
       .then((res) => {
         dispatch(getCourseAdminPageSuccess(res.data.items));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 };
 export const getCourseAdminPageSuccess = (res) => {
@@ -258,6 +264,137 @@ export const getCourseAdminPageSuccess = (res) => {
 export const getCourseAdminPageFaile = (err) => {
   return {
     type: GET_COURSE_ADMIN_PAGE_FAILE,
+    payload: err,
+  };
+};
+
+export const deleteCourse = (courseID, token) => {
+  return (dispatch) => {
+    axios({
+      method: "DELETE",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${courseID}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        dispatch(deleteCourseSuccess(true));
+        swal("Good job!", "Delete course Success!", "success");
+      })
+      .catch((err) => {
+        dispatch(deleteCourseFaile(err));
+        swal("Oops!", "Delete course Faile!", "error");
+      });
+  };
+};
+export const deleteCourseSuccess = (res) => {
+  return {
+    type: DELETE_COURSE_SUCCESS,
+    payload: res,
+  };
+};
+export const deleteCourseFaile = (err) => {
+  return {
+    type: DELETE_COURSE_FAILE,
+    payload: err,
+  };
+};
+
+export const postAddCourse = (course, token, formData, imgName) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHoc",
+      data: {
+        maKhoaHoc: course.courseID,
+        biDanh: course.shortName,
+        tenKhoaHoc: course.courseName,
+        moTa: course.descripbe,
+        luotXem: course.views,
+        danhGia: course.student,
+        hinhAnh: imgName,
+        maNhom: course.groupID,
+        ngayTao: course.createDate,
+        maDanhMucKhoaHoc: course.courseCategory,
+        taiKhoanNguoiTao: course.tutor,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        axios({
+          method: "POST",
+          url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh",
+          data: formData,
+        })
+          .then((res) => {
+            swal("Good job!", "Add course Success!", "success");
+          })
+          .catch((err) => {
+            swal("Oops!", "Add course Faile!", "error");
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+export const postAddCourseSuccess = (res) => {
+  return {
+    type: POST_ADD_COURSE_SUCCESS,
+    payload: res,
+  };
+};
+export const postAddCourseFaile = (err) => {
+  return {
+    type: POST_ADD_COURSE_FAILE,
+    payload: err,
+  };
+};
+
+export const courseModal = (course) => {
+  return {
+    type: COURSE_MODAL,
+    payload: course,
+  };
+};
+export const courseKeyModal = (key) => {
+  return {
+    type: COURSE_KEY_MODAL,
+    payload: key,
+  };
+};
+
+export const getUserList = () => {
+  return (dispatch) => {
+    axios({
+      method: "GET",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP03",
+    })
+      .then((res) => {
+        const userTutorList = [];
+        res.data.map((item) => {
+          if (item.maLoaiNguoiDung === "GV") {
+            userTutorList.push(item);
+          }
+        });
+        dispatch(getUserListSuccess(userTutorList));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+export const getUserListSuccess = (res) => {
+  return {
+    type: GET_USER_LIST_SUCCESS,
+    payload: res,
+  };
+};
+export const getUserListFaile = (err) => {
+  return {
+    type: GET_USER_LIST_FAILE,
     payload: err,
   };
 };

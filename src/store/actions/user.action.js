@@ -11,13 +11,13 @@ import {
   SIGNUP_FAILE,
   SIGNUP_SUCCESS,
 } from "../constants/user.const";
+import swal from "sweetalert";
 
 export const postUserSignIn = (Username, password, history) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
       data: {
         taiKhoan: Username,
         matKhau: password,
@@ -108,8 +108,7 @@ export const postUserUpdate = (
   return (dispatch) => {
     axios({
       method: "PUT",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
       data: {
         taiKhoan: taiKhoan,
         matKhau: matKhau,
@@ -152,8 +151,7 @@ export const registerCourse = (courseId, userName, token) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/DangKyKhoaHoc",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/DangKyKhoaHoc",
       data: {
         maKhoaHoc: courseId,
         taiKhoan: userName,
@@ -163,12 +161,10 @@ export const registerCourse = (courseId, userName, token) => {
       },
     })
       .then((res) => {
-        console.log(res);
-        alert("Register success");
+        swal("Good job!", "You Got The Course!", "success");
       })
       .catch((err) => {
-        console.log(err);
-        alert("You have registered this course already!");
+        swal("Opps!", "You have registered this course already!", "error");
       });
   };
 };
@@ -189,8 +185,7 @@ export const getUserDetail = (userId, token) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
       data: {
         taiKhoan: userId,
         // matKhau: "string",

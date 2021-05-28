@@ -65,7 +65,9 @@ function UserManage() {
     return userAdminPage?.map((item, index) => {
       return (
         <tr key={index} className={`${index % 2 == 0 ? "bg-list" : ""}`}>
-          <th className="item">{index + 1}</th>
+          <th className="item-img">
+            <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairDreads&accessoriesType=Round&hairColor=Black&facialHairType=BeardLight&facialHairColor=BlondeGolden&clotheType=Hoodie&clotheColor=Blue02&eyeType=Default&eyebrowType=AngryNatural&mouthType=Sad&skinColor=Light" />
+          </th>
           <th className="item">{item.taiKhoan}</th>
           <th className="item">{item.hoTen}</th>
           <th className="item">{item.email}</th>
@@ -164,7 +166,7 @@ function UserManage() {
         </div>
         {/* render user list */}
         <div className="user-table">
-          <table>
+          <table className="table">
             <thead className="head-table text-primary">
               <tr>
                 <th className="item">No.</th>

@@ -21,14 +21,17 @@
     // padding: 10px 20px;
     background: #7a8cd7;
     li {
-      padding: 10px 20px;
+      padding: 10px 0;
+      padding-left: 30px;
+      transition: 0.3s ease-in;
       a {
         text-decoration: none;
         color: #fff;
         font-size: 1.3rem;
-        font-weight: 700;
+        font-weight: 500;
       }
       &:hover {
+        transform: scale(1.1);
         background: #fff;
         a {
           color: #7386d5;

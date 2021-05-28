@@ -1,0 +1,91 @@
+.comment {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  .avatar {
+    width: 10%;
+    p {
+      width: 70px;
+      height: 70px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 2rem;
+      background: rgb(228, 101, 101);
+      color: #fff;
+      line-height: 70px;
+      text-align: center;
+      border-radius: 50%;
+    }
+  }
+  .content {
+    width: 88%;
+    .name {
+      font-size: 1.2rem;
+      h2 {
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      .stars {
+        color: #ce6d12;
+      }
+      .times {
+        margin-left: 10px;
+        font-size: 0.9rem;
+      }
+    }
+    .text {
+      font-size: 1rem;
+      line-height: 24px;
+    }
+    .likes {
+      margin-top: 10px;
+      p {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+      }
+      .like-btn {
+        .like-icon {
+          cursor: pointer;
+          color: #2896a9;
+          margin-right: 10px;
+          border: 1px solid #2896a9;
+          display: inline-block;
+          padding: 10px;
+          border-radius: 50%;
+        }
+        span {
+          cursor: pointer;
+          margin-left: 20px;
+          color: #2896a9;
+          &:hover {
+            color: #134852;
+          }
+        }
+      }
+    }
+  }
+}
+.see-more-review {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border: 1px solid #2896a9;
+  margin-top: 30px;
+  cursor: pointer;
+  &:hover {
+    span {
+      color: #144e58;
+    }
+    border: 1px solid #144e58;
+  }
+  span {
+    color: #2896a9;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+}

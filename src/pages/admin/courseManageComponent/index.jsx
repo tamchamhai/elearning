@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
-import { getCourseAdminPage } from "../../../store/actions/admin.action";
+import {
+  courseKeyModal,
+  courseModal,
+  deleteCourse,
+  getCourseAdminPage,
+  getUserList,
+} from "../../../store/actions/admin.action";
 import PageNotFound from "../../../components/page-not-found";
+import ModalCourse from "../../../components/admin/modal-course";
 
 function CourseManage() {
   const dispatch = useDispatch();
   const { courseAdminPage } = useSelector((state) => state.admin);
-  const { error } = useSelector((state) => state.admin);
+  const token = JSON.parse(localStorage.getItem("adminSignin")).accessToken;
+
   // useState
   const [pageIndex, setPageIndex] = useState({
     index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -19,11 +27,26 @@ function CourseManage() {
     group: "GP01",
     searchKey: null,
   });
+  const [addEditCourse, setAddEditCourse] = useState({
+    course: null,
+    key: "",
+  });
 
   // Handle function
   const handlePageSelect = (index) => {
     setPageIndex({ ...pageIndex, selectedIndex: index });
     setGetCourse({ ...getCourse, pageIndex: index });
+  };
+  const handleDeleteCourse = (courseID) => {
+    dispatch(deleteCourse(courseID, token));
+  };
+  const handleAddCourse = () => {
+    dispatch(courseModal({}));
+    dispatch(courseKeyModal("add_key"));
+  };
+  const handleEditCourse = (course) => {
+    dispatch(courseModal(course));
+    dispatch(courseKeyModal("edit_key"));
   };
 
   // Render function
@@ -44,7 +67,67 @@ function CourseManage() {
       );
     });
   };
-  const renderCoursePageIndex = () => {};
+  const renderCourseList = () => {
+    return courseAdminPage?.map((course, index) => {
+      return (
+        <tr
+          key={index}
+          className={`trow ${index % 2 === 0 ? "bg-list-course" : ""}`}
+        >
+          <th className="item" scope="row">
+            <div className="courseImg">
+              <img src={course.hinhAnh} alt="Oops!" />
+              <div className="courseName">
+                <h3>{course.tenKhoaHoc}</h3>
+                <span>{course.danhMucKhoaHoc.tenDanhMucKhoaHoc}</span>
+              </div>
+            </div>
+          </th>
+          <td className="item">
+            <div className="creator">
+              <h3>{course.nguoiTao.hoTen}</h3>
+              <p>Views: {course.luotXem}</p>
+            </div>
+          </td>
+          <td className="item">
+            <div className="date">{course.ngayTao}</div>
+          </td>
+          <td className="item">
+            <div className="switch-btn">
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round" />
+              </label>
+            </div>
+          </td>
+          <td className="item">
+            <div className="action">
+              <span className="action-btns register">register</span>
+              <span
+                className="action-btns edit"
+                id="edit-user"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
+                onClick={() => {
+                  handleEditCourse(course);
+                }}
+              >
+                edit
+              </span>
+              <span
+                className="action-btns delete"
+                onClick={() => {
+                  handleDeleteCourse(course.maKhoaHoc);
+                }}
+              >
+                delete
+              </span>
+            </div>
+          </td>
+        </tr>
+      );
+    });
+  };
 
   // componentDidmount
   useEffect(() => {
@@ -55,10 +138,12 @@ function CourseManage() {
         getCourse.group
       )
     );
+    dispatch(getUserList());
   }, [getCourse.searchKey, getCourse.pageIndex, getCourse.group]);
 
   return (
     <div className="cover-course-manage">
+      <ModalCourse />
       {/* Title */}
       <div className="title-course">
         <h1>courses management</h1>
@@ -78,12 +163,15 @@ function CourseManage() {
               <option value="GP04">GP04</option>
               <option value="GP05">GP05</option>
               <option value="GP06">GP06</option>
-              <option value="GP07">GP07</option>
-              <option value="GP08">GP08</option>
-              <option value="GP09">GP09</option>
             </select>
           </div>
-          <button>add course</button>
+          <button
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+            onClick={handleAddCourse}
+          >
+            add course
+          </button>
         </div>
       </div>
       {/* Content */}
@@ -96,12 +184,12 @@ function CourseManage() {
               id="categories"
               name="categories"
             >
-              <option value="GP01">FrontEnd</option>
-              <option value="GP02">BackEnd</option>
-              <option value="GP03">Photoshop</option>
-              <option value="GP04">Dev-ops</option>
-              <option value="GP05">GP05</option>
-              <option value="GP06">GP06</option>
+              <option value="BackEnd">BackEnd</option>
+              <option value="Design">Design</option>
+              <option value="DiDong">DiDong</option>
+              <option value="FrontEnd">FrontEnd</option>
+              <option value="FullStack">FullStack</option>
+              <option value="TuDuy">TuDuy</option>
             </select>
           </div>
           <div className="search-section">
@@ -120,19 +208,33 @@ function CourseManage() {
         </div>
         {/* render user list */}
         <div className="user-table">
-          <table>
+          <table class="table">
             <thead className="head-table text-primary">
               <tr>
-                <th className="item">Course</th>
-                <th className="item">Created by</th>
-                <th className="item">Published at</th>
-                <th className="item">Display</th>
-                <th className="item">Action</th>
+                <th className="item" scope="col">
+                  Course
+                </th>
+                <th className="item" scope="col">
+                  Created by
+                </th>
+                <th className="item" scope="col">
+                  Published at
+                </th>
+                <th className="item" scope="col">
+                  Display
+                </th>
+                <th className="item" scope="col">
+                  Action
+                </th>
               </tr>
             </thead>
-            <tbody className="body-table">{renderCoursePageIndex()}</tbody>
+            <tbody className="body-table">{renderCourseList()}</tbody>
           </table>
-          <div className={`${courseAdminPage ? "page-dblock" : "page-dnone"}`}>
+          <div
+            className={`${
+              courseAdminPage?.length === 0 ? "page-dblock" : "page-dnone"
+            }`}
+          >
             <PageNotFound />
           </div>
         </div>

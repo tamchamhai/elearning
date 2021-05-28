@@ -4,6 +4,11 @@ import AdminHeader from "../adminHeader";
 import Sidebar from "../sidebar";
 import { useSelector } from "react-redux";
 import "./style.scss";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import QuestionAnswerOutlinedIcon from "@material-ui/icons/QuestionAnswerOutlined";
+import StorageOutlinedIcon from "@material-ui/icons/StorageOutlined";
+import CollectionsBookmarkOutlinedIcon from "@material-ui/icons/CollectionsBookmarkOutlined";
+import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import Chart from "react-google-charts";
 
 function Dashboard() {
@@ -26,6 +31,81 @@ function Dashboard() {
           <Sidebar />
         </div>
         <div className="content-dashboard">
+          {/* Banner */}
+          <div className="dashboard-banner">
+            <div className="banner-comment banner">
+              <div className="heading">
+                <div className="icon">
+                  <QuestionAnswerOutlinedIcon />
+                </div>
+                <div className="text">
+                  <h3>202</h3>
+                  <p>New Comments</p>
+                </div>
+              </div>
+              <div className="footing">
+                <div className="viewdetail">View detail</div>
+                <div className="arrow-right">
+                  <ArrowForwardIcon />
+                </div>
+              </div>
+            </div>
+
+            <div className="banner-user banner">
+              <div className="heading">
+                <div className="icon">
+                  <StorageOutlinedIcon />
+                </div>
+                <div className="text">
+                  <h3>2023</h3>
+                  <p>New Users</p>
+                </div>
+              </div>
+              <div className="footing">
+                <div className="viewdetail">View detail</div>
+                <div className="arrow-right">
+                  <ArrowForwardIcon />
+                </div>
+              </div>
+            </div>
+
+            <div className="banner-course banner">
+              <div className="heading">
+                <div className="icon">
+                  <CollectionsBookmarkOutlinedIcon />
+                </div>
+                <div className="text">
+                  <h3>123</h3>
+                  <p>New Courses</p>
+                </div>
+              </div>
+              <div className="footing">
+                <div className="viewdetail">View detail</div>
+                <div className="arrow-right">
+                  <ArrowForwardIcon />
+                </div>
+              </div>
+            </div>
+
+            <div className="banner-messenger banner">
+              <div className="heading">
+                <div className="icon">
+                  <EmailOutlinedIcon />
+                </div>
+                <div className="text">
+                  <h3>2023</h3>
+                  <p>New Email</p>
+                </div>
+              </div>
+              <div className="footing">
+                <div className="viewdetail">View detail</div>
+                <div className="arrow-right">
+                  <ArrowForwardIcon />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Chart */}
           <div className="google-chart-one">
             <div className="user-chart">
               <Chart

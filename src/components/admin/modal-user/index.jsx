@@ -52,7 +52,6 @@ function ModalUser() {
     const tempError = { ...userError.onChangeError, [name]: smsError };
     const tempUser = { ...user.data, [name]: value };
 
-    console.log(userError.onChangeError);
     setError({ ...userError, onChangeError: tempError });
     setUser({ ...user, data: tempUser });
   };
@@ -306,9 +305,6 @@ function ModalUser() {
                   </div>
                 </div>
               </form>
-              <div className="render-errors">
-                <p>{renderErrorAddUser()}</p>
-              </div>
             </div>
             {/* Footer */}
             <div className="modal-footer">

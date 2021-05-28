@@ -3,11 +3,16 @@
   padding: 0;
   margin: 0;
 }
+// Common class
+.bg-list-course {
+  background: rgb(228, 228, 228);
+}
 .select-class {
   color: rgb(255, 0, 51);
   text-shadow: 2px 4px 5px crimson;
 }
 
+//-----------------------------------
 .cover-course-manage {
   background: #fff;
   border-radius: 4px;
@@ -121,20 +126,67 @@
       table {
         width: 100%;
         .head-table {
+          border: 1px solid #00000020;
           .item {
-            border: 1px solid #00000020;
             padding: 15px 10px;
           }
         }
         .body-table {
+          border: 1px solid #0000000a;
           .item {
-            border: 1px solid #00000020;
             font-weight: 400;
             padding: 8px 10px;
-            .btns {
+            height: 70px;
+            .courseImg {
+              display: flex;
+              .courseName {
+                margin-left: 20px;
+                margin-top: 5px;
+                h3 {
+                  font-weight: 700;
+                }
+                span {
+                  display: inline-block;
+                  background: chartreuse;
+                  padding: 6px;
+                  margin-top: 4px;
+                  border-radius: 10px;
+                }
+              }
+              img {
+                width: 100px;
+                height: 60px;
+                border-radius: 5px;
+                background: url(https://images.unsplash.com/photo-1523633589114-88eaf4b4f1a8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80)
+                  center/cover no-repeat;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ddd;
+                font-weight: 700;
+                object-fit: cover;
+              }
+            }
+            .creator {
+              p {
+                background: coral;
+                padding: 6px;
+                width: 100px;
+                margin-top: 4px;
+                border-radius: 10px;
+              }
+              h3 {
+                font-weight: 400;
+              }
+            }
+            .date {
+              margin: 20px 0;
+            }
+            .action-btns {
               padding: 8px;
               color: #fff;
               border-radius: 4px;
+              margin: 12px 0;
               margin-left: 5px;
               cursor: pointer;
               display: inline-block;
@@ -151,6 +203,83 @@
             }
             .delete {
               background: crimson;
+            }
+            .switch-btn {
+              margin-top: 12px;
+              .display-switch-on {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 30px;
+                border-radius: 25px;
+                border: 1px solid #e1e1e1b3;
+                background-color: rgba(0, 255, 0, 0.6);
+                box-shadow: inset 4px 4px 8px #0000004f;
+                margin-top: 2px;
+                transition: 0.3s ease-in;
+                &::after {
+                  transition: 0.5s ease-in;
+                  content: "";
+                  position: absolute;
+                  width: 30px;
+                  height: 26px;
+                  background-color: #e3edf7;
+                  border-radius: 12px;
+                  right: 1px;
+                  top: 1px;
+                  box-shadow: 4px 4px 8px #0000004f;
+                }
+              }
+              .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+                input {
+                  opacity: 0;
+                  width: 0;
+                  height: 0;
+                  &:checked + .slider {
+                    background-color: rgba(0, 255, 0, 0.6);
+                  }
+                  &:checked + .slider::before {
+                    -webkit-transform: translateX(30px);
+                    -ms-transform: translateX(30px);
+                    transform: translateX(30px);
+                  }
+                }
+                .slider {
+                  position: absolute;
+                  cursor: pointer;
+                  top: 2px;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background-color: #ccc;
+                  -webkit-transition: 0.4s;
+                  transition: 0.4s;
+                  border: 1px solid #e1e1e1b3;
+                  box-shadow: inset 4px 4px 8px #0000004f;
+                  &::before {
+                    position: absolute;
+                    content: "";
+                    height: 28px;
+                    width: 28px;
+                    left: 1px;
+                    bottom: 1px;
+                    background-color: white;
+                    box-shadow: 4px 4px 8px #0000004f;
+                    -webkit-transition: 0.4s;
+                    transition: 0.4s;
+                  }
+                }
+                .slider.round {
+                  border-radius: 34px;
+                }
+                .slider.round::before {
+                  border-radius: 50%;
+                }
+              }
             }
           }
         }
