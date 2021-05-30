@@ -12,16 +12,73 @@ export default function Categories() {
       return <SpinnerLoading />;
     } else {
       return categories?.map((item, index) => {
-        return (
-          <NavLink
-            key={index}
-            exact={false}
-            className="dropdown-item"
-            to={`/category/${item.maDanhMuc}`}
-          >
-            {item.tenDanhMuc}
-          </NavLink>
-        );
+        if (item.maDanhMuc == "BackEnd") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              BackEnd Development
+            </NavLink>
+          );
+        } else if (item.maDanhMuc == "Design") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              Web Design
+            </NavLink>
+          );
+        } else if (item.maDanhMuc == "DiDong") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              Mobile Development
+            </NavLink>
+          );
+        } else if (item.maDanhMuc == "FrontEnd") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              FrontEnd Web Design
+            </NavLink>
+          );
+        } else if (item.maDanhMuc == "FullStack") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              FullStack Web Development
+            </NavLink>
+          );
+        } else if (item.maDanhMuc == "TuDuy") {
+          return (
+            <NavLink
+              key={index}
+              exact={false}
+              className="dropdown-item"
+              to={`/category/${item.maDanhMuc}`}
+            >
+              Algorithm Basic
+            </NavLink>
+          );
+        }
       });
     }
   };

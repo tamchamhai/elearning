@@ -300,43 +300,19 @@ export const deleteCourseFaile = (err) => {
   };
 };
 
-export const postAddCourse = (course, token, formData, imgName) => {
+export const postAddCourse = (token, formData) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHoc",
-      data: {
-        maKhoaHoc: course.courseID,
-        biDanh: course.shortName,
-        tenKhoaHoc: course.courseName,
-        moTa: course.descripbe,
-        luotXem: course.views,
-        danhGia: course.student,
-        hinhAnh: imgName,
-        maNhom: course.groupID,
-        ngayTao: course.createDate,
-        maDanhMucKhoaHoc: course.courseCategory,
-        taiKhoanNguoiTao: course.tutor,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh",
+      data: formData,
     })
       .then((res) => {
-        axios({
-          method: "POST",
-          url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh",
-          data: formData,
-        })
-          .then((res) => {
-            swal("Good job!", "Add course Success!", "success");
-          })
-          .catch((err) => {
-            swal("Oops!", "Add course Faile!", "error");
-          });
+        swal("Good job!", "Add course Success!", "success");
+        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        swal("Oops!", "Add course Faile!", "error");
       });
   };
 };

@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.tab-list {
+  padding: 30px;
+  .navbar-list {
+    margin-left: 3px;
+    ul {
+      display: flex;
+      justify-content: flex-start;
+      .navbar-item {
+        margin-right: 20px;
+        cursor: pointer;
+        a {
+          text-decoration: none;
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #73726c;
+        }
+      }
+    }
+  }
+  .board-navbar {
+    padding: 20px;
+    border: 1px solid #dcdacb;
+    border-radius: 5px;
+    margin-top: 20px;
+    .heading-board {
+      display: flex;
+      justify-content: space-between;
+      .text {
+        width: 50%;
+        h1 {
+          font-size: 1.5rem;
+          color: #000;
+          // margin-top: 20px;
+        }
+        p {
+          display: block;
+          display: -webkit-box !important;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: normal;
+          margin: 15px 0;
+          line-height: 1.4;
+        }
+        span {
+          color: #0f7c90;
+          padding: 10px 10px;
+          border-radius: 5px;
+          border: 1px solid #0f7c90;
+          margin-top: 20px;
+          display: inline-block;
+          font-weight: 700;
+          font-size: 1.05rem;
+          &:hover {
+            color: #094b57;
+            border: 1px solid #094b57;
+          }
+        }
+      }
+      .img {
+        width: 20%;
+        img {
+          width: 180px;
+          height: 180px;
+        }
+      }
+    }
+    .board-list {
+      margin-top: 25px;
+    }
+  }
+}
+
+.quote {
+  padding: 0 30px;
+  margin-bottom: 40px;
+  h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #73726c;
+    font-size: 1.05rem;
+  }
+}
+
+.student-viewing {
+  margin-top: 40px;
+  .heading-student {
+    padding: 10px 30px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    span {
+      color: #0f7c90;
+      cursor: pointer;
+      &:hover {
+        color: #094b57;
+      }
+    }
+  }
+}
+
+// Common class
+.active-click {
+  color: #272725 !important ;
+  // border-bottom: 1px solid #272725;
+}

@@ -15,16 +15,38 @@ function Category() {
   const { loading } = useSelector((state) => state.loading);
   const { coursesOfCategory } = useSelector((state) => state.courses);
 
-  useEffect(function () {
+  useEffect(() => {
     dispatch(getCategories());
   }, []);
-  useEffect(
-    function () {
-      dispatch(getCoursesOfCategory(name));
-    },
-    [name]
-  );
+  useEffect(() => {
+    dispatch(getCoursesOfCategory(name));
+  }, [name]);
 
+  const renderCategoryName = () => {
+    if (coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "BackEnd") {
+      return "BackEnd Development";
+    } else if (
+      coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "FrontEnd"
+    ) {
+      return "FrontEnd Development";
+    } else if (
+      coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "FullStack"
+    ) {
+      return "FullStack Development";
+    } else if (
+      coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "DiDong"
+    ) {
+      return "Mobile Development";
+    } else if (
+      coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "TuDuy"
+    ) {
+      return "Algorithm";
+    } else if (
+      coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc == "Design"
+    ) {
+      return "Web Design";
+    }
+  };
   const renderCategory = () => {
     if (loading) {
       return (
@@ -36,7 +58,8 @@ function Category() {
       return (
         <div className="pon ">
           <h1 className="title" id="title">
-            {coursesOfCategory[0]?.danhMucKhoaHoc.tenDanhMucKhoaHoc}
+            {/* {coursesOfCategory[0]?.danhMucKhoaHoc.maDanhMucKhoahoc} */}
+            {renderCategoryName()}
           </h1>
           <Card renderList={coursesOfCategory} loading={loading} />;
         </div>

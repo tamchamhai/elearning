@@ -8,6 +8,10 @@ import { IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import AddItemToCard from "../../../utils/button/addItemToCard";
 import Registor from "../../../utils/button/registor";
+import SpinnerLoading from "../../spinner-loading";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 function Card({ renderList, loading }) {
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
@@ -31,13 +35,12 @@ function Card({ renderList, loading }) {
       );
     }
   };
+
   const renderListCard = () => {
     if (loading) {
       return (
         <div className="backdrop-loading col-12">
-          <div className="spinner-border text-secondary " role="status">
-            <span className="visually-hidden"></span>
-          </div>
+          <SpinnerLoading />
         </div>
       );
     } else {
@@ -46,7 +49,8 @@ function Card({ renderList, loading }) {
           return (
             <div
               key={index}
-              className="cover-main-card text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
+              // className="cover-main-card text-decoration-none text-dark px-sm-1 col-12 col-sm-6 col-md-4 col-lg-3"
+              className="cover-main-card text-decoration-none"
             >
               <div className="cards">
                 <div className="head-img">
@@ -72,7 +76,13 @@ function Card({ renderList, loading }) {
                 <div className="price">
                   <p>$120</p>
                   <div className="tag-best-seller">
-                    <button>BestSeller</button>
+                    <button
+                      className={`${
+                        course.luotXem > 100 ? "" : "opacity-none"
+                      }`}
+                    >
+                      BestSeller
+                    </button>
                   </div>
                 </div>
 
@@ -87,7 +97,11 @@ function Card({ renderList, loading }) {
                         <h2>{course.tenKhoaHoc}</h2>
                       </div>
                       <div className="update">
-                        <button>BestSeller</button>
+                        <button
+                          className={`${course.luotXem > 100 ? "" : "d-none"}`}
+                        >
+                          BestSeller
+                        </button>
                         <span>
                           Đã Cập Nhật <span>April 2021</span>
                         </span>
@@ -102,15 +116,6 @@ function Card({ renderList, loading }) {
                       </div>
                     </div>
                   </NavLink>
-
-                  {/* <div className="btns d-flex justify-content-between container">
-                    <AddItemToCard />
-                    <div className="btn-wishlist">
-                      <IconButton color="primary" className="hov">
-                        <FavoriteIcon />
-                      </IconButton>
-                    </div>
-                  </div> */}
                   {renderBtns()}
                 </div>
 
@@ -123,9 +128,56 @@ function Card({ renderList, loading }) {
     }
   };
 
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          initialSlide: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 458,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="row" id="card-container">
-      {renderListCard()}
+    <div>
+      <Slider {...settings}>
+        {renderListCard()}
+        {/* <div className="row" id="card-container"></div> */}
+      </Slider>
     </div>
   );
 }

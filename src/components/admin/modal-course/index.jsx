@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAddCourse } from "../../../store/actions/admin.action";
+import dateFormat from "dateformat";
 import "./style.scss";
 
 function ModalCourse() {
@@ -10,9 +11,7 @@ function ModalCourse() {
   const { courseKeyModal } = useSelector((state) => state.admin);
   const { userTutorList } = useSelector((state) => state.admin);
   const [uploadImg, setUploadImg] = useState({
-    file: "",
-    name: "",
-    isUpload: false,
+    file: {},
   });
   const [course, setCourse] = useState({
     data: {
@@ -24,7 +23,7 @@ function ModalCourse() {
       student: courseModal?.soLuongHocVien,
       image: courseModal?.hinhAnh,
       groupID: courseModal?.maNhom,
-      createDate: courseModal?.ngayTao,
+      createDate: dateFormat("dd/MM/yyyy", new Date(courseModal?.ngayTao)),
       courseCategory: courseModal?.danhMucKhoaHoc?.maDanhMucKhoahoc,
       tutor: courseModal?.nguoiTao?.taiKhoan,
     },
@@ -32,43 +31,38 @@ function ModalCourse() {
   // Handle function
   const handleOnChange = (event) => {
     const { name, value, files } = event.target;
-    let formData = new FormData();
-    formData.append("maKhoaHoc", course.data.courseID);
-    formData.append("tenKhoaHoc", course.data.courseName);
-    // handle course info
-
-    if (files) {
-      const file = event.target.files[0];
-      formData.append("file", file);
-      setUploadImg({
-        ...uploadImg,
-        file: formData,
-        isUpload: true,
-        name: file.name,
-      });
-    }
-
     let courseProp = { ...course.data, [name]: value };
     setCourse({ ...course, data: courseProp });
+    if (name === "image") {
+      setCourse({
+        ...course.data,
+        image: files[0],
+      });
+    }
   };
-  // const handleOnChangeUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   let formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("tenKhoaHoc", course.data.courseName);
-  //   setUploadImg({
-  //     ...uploadImg,
-  //     file: formData,
-  //     isUpload: true,
-  //     name: file.name,
-  //   });
-  // };
+  const handleUploadImg = (event) => {
+    const { files } = event.target;
+    setUploadImg({ file: files[0] });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postAddCourse(course.data, token, uploadImg.file, uploadImg.name));
-    console.log(course.data);
-    console.log(uploadImg.file);
-    console.log(uploadImg.name);
+    let formData = new FormData();
+    formData.append("maKhoaHoc", course.data.courseID);
+    formData.append("biDanh", course.data.shortName);
+    formData.append("tenKhoaHoc", course.data.courseName);
+    formData.append("moTa", course.data.descripbe);
+    formData.append("luotXem", course.data.views);
+    formData.append("hinhAnh", uploadImg.file);
+    formData.append("danhGia", course.data.student);
+    formData.append("maNhom", course.data.groupID);
+    formData.append(
+      "ngayTao",
+      dateFormat("dd-mm-yyyy", new Date(course.data.createDate))
+    );
+    formData.append("maDanhMucKhoaHoc", course.data.courseCategory);
+    formData.append("taiKhoanNguoiTao", course.data.tutor);
+    dispatch(postAddCourse(token, formData));
   };
 
   // Render Function
@@ -239,6 +233,7 @@ function ModalCourse() {
                         id="createDate"
                         className="form-add-course"
                         required
+                        data-date-format="DD MMMM YYYY"
                         name="createDate"
                         onChange={handleOnChange}
                         value={
@@ -322,10 +317,8 @@ function ModalCourse() {
                         className="form-add-course"
                         required
                         name="image"
-                        onChange={handleOnChange}
-                        // onChange={handleOnChangeUpload}
+                        onChange={handleUploadImg}
                       />
-                      <span className="btn btn-primary mt-1">Upload</span>
                     </div>
                   </div>
                 </div>

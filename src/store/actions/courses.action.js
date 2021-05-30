@@ -19,8 +19,7 @@ export const getListCourses = () => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01",
     })
       .then((res) => {
         dispatch(getListCourseSuccess(res.data));
@@ -70,8 +69,7 @@ export const getCategories = () => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc",
     })
       .then((res) => {
         dispatch(getCategoriesSuccess(res.data));
@@ -167,8 +165,7 @@ export const postCancelRegisterCourse = (courseId, userName, token) => {
   return (dispatch) => {
     axios({
       method: "POST",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/HuyGhiDanh",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/HuyGhiDanh",
       data: {
         maKhoaHoc: courseId,
         taiKhoan: userName,
