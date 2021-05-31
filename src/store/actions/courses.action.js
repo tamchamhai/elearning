@@ -19,7 +19,7 @@ export const getListCourses = () => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP03",
     })
       .then((res) => {
         dispatch(getListCourseSuccess(res.data));
@@ -38,7 +38,7 @@ export const getSearchCourse = (courseName) => {
     dispatch(startLoading());
     axios({
       method: "",
-      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP01`,
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP03`,
     })
       .then((res) => {
         dispatch(getListCourseSuccess(res.data));
@@ -103,7 +103,7 @@ export const getCoursesOfCategory = (params) => {
     console.log(params);
     axios({
       method: "GET",
-      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${params}&MaNhom=GP01`,
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${params}&MaNhom=GP03`,
     })
       .then((res) => {
         dispatch(getCoursesOfCategorySuccess(res.data));

@@ -2,6 +2,7 @@ import {
   ADMIN_LOGOUT,
   COURSE_KEY_MODAL,
   COURSE_MODAL,
+  DELETE_COURSE_SUCCESS,
   DELETE_USER_FAILE,
   DELETE_USER_SUCCESS,
   GET_COURSE_ADMIN_PAGE_FAILE,
@@ -10,6 +11,7 @@ import {
   GET_USER_ADMIN_PAGE_SUCCESS,
   GET_USER_LIST_SUCCESS,
   KEY_ADD_EDIT,
+  POST_ADD_COURSE_SUCCESS,
   POST_ADD_USER_FAILE,
   POST_ADMIN_SIGNIN_FAILE,
   POST_ADMIN_SIGNIN_SUCCESS,
@@ -23,6 +25,8 @@ const initialState = {
   userAdminPage: null,
   courseAdminPage: null,
   deleteUserAdmin: true,
+  deleteCourseAdmin: true,
+  addCourseAdmin: true,
   userModal: null,
   keyAddEdit: null,
   userTutorList: null,
@@ -71,6 +75,12 @@ const adminReducer = (state = initialState, action) => {
       return { ...state, courseKeyModal: payload };
     case GET_USER_LIST_SUCCESS:
       return { ...state, userTutorList: payload };
+    case DELETE_COURSE_SUCCESS:
+      let changeDel = state.deleteCourseAdmin;
+      return { ...state, deleteCourseAdmin: !changeDel };
+    case POST_ADD_COURSE_SUCCESS:
+      let changeAddCourse = state.addCourseAdmin;
+      return { ...state, addCourseAdmin: !changeAddCourse };
     default:
       return { ...state };
   }

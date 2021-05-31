@@ -78,7 +78,7 @@ function Card({ renderList, loading }) {
                   <div className="tag-best-seller">
                     <button
                       className={`${
-                        course.luotXem > 100 ? "" : "opacity-none"
+                        course.luotXem >= 100 ? "" : "opacity-none"
                       }`}
                     >
                       BestSeller
@@ -103,12 +103,12 @@ function Card({ renderList, loading }) {
                           BestSeller
                         </button>
                         <span>
-                          Đã Cập Nhật <span>April 2021</span>
+                          Updateed <span>April 2021</span>
                         </span>
                       </div>
                       <div className="detail">
                         <span>
-                          40 Giờ học<span>Tất cả cấp độ</span>
+                          40 Hours Learning<span>All levels</span>
                         </span>
                       </div>
                       <div className="intro">
@@ -130,12 +130,12 @@ function Card({ renderList, loading }) {
 
   var settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    // autoplay: true,
+    // autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
@@ -143,7 +143,7 @@ function Card({ renderList, loading }) {
           slidesToShow: 4,
           slidesToScroll: 4,
           initialSlide: 2,
-          infinite: true,
+          // infinite: true,
           dots: true,
         },
       },

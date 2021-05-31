@@ -194,6 +194,85 @@ export default function Home() {
         </h2>
         <Card renderList={courseList} loading={loading} />
       </div>
+      <div className="top-categories">
+        <h1>Top categories</h1>
+        <div className="categories-items">
+          <div className="categories-item">
+            <img src={category1} alt="top categories img" />
+            <h1>Design</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category2} alt="top categories img" />
+            <h1>Development</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category3} alt="top categories img" />
+            <h1>Marketing</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category4} alt="top categories img" />
+            <h1>IT and Software</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category5} alt="top categories img" />
+            <h1>Personal Development</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category6} alt="top categories img" />
+            <h1>Business</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category7} alt="top categories img" />
+            <h1>Photography</h1>
+          </div>
+          <div className="categories-item">
+            <img src={category8} alt="top categories img" />
+            <h1>Music</h1>
+          </div>
+        </div>
+      </div>
+      <div className="features-topic">
+        <h1>Featured topic by category</h1>
+        <div className="feature-cover">
+          <div className="feature-item">
+            <h2>Development</h2>
+            <h4>Python</h4>
+            <p>27,343,256 students</p>
+            <h4>Web Development</h4>
+            <p>9,118,892 students</p>
+            <h4>Machine Learning</h4>
+            <p>9,390,132 students</p>
+          </div>
+          <div className="feature-item">
+            <h2>Business</h2>
+            <h4>Financial Analysis</h4>
+            <p>4,023,747 students</p>
+            <h4>SQL</h4>
+            <p>4,219,867 students</p>
+            <h4>PMP</h4>
+            <p>1,350,127 students</p>
+          </div>
+          <div className="feature-item">
+            <h2>IT and Software</h2>
+            <h4>AWS Certification</h4>
+            <p>2,707,267 students</p>
+            <h4>Ethical Hacking</h4>
+            <p>2,115,225 students</p>
+            <h4>Cyber Security</h4>
+            <p>9,390,132 students</p>
+          </div>
+          <div className="feature-item">
+            <h2>Design</h2>
+            <h4>Photoshop</h4>
+            <p>8,556,632 students</p>
+            <h4>Graphic Design</h4>
+            <p>7,343,256 students</p>
+            <h4>Drawing</h4>
+            <p>3,075,690 students</p>
+          </div>
+        </div>
+        <span className="btn-explore">Explore More</span>
+      </div>
     </div>
   );
 }

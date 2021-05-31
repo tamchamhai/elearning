@@ -306,10 +306,13 @@ export const postAddCourse = (token, formData) => {
       method: "POST",
       url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh",
       data: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
     })
       .then((res) => {
         swal("Good job!", "Add course Success!", "success");
-        console.log(res);
+        dispatch(postAddCourseSuccess(true));
       })
       .catch((err) => {
         swal("Oops!", "Add course Faile!", "error");

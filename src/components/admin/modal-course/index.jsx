@@ -10,6 +10,7 @@ function ModalCourse() {
   const { courseModal } = useSelector((state) => state.admin);
   const { courseKeyModal } = useSelector((state) => state.admin);
   const { userTutorList } = useSelector((state) => state.admin);
+  const { changeAddCourse } = useSelector((state) => state.admin);
   const [uploadImg, setUploadImg] = useState({
     file: {},
   });
@@ -39,6 +40,7 @@ function ModalCourse() {
         image: files[0],
       });
     }
+    console.log(name, value);
   };
   const handleUploadImg = (event) => {
     const { files } = event.target;
@@ -62,6 +64,7 @@ function ModalCourse() {
     );
     formData.append("maDanhMucKhoaHoc", course.data.courseCategory);
     formData.append("taiKhoanNguoiTao", course.data.tutor);
+    console.log(course.data.views);
     dispatch(postAddCourse(token, formData));
   };
 
@@ -113,7 +116,7 @@ function ModalCourse() {
         },
       });
     }
-  }, [courseModal, courseKeyModal]);
+  }, [courseModal, courseKeyModal, changeAddCourse]);
 
   return (
     <div>
@@ -331,7 +334,7 @@ function ModalCourse() {
                         className="form-control"
                         id="courseDescripbe"
                         rows={5}
-                        name="courseDescripbe"
+                        name="descripbe"
                         defaultValue={""}
                         onChange={handleOnChange}
                       />

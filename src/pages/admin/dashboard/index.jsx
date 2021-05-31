@@ -9,7 +9,9 @@ import QuestionAnswerOutlinedIcon from "@material-ui/icons/QuestionAnswerOutline
 import StorageOutlinedIcon from "@material-ui/icons/StorageOutlined";
 import CollectionsBookmarkOutlinedIcon from "@material-ui/icons/CollectionsBookmarkOutlined";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
+import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 import Chart from "react-google-charts";
+import BarChartjs from "../../../components/chart/bar";
 
 function Dashboard() {
   // useSelector/useDispatch
@@ -32,6 +34,10 @@ function Dashboard() {
         </div>
         <div className="content-dashboard">
           {/* Banner */}
+          <h1 className="dashboard-heading">
+            <ImportantDevicesIcon />
+            My Dashboard
+          </h1>
           <div className="dashboard-banner">
             <div className="banner-comment banner">
               <div className="heading">
@@ -106,7 +112,7 @@ function Dashboard() {
             </div>
           </div>
           {/* Chart */}
-          <div className="google-chart-one">
+          <div className="google-chart-one d-none">
             <div className="user-chart">
               <Chart
                 width={400}
@@ -159,7 +165,7 @@ function Dashboard() {
               />
             </div>
           </div>
-          <div className="google-chart-two">
+          <div className="google-chart-two d-none">
             <div className="profit-chart">
               <h1>Profit chart</h1>
               <Chart
@@ -192,6 +198,12 @@ function Dashboard() {
                   legend: "none",
                 }}
               />
+            </div>
+          </div>
+          <div className="chart-js">
+            <div className="bar-chart">
+              <h1>Total Views Per Month</h1>
+              <BarChartjs />
             </div>
           </div>
         </div>

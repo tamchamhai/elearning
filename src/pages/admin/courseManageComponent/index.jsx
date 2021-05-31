@@ -15,6 +15,8 @@ import ModalCourse from "../../../components/admin/modal-course";
 function CourseManage() {
   const dispatch = useDispatch();
   const { courseAdminPage } = useSelector((state) => state.admin);
+  const { deleteCourseAdmin } = useSelector((state) => state.admin);
+  const { addCourseAdmin } = useSelector((state) => state.admin);
   const token = JSON.parse(localStorage.getItem("adminSignin")).accessToken;
 
   // useState
@@ -24,7 +26,7 @@ function CourseManage() {
   });
   const [getCourse, setGetCourse] = useState({
     pageIndex: 1,
-    group: "GP01",
+    group: "GP03",
     searchKey: null,
   });
   const [addEditCourse, setAddEditCourse] = useState({
@@ -139,7 +141,13 @@ function CourseManage() {
       )
     );
     dispatch(getUserList());
-  }, [getCourse.searchKey, getCourse.pageIndex, getCourse.group]);
+  }, [
+    getCourse.searchKey,
+    getCourse.pageIndex,
+    getCourse.group,
+    deleteCourseAdmin,
+    addCourseAdmin,
+  ]);
 
   return (
     <div className="cover-course-manage">
