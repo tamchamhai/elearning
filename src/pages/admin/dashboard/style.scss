@@ -35,6 +35,7 @@
       .dashboard-banner {
         display: flex;
         justify-content: space-between;
+        padding: 0 30px;
         .banner {
           padding: 5px;
           border-radius: 10px;
@@ -132,37 +133,22 @@
           }
         }
       }
-      .google-chart-one {
-        width: 100%;
-        margin-bottom: 10px;
-        .course-chart {
-          border-radius: 5px !important;
-          padding: 20px;
-          background: #fff;
-          margin-left: 10px;
-        }
-        .user-chart {
-          border-radius: 5px !important;
-          padding: 20px;
-          background: #fff;
-          margin-right: 10px;
-        }
-      }
-      .google-chart-two {
-        // width: 100%;
-        .profit-chart {
-          border-radius: 5px !important;
-          padding: 20px;
-          background: #fff;
-          margin-right: 10px;
-        }
-      }
+
       .chart-js {
         h1 {
           font-size: 2rem;
           font-weight: 700;
           color: #fff;
           padding-left: 30px;
+        }
+        .cover-chart {
+          display: flex;
+          .polar-chart {
+            width: 50%;
+          }
+          .donut-chart {
+            width: 50%;
+          }
         }
       }
     }

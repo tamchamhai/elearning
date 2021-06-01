@@ -11,4 +11,134 @@
     font-weight: 300;
     background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
   }
+  .subtitle {
+    font-size: 1.5rem;
+    padding: 30px;
+    font-weight: 700;
+  }
+  .featured-course {
+    padding: 30px;
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .course-wrap {
+      .course-item {
+        display: flex !important;
+        padding: 30px;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+        margin-top: 30px;
+        img {
+          border-radius: 5px;
+          width: 40%;
+          margin-right: 30px;
+        }
+        .text-course {
+          width: 37%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .up {
+            display: flex;
+            flex-direction: column;
+            .title-course {
+              font-size: 1.8rem;
+            }
+            .intro-course {
+              font-size: 1.1rem;
+              line-height: 1.4rem;
+              margin-top: 10px;
+              color: #3c3b37;
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-line-clamp: 4;
+              -webkit-box-orient: vertical;
+              text-overflow: ellipsis;
+              white-space: pre-line;
+            }
+            .tutor-course {
+              font-size: 0.9rem;
+              margin: 8px 0 5px 0;
+            }
+            .update-course {
+              font-size: 0.9rem;
+              margin-bottom: 8px;
+              span:first-child {
+                color: #2d8643;
+                margin-right: 5px;
+              }
+              span:nth-child(2) {
+                margin-right: 5px;
+                color: #2d8643;
+                font-weight: 700;
+              }
+              span:nth-child(3) {
+                margin-right: 5px;
+              }
+            }
+            .votes {
+              display: flex;
+              align-items: center;
+              span:first-child {
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin-right: 5px;
+                color: #be5a0e;
+              }
+              .stars {
+                margin-right: 5px;
+                color: #eb8a2f;
+              }
+              .views {
+                margin-right: 5px;
+              }
+              .bestseller {
+                font-size: 0.9rem;
+                padding: 8px;
+                background: #ffe799;
+                color: #593d00;
+                border-radius: 8px;
+              }
+            }
+          }
+          .down {
+            .price {
+              font-size: 1.5rem;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+  .popular-topics {
+    padding: 0 30px;
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 30px;
+      font-weight: 700;
+    }
+    .grids {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-gap: 10px;
+      margin-top: 20px;
+      .grids-item {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #d3d3d3;
+        cursor: pointer;
+        &:hover span {
+          color: #094c59;
+        }
+        span {
+          color: #0f7c90;
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }

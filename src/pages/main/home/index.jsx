@@ -8,6 +8,7 @@ import {
   getListCourses,
 } from "../../../store/actions/courses.action";
 import "./style.scss";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import avatar1 from "../../../assets/img/mainPage/avatar1.jpg";
 import avatar2 from "../../../assets/img/mainPage/avatar2.jpg";
 import avatar3 from "../../../assets/img/mainPage/avatar3.jpg";
@@ -23,6 +24,15 @@ import category5 from "../../../assets/img/mainPage/category5.jpg";
 import category6 from "../../../assets/img/mainPage/category6.jpg";
 import category7 from "../../../assets/img/mainPage/category7.jpg";
 import category8 from "../../../assets/img/mainPage/category8.jpg";
+import intructor from "../../../assets/img/mainPage/intructor.jpg";
+import business from "../../../assets/img/mainPage/business.jpg";
+import video from "../../../assets/img/mainPage/video.jpg";
+import adidaslogo from "../../../assets/img/mainPage/adidas-logo.svg";
+import bookinglogo from "../../../assets/img/mainPage/booking-logo.svg";
+import eventbritelogo from "../../../assets/img/mainPage/eventbrite-logo.svg";
+import mercedeslogo from "../../../assets/img/mainPage/mercedes-logo-v2.svg";
+import volkswagenlogo from "../../../assets/img/mainPage/volkswagen-logo.svg";
+import VideoModal from "../../../components/main/video-modal";
 
 export default function Home() {
   // Get data from store
@@ -272,6 +282,81 @@ export default function Home() {
           </div>
         </div>
         <span className="btn-explore">Explore More</span>
+      </div>
+      <div className="become-instructor">
+        <div className="non-student">
+          <div className="content-wrapper">
+            <img src={intructor} alt="intructor img" />
+            <div className="text">
+              <h3>Become an instructor</h3>
+              <p>
+                Top instructors from around the world teach millions of students
+                on Udemy. We provide the tools and skills to teach what you
+                love.
+              </p>
+              <span className="btn-explore">Start teaching today</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="company-trust">
+        <div className="text-wrap">
+          <h3>Trusted by companies off all size</h3>
+          <div className="img-wrap">
+            <div className="img-item">
+              <img src={bookinglogo} alt="trust logo" />
+            </div>
+            <div className="img-item">
+              <img src={volkswagenlogo} alt="trust logo" />
+            </div>
+            <div className="img-item">
+              <img src={mercedeslogo} alt="trust logo" />
+            </div>
+            <div className="img-item">
+              <img src={adidaslogo} alt="trust logo" />
+            </div>
+            <div className="img-item">
+              <img src={eventbritelogo} alt="trust logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="become-instructor">
+        <div className="non-student business-bg">
+          <div className="content-wrapper">
+            <div className="text text-white">
+              <h3>Elearn for Business</h3>
+              <p>
+                Get unlimited access to 5,500+ of Udemy’s top courses for your
+                team.
+              </p>
+              <span className="btn-explore">Get Elearn for Business</span>
+            </div>
+            <img src={business} alt="business img" />
+          </div>
+        </div>
+      </div>
+      <div className="video">
+        <div className="video-wrap">
+          <div className="img">
+            <img src={video} alt="video img" />
+            <div
+              className="play-btn"
+              data-toggle="modal"
+              data-target="#videoModal"
+            >
+              <VideoModal />
+              <PlayCircleOutlineIcon />
+            </div>
+          </div>
+          <div className="text">
+            <h3>Transform your life through education</h3>
+            <p>
+              Mohamad Alaloush launched a new career in software development by
+              taking courses on Udemy. What will you be able to do?
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,17 +1,17 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import "./style.scss";
 
-function BarChartjs() {
+function PolarChartJs() {
   return (
     <div className="chart">
-      <Bar
+      <Doughnut
         data={{
           labels: ["January", "February", "March", "April", "May"],
           datasets: [
             {
-              label: "Total views per month",
-              data: [1209, 1169, 1003, 1155, 2065, 1903],
+              //   label: "Total views per month",
+              data: [109, 119, 103, 115, 205, 193],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
@@ -57,4 +57,4 @@ function BarChartjs() {
   );
 }
 
-export default BarChartjs;
+export default PolarChartJs;

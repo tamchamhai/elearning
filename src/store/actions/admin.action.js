@@ -306,9 +306,7 @@ export const postAddCourse = (token, formData) => {
       method: "POST",
       url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh",
       data: formData,
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
+      headers: { "Access-Control-Allow-Origin": "*" },
     })
       .then((res) => {
         swal("Good job!", "Add course Success!", "success");

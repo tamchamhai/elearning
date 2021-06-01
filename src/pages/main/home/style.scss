@@ -14,6 +14,7 @@
   font-weight: 700;
   font-size: 1.05rem;
   cursor: pointer;
+  text-align: center;
   &:hover {
     background-color: #094b57;
     border: 1px solid #094b57;
@@ -184,8 +185,117 @@
     }
   }
 }
+.become-instructor {
+  padding: 50px 0;
+  margin-top: 50px;
+  .non-student {
+    background: #fbfbf8;
+    height: 23rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      img {
+        height: 28rem;
+        margin-right: 50px;
+        box-shadow: 0 2px 4px #00000014, 0 4px 12px #00000014;
+      }
+      .text {
+        max-width: 28rem;
+        margin-right: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h3 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+        }
+        p {
+          font-size: 1.3rem;
+          line-height: 1.7rem;
+        }
+      }
+    }
+  }
+}
+.company-trust {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  border-top: 1px solid #dcdacb;
+  border-bottom: 1px solid #dcdacb;
+  padding: 40px 0;
+  .text-wrap {
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      // margin-bottom: 30px;
+      text-align: center;
+    }
+    .img-wrap {
+      width: 100%;
+      .img-item {
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+        margin: 1.2rem;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+.video {
+  border-top: 1px solid #dcdacb;
+  border-bottom: 1px solid #dcdacb;
+  margin: 40px 0;
+  padding: 30px 0;
+  .video-wrap {
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .img {
+      margin-right: 3rem;
+      position: relative;
+      .play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        cursor: pointer;
+        .MuiSvgIcon-root {
+          transform: translateX(-50%) translateY(-50%);
+          font-size: 5rem;
+          color: #fff;
+          border-radius: 50%;
+        }
+      }
+    }
+    .text {
+      h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 1.3rem;
+        line-height: 1.7rem;
+      }
+      max-width: 30rem;
+    }
+  }
+}
+
 // Common class
 .active-click {
   color: #272725 !important ;
   // border-bottom: 1px solid #272725;
+}
+.business-bg {
+  background: #003640 !important;
 }
