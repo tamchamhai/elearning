@@ -9,6 +9,7 @@ import {
   userModal,
 } from "../../../store/actions/admin.action";
 import ModalUser from "../../../components/admin/modal-user";
+import RegistorModal from "../../../components/admin/modal-registor";
 
 function UserManage() {
   const dispatch = useDispatch();
@@ -74,7 +75,13 @@ function UserManage() {
           <th className="item">{item.soDT}</th>
           <th className="item">{item.maLoaiNguoiDung}</th>
           <th className="item">
-            <span className="btns register">register</span>
+            <span
+              className="btns register"
+              data-toggle="modal"
+              data-target="#registorCourseModal"
+            >
+              register
+            </span>
             <span
               data-target="#user-modal"
               data-toggle="modal"
@@ -114,6 +121,7 @@ function UserManage() {
     <div className="cover-user-manage">
       {/* Modal */}
       <ModalUser />
+      <RegistorModal />
       <div className="title">
         <h1>user management</h1>
         <div className="add-user-btn">

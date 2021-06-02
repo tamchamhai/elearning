@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategories,
@@ -9,8 +9,14 @@ import Card from "../../../components/main/card";
 import "./style.scss";
 import StarIcon from "@material-ui/icons/Star";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import SpinnerLoading from "../../../components/spinner-loading";
 import Slider from "react-slick";
+import avatar1 from "../../../assets/img/mainPage/avatar1.jpg";
+import avatar2 from "../../../assets/img/mainPage/avatar2.jpg";
+import avatar3 from "../../../assets/img/mainPage/avatar3.jpg";
+import avatar4 from "../../../assets/img/mainPage/avatar4.jpg";
+import featuredcourse from "../../../assets/img/carousel/featuredcourse.jpg";
 
 function Category() {
   const dispatch = useDispatch();
@@ -28,6 +34,40 @@ function Category() {
     autoplaySpeed: 2000,
     cssEase: "linear",
   };
+  const instructor = [
+    {
+      avatar: avatar1,
+      name: "Dr. Angela Yu",
+      profession: "Data science, Flask",
+      rating: "4.7",
+      students: "860.323",
+      courses: "15",
+    },
+    {
+      avatar: avatar2,
+      name: "Joso Portilla",
+      profession: "Python, Machine learning",
+      rating: "4.5",
+      students: "660.323",
+      courses: "11",
+    },
+    {
+      avatar: avatar3,
+      name: "Academind by Schwarzmüller",
+      profession: "React, React Hooks",
+      rating: "4.8",
+      students: "1.860.323",
+      courses: "35",
+    },
+    {
+      avatar: avatar4,
+      name: "Coot Steele",
+      profession: "Web Development, MySQL",
+      rating: "4.9",
+      students: "1.060.323",
+      courses: "25",
+    },
+  ];
 
   useEffect(() => {
     dispatch(getCategories());
@@ -99,6 +139,77 @@ function Category() {
       );
     });
   };
+  const renderInstructor = () => {
+    return instructor.map((item, index) => {
+      return (
+        <div className="grids-item">
+          <div className="image">
+            <img src={item.avatar} alt="instructor avatar" />
+          </div>
+          <div className="text">
+            <div className="name">{item.name}</div>
+            <div className="profession">{item.profession}</div>
+            <div className="rates">
+              <span>{item.rating}</span>
+              <span>
+                <StarIcon />
+              </span>
+              <span>Instructor Rating</span>
+            </div>
+            <div className="students">
+              <span>{item.students}</span>
+              <span>students</span>
+            </div>
+            <div className="courses">
+              <span>{item.courses}</span>
+              <span>courses</span>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+  const renderAllDevelopmentCourse = () => {
+    return coursesOfCategory?.map((item, index) => {
+      return (
+        <NavLink
+          className="list-item"
+          to={`/course-detail/${item.maKhoaHoc}`}
+          exact={true}
+          key={index}
+        >
+          <img src={item.hinhAnh} alt="img course" />
+          <div className="text-course">
+            <div className="up">
+              <h3 className="title-course">{item.tenKhoaHoc}</h3>
+              <p className="intro-course"> {item.moTa}</p>
+              <p className="tutor-course">Created by: {item.nguoiTao?.hoTen}</p>
+              <p className="update-course">
+                <span>Updated</span>
+                <span>May 2021</span>
+                <span>28 total hours - 244 lectures - All level</span>
+              </p>
+              <div className="votes">
+                <span>4.9</span>
+                <span className="stars">
+                  <StarIcon />
+                  <StarIcon />
+                  <StarIcon />
+                  <StarIcon />
+                  <StarHalfIcon />
+                </span>
+                <span className="views">(202)</span>
+                <span className="bestseller">Bestseller</span>
+              </div>
+            </div>
+            <div className="down">
+              <p className="price">$94.99</p>
+            </div>
+          </div>
+        </NavLink>
+      );
+    });
+  };
 
   const renderCategory = () => {
     if (loading) {
@@ -155,6 +266,39 @@ function Category() {
               <div className="grids-item">
                 <span>Javascript</span>
               </div>
+            </div>
+          </div>
+          <div className="popular-instructor">
+            <h3>Popular instructor</h3>
+            <div className="grids">{renderInstructor()}</div>
+          </div>
+          <div className="all-development-course">
+            <h3>All Development Courses</h3>
+            <div className="btns">
+              <div className="filter">
+                <span>
+                  <FilterListIcon /> <span>Filter</span>
+                </span>
+              </div>
+              <div className="popular">
+                <select
+                  name="popular"
+                  id="popular"
+                  className="popular-selector"
+                >
+                  <option value="Sort" disabled>
+                    Sort
+                  </option>
+                  <option value="Most Popular">Most Popular</option>
+                  <option value="Highest Rated">Highest Rated</option>
+                  <option value="Newest">Newest</option>
+                </select>
+              </div>
+            </div>
+            <div className="list-course">
+              <div className="sidebar-filter"></div>
+              {/* Render list course */}
+              <div className="list-wrap">{renderAllDevelopmentCourse()}</div>
             </div>
           </div>
         </div>

@@ -330,6 +330,27 @@ export const postAddCourseFaile = (err) => {
   };
 };
 
+export const postUpdateCourse = (token, formData) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/CapNhatKhoaHocUpload",
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        swal("Good job!", "Update course Success!", "success");
+        dispatch(postAddCourseSuccess(true));
+      })
+      .catch((err) => {
+        swal("Oops!", "Update course Faile!", "error");
+        console.log(err);
+      });
+  };
+};
+
 export const courseModal = (course) => {
   return {
     type: COURSE_MODAL,

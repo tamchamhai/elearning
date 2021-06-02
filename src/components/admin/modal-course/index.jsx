@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAddCourse } from "../../../store/actions/admin.action";
+import {
+  postAddCourse,
+  postUpdateCourse,
+} from "../../../store/actions/admin.action";
 import dateFormat from "dateformat";
 import "./style.scss";
 
@@ -64,8 +67,11 @@ function ModalCourse() {
     );
     formData.append("maDanhMucKhoaHoc", course.data.courseCategory);
     formData.append("taiKhoanNguoiTao", course.data.tutor);
-    console.log(course.data.views);
-    dispatch(postAddCourse(token, formData));
+    if (courseKeyModal === "add_key") {
+      dispatch(postAddCourse(token, formData));
+    } else if (courseKeyModal === "edit_key") {
+      dispatch(postUpdateCourse(token, formData));
+    }
   };
 
   // Render Function

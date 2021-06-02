@@ -9,6 +9,7 @@ import {
   GET_LIST_COURSE_SUCCESS,
   POST_CANCEL_REGISTER_SUCCESS,
   POST_CANCEL_REGISTER_FAILE,
+  ADD_TO_CART_COURSE,
 } from "../constants/courses.const";
 import { startLoading, stopLoading } from "./common.action";
 import axios from "axios";
@@ -197,5 +198,19 @@ export const postCancelRegisterFaile = (err) => {
   return {
     type: POST_CANCEL_REGISTER_FAILE,
     payload: err,
+  };
+};
+
+//handle add course to cart list
+export const addCourseToCart = (course) => {
+  return {
+    type: ADD_TO_CART_COURSE,
+    payload: course,
+  };
+};
+export const removeCourseFromCart = (course) => {
+  return {
+    type: ADD_TO_CART_COURSE,
+    payload: course,
   };
 };

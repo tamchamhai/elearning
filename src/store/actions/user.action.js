@@ -29,7 +29,6 @@ export const postUserSignIn = (Username, password, history) => {
         history.goBack();
       })
       .catch((err) => {
-        console.log(err);
         dispatch(postUserSigninFaile(err));
       });
   };
@@ -71,12 +70,10 @@ export const postUserSignUp = (
       },
     })
       .then((res) => {
-        console.log(res.data);
         dispatch(postSignUpSuccess(res.data));
         history.goBack();
       })
       .catch((err) => {
-        console.log(err);
         dispatch(postSignUpFaile(err));
       });
   };
@@ -123,14 +120,13 @@ export const postUserUpdate = (
       },
     })
       .then((res) => {
-        console.log(res.data);
-        alert("update success");
         dispatch(putUserUpdateSuccess(res.data));
         dispatch(postUserSigninSuccess(res.data));
+        swal("Good job!", "User Have Been Update!", "success");
       })
       .catch((err) => {
-        console.log(err.message);
         dispatch(putUserUpdateFaile(err));
+        swal("Opps!", "User Update Faile!", "error");
       });
   };
 };

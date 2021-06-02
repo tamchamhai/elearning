@@ -15,11 +15,11 @@ import Slider from "react-slick";
 
 function Card({ renderList, loading }) {
   const userSignin = JSON.parse(localStorage.getItem("userSignin"));
-  const renderBtns = () => {
+  const renderBtns = (course) => {
     if (userSignin) {
       return (
         <div className="btns d-flex justify-content-between container mb-2">
-          <AddItemToCard />
+          <AddItemToCard courseCart={course} />
           <div className="btn-wishlist">
             <IconButton color="primary" className="hov">
               <FavoriteIcon />
@@ -116,7 +116,7 @@ function Card({ renderList, loading }) {
                       </div>
                     </div>
                   </NavLink>
-                  {renderBtns()}
+                  {renderBtns(course)}
                 </div>
 
                 {/* btns */}
@@ -134,6 +134,7 @@ function Card({ renderList, loading }) {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
+    initialSlide: 0,
     // autoplay: true,
     // autoplaySpeed: 2000,
     responsive: [
@@ -142,7 +143,7 @@ function Card({ renderList, loading }) {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          initialSlide: 2,
+          initialSlide: 0,
           // infinite: true,
           dots: true,
         },
@@ -152,7 +153,7 @@ function Card({ renderList, loading }) {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          initialSlide: 2,
+          initialSlide: 0,
         },
       },
       {
@@ -174,10 +175,7 @@ function Card({ renderList, loading }) {
 
   return (
     <div>
-      <Slider {...settings}>
-        {renderListCard()}
-        {/* <div className="row" id="card-container"></div> */}
-      </Slider>
+      <Slider {...settings}>{renderListCard()}</Slider>
     </div>
   );
 }

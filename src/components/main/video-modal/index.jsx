@@ -16,14 +16,14 @@ export default function VideoModal() {
           <div className="modal-content">
             <div className="modal-body">
               <iframe
-                class="embed-responsive-item"
-                width="854"
-                height="480"
+                className="embed-responsive-item"
+                width={854}
+                height={480}
                 src="https://www.youtube.com/embed/qN3OueBm9F4?autoplay=0"
-                frameborder="0"
+                frameBorder={0}
                 allow="autoplay; encrypted-media"
-                allowfullscreen
-              ></iframe>
+                allowFullScreen
+              />
             </div>
           </div>
         </div>

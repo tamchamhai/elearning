@@ -348,11 +348,15 @@
             }
             .text {
               margin-left: 10px;
-              h2 {
-                cursor: pointer;
-                margin-bottom: 10px;
-                &:hover {
-                  font-weight: 700;
+              a {
+                color: #3c3b37;
+                text-decoration: none;
+                h2 {
+                  cursor: pointer;
+                  margin-bottom: 10px;
+                  &:hover {
+                    font-weight: 700;
+                  }
                 }
               }
               span:nth-child(2) {

@@ -29,10 +29,6 @@ function CourseManage() {
     group: "GP03",
     searchKey: null,
   });
-  const [addEditCourse, setAddEditCourse] = useState({
-    course: null,
-    key: "",
-  });
 
   // Handle function
   const handlePageSelect = (index) => {

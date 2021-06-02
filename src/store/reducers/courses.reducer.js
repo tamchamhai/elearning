@@ -1,4 +1,5 @@
 import {
+  ADD_TO_CART_COURSE,
   GET_CATEGORIES_FAILE,
   GET_CATEGORIES_SUCCESS,
   GET_COURSES_OF_CATEGORY_FAILE,
@@ -17,6 +18,7 @@ const initialState = {
   coursesOfCategory: [],
   courseDetail: [],
   cancelRegister: [],
+  courseInCart: [],
   error: [],
 };
 
@@ -43,6 +45,16 @@ const courseReducer = (state = initialState, action) => {
       return { ...state, cancelRegister: payload };
     case POST_CANCEL_REGISTER_FAILE:
       return { ...state, error: payload };
+    case ADD_TO_CART_COURSE:
+      let addCourseList = state.courseInCart;
+      const index = addCourseList.findIndex(
+        (course) => course.maKhoaHoc === payload.maKhoaHoc
+      );
+      if (index === -1) {
+        addCourseList.push(payload);
+      }
+      return { ...state, courseInCart: addCourseList };
+
     default:
       return { ...state };
   }

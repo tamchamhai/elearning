@@ -19,7 +19,6 @@ function Comment({ user }) {
   const handleRandomColor = () => {
     let num = Math.floor(Math.random() * 5 + 1);
     let pickColor = color[num];
-    console.log(pickColor);
     return pickColor;
   };
   // handleRandomColor();

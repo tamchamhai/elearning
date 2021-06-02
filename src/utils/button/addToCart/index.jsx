@@ -1,67 +1,60 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
 import { IconButton } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-
-const useStyles = makeStyles((theme) => ({
-  popover: {
-    pointerEvents: "none",
-  },
-  paper: {
-    padding: theme.spacing(1),
-  },
-}));
+import { useSelector } from "react-redux";
+import "./style.scss";
 
 export default function AddToCardBtn() {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { courseInCart } = useSelector((state) => state.courses);
 
-  const handlePopoverOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const renderCourseInCart = () => {
+    return courseInCart?.map((item, index) => {
+      return (
+        <div className="item-popover" key={index}>
+          <div className="image">
+            <img src={item.hinhAnh} alt="image course" />
+          </div>
+          <div className="text-des">
+            <h3 className="text-title">{item.tenKhoaHoc}</h3>
+            <p className="intro">{item.moTa}</p>
+            <div className="price">$120</div>
+          </div>
+        </div>
+      );
+    });
   };
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
 
   return (
-    <div>
+    <div className="add-to-cart">
       <IconButton
         color="primary"
         aria-label="add to shopping cart"
-        className="ml-2"
-        aria-owns={open ? "mouse-over-popover" : undefined}
+        className="ml-2 add-cart-icon"
         aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
       >
         <AddShoppingCartIcon />
       </IconButton>
-      <Popover
-        id="mouse-over-popover"
-        className={classes.popover}
-        classes={{
-          paper: classes.paper,
-        }}
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
+      {/* Popover */}
+      <div
+        className={`popover-add-card ${
+          courseInCart.length === 0 ? " d-none" : ""
+        }`}
       >
-        <Typography>I use Popover.</Typography>
-      </Popover>
+        <div className="cover-popover">
+          <div className="content-popover">{renderCourseInCart()}</div>
+          <div className="total-price">
+            <p>Total: ${courseInCart.length * 120}</p>
+          </div>
+        </div>
+      </div>
+      {/* Number of course */}
+      <div
+        className={`number-course  ${
+          courseInCart.length === 0 ? " d-none" : ""
+        }`}
+      >
+        <p>{courseInCart ? `${courseInCart.length}` : ""}</p>
+      </div>
     </div>
   );
 }

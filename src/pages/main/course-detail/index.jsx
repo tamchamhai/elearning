@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import StarIcon from "@material-ui/icons/Star";
@@ -53,6 +53,7 @@ export default function CourseDetail() {
   const briefArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   let click_description_show_more = false;
   let click_instructor_show_more = false;
+  const [reload, setReload] = useState(false);
 
   // Function
   const handleExpandAll = () => {
@@ -181,7 +182,7 @@ export default function CourseDetail() {
     if (userSignin) {
       return (
         <div className="registor">
-          <AddItemToCard />
+          <AddItemToCard courseCart={courseDetail} />
           <BuyNowBtn
             courseID={courseId}
             userName={userSignin.taiKhoan}
@@ -204,7 +205,15 @@ export default function CourseDetail() {
           <div className="name">
             <img src={item.hinhAnh} alt="course img" />
             <div className="text">
-              <h2>Python for Data Science and Machine Learning Bootcamp</h2>
+              <NavLink
+                to={`/course-detail/${item.maKhoaHoc}`}
+                exact={true}
+                onClick={() => {
+                  setReload(!reload);
+                }}
+              >
+                <h2>Python for Data Science and Machine Learning Bootcamp</h2>
+              </NavLink>
               <span>Bestseller</span>
               <span>25 total hours</span>
               <span>Update 05/2021</span>
@@ -226,11 +235,14 @@ export default function CourseDetail() {
     });
   };
 
-  useEffect(function () {
-    dispatch(getCourseDetail(courseId));
-    dispatch(getCourseAdminPage("", 2, "GP01"));
-    dispatch(getUserAdminPage("GP02", 2, ""));
-  }, []);
+  useEffect(
+    function () {
+      dispatch(getCourseDetail(courseId));
+      dispatch(getCourseAdminPage("", 2, "GP03"));
+      dispatch(getUserAdminPage("GP02", 2, ""));
+    },
+    [reload]
+  );
 
   const renderCourseDetail = () => {
     if (loading) {
@@ -1461,7 +1473,7 @@ export default function CourseDetail() {
 
                   <div className="btns">
                     <div className="mx-2 item">
-                      <AddItemToCard />
+                      <AddItemToCard courseCart={courseDetail} />
                     </div>
                     <div className="item">
                       <BuyNowBtn />
