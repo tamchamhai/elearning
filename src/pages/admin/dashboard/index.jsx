@@ -116,11 +116,6 @@ function Dashboard() {
           <div className="chart-js">
             <div className="bar-chart">
               <h1>Total Views Per Month</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                impedit veniam tempora aliquid architecto iure hic voluptates
-                asperiores deleniti illum.
-              </p>
               <BarChartjs />
             </div>
             <div className="cover-chart">

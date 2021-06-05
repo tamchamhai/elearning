@@ -11,12 +11,21 @@ import {
 } from "../../../store/actions/admin.action";
 import PageNotFound from "../../../components/page-not-found";
 import ModalCourse from "../../../components/admin/modal-course";
+import RegistorModal from "../../../components/admin/modal-registor";
+import {
+  dataCourseRegister,
+  getKeyRegister,
+  postUserConfirmed,
+  postUserNotRegister,
+  postUserPending,
+} from "../../../store/actions/register.action";
 
 function CourseManage() {
   const dispatch = useDispatch();
   const { courseAdminPage } = useSelector((state) => state.admin);
   const { deleteCourseAdmin } = useSelector((state) => state.admin);
   const { addCourseAdmin } = useSelector((state) => state.admin);
+  const { registerCourse } = useSelector((state) => state.register);
   const token = JSON.parse(localStorage.getItem("adminSignin")).accessToken;
 
   // useState
@@ -100,7 +109,17 @@ function CourseManage() {
           </td>
           <td className="item">
             <div className="action">
-              <span className="action-btns register">register</span>
+              <span
+                className="action-btns register"
+                data-toggle="modal"
+                data-target="#registorCourseModal"
+                onClick={() => {
+                  dispatch(getKeyRegister("course-manage"));
+                  dispatch(dataCourseRegister(course));
+                }}
+              >
+                register
+              </span>
               <span
                 className="action-btns edit"
                 id="edit-user"
@@ -129,6 +148,11 @@ function CourseManage() {
 
   // componentDidmount
   useEffect(() => {
+    if (registerCourse.length !== 0) {
+      dispatch(postUserNotRegister(registerCourse.maKhoaHoc, token));
+      dispatch(postUserConfirmed(registerCourse.maKhoaHoc, token));
+      dispatch(postUserPending(registerCourse.maKhoaHoc, token));
+    }
     dispatch(
       getCourseAdminPage(
         getCourse.searchKey,
@@ -143,11 +167,13 @@ function CourseManage() {
     getCourse.group,
     deleteCourseAdmin,
     addCourseAdmin,
+    registerCourse,
   ]);
 
   return (
     <div className="cover-course-manage">
       <ModalCourse />
+      <RegistorModal />
       {/* Title */}
       <div className="title-course">
         <h1>courses management</h1>
@@ -212,7 +238,7 @@ function CourseManage() {
         </div>
         {/* render user list */}
         <div className="user-table">
-          <table class="table">
+          <table className="table">
             <thead className="head-table text-primary">
               <tr>
                 <th className="item" scope="col">

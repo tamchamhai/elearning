@@ -10,23 +10,29 @@ import {
 } from "../../../store/actions/admin.action";
 import ModalUser from "../../../components/admin/modal-user";
 import RegistorModal from "../../../components/admin/modal-registor";
+import {
+  dataUserRegister,
+  getKeyRegister,
+  postCourseConfirmed,
+  postCourseNotRegister,
+  postCoursePending,
+} from "../../../store/actions/register.action";
 
 function UserManage() {
   const dispatch = useDispatch();
   const token = JSON.parse(localStorage.getItem("adminSignin"))?.accessToken;
   const { userAdminPage } = useSelector((state) => state.admin);
   const { deleteUserAdmin } = useSelector((state) => state.admin);
+  const { registerUser } = useSelector((state) => state.register);
+  const { courseNotRegister } = useSelector((state) => state.register);
+  const { keyRegister } = useSelector((state) => state.register);
   // useState
   const [pageIndex, setPageIndex] = useState({
     index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     selectedIndex: 1,
   });
-  const [groupID, setGroupID] = useState("GP01");
+  const [groupID, setGroupID] = useState("GP03");
   const [keySearch, setKeySearch] = useState("");
-  const [modalData, setModalData] = useState({
-    keySetBtn: null,
-    data: {},
-  });
 
   // Handle function
   const handlePageSelect = (index) => {
@@ -79,6 +85,10 @@ function UserManage() {
               className="btns register"
               data-toggle="modal"
               data-target="#registorCourseModal"
+              onClick={() => {
+                dispatch(getKeyRegister("user-manage"));
+                dispatch(dataUserRegister(item));
+              }}
             >
               register
             </span>
@@ -115,13 +125,24 @@ function UserManage() {
   // useEffect
   useEffect(() => {
     dispatch(getUserAdminPage(groupID, pageIndex.selectedIndex, keySearch));
-  }, [groupID, pageIndex.selectedIndex, keySearch, deleteUserAdmin]);
+    if (registerUser.length !== 0) {
+      dispatch(postCourseNotRegister(registerUser.taiKhoan, token));
+      dispatch(postCourseConfirmed(registerUser.taiKhoan, token));
+      dispatch(postCoursePending(registerUser.taiKhoan, token));
+    }
+  }, [
+    groupID,
+    pageIndex.selectedIndex,
+    keySearch,
+    deleteUserAdmin,
+    registerUser,
+  ]);
 
   return (
     <div className="cover-user-manage">
       {/* Modal */}
       <ModalUser />
-      <RegistorModal />
+      <RegistorModal courseNotRegister={courseNotRegister} />
       <div className="title">
         <h1>user management</h1>
         <div className="add-user-btn">

@@ -1,0 +1,65 @@
+.modal-content {
+  .modal-header-register {
+    #modalRegisterCourse {
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+  }
+  .modal-body-register {
+    padding: 15px;
+    .part-one,
+    .part-two,
+    .part-three {
+      // border-bottom: 2px solid rgb(192, 190, 190);
+      padding-bottom: 20px;
+      h1 {
+        display: block;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        cursor: pointer;
+        letter-spacing: 1px;
+      }
+    }
+    .part-one {
+      .selector {
+        display: flex;
+        justify-content: space-between;
+        #groupID-register {
+          width: 70%;
+          border-radius: 5px;
+          &:focus-visible {
+            outline: none;
+          }
+        }
+        .btn-register {
+          width: 20%;
+        }
+      }
+    }
+    .part-two {
+      padding-top: 20px;
+    }
+    .part-three {
+      padding-top: 20px;
+    }
+  }
+}
+.check-btn {
+  background: lightgreen;
+  border-radius: 5px;
+  margin-right: 5px;
+  color: #fff;
+  &:hover {
+    background: rgb(93, 156, 93);
+  }
+}
+.delete-btn {
+  border-radius: 5px;
+  background: crimson;
+  color: #fff;
+  &:hover {
+    background: rgb(128, 11, 34);
+  }
+}
