@@ -8,6 +8,7 @@ import {
   GET_COURSE_DETAIL_SUCCESS,
   GET_LIST_COURSE_FAILE,
   GET_LIST_COURSE_SUCCESS,
+  GET_SEARCH_KEY,
   POST_CANCEL_REGISTER_FAILE,
   POST_CANCEL_REGISTER_SUCCESS,
 } from "../constants/courses.const";
@@ -19,6 +20,7 @@ const initialState = {
   courseDetail: [],
   cancelRegister: [],
   courseInCart: [],
+  searchKey: "",
   error: [],
 };
 
@@ -54,7 +56,8 @@ const courseReducer = (state = initialState, action) => {
         addCourseList.push(payload);
       }
       return { ...state, courseInCart: addCourseList };
-
+    case GET_SEARCH_KEY:
+      return { ...state, searchKey: payload };
     default:
       return { ...state };
   }

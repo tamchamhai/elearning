@@ -10,6 +10,7 @@ import {
   POST_CANCEL_REGISTER_SUCCESS,
   POST_CANCEL_REGISTER_FAILE,
   ADD_TO_CART_COURSE,
+  GET_SEARCH_KEY,
 } from "../constants/courses.const";
 import { startLoading, stopLoading } from "./common.action";
 import axios from "axios";
@@ -34,16 +35,19 @@ export const getListCourses = () => {
 };
 
 // Get the course from search
-export const getSearchCourse = (courseName) => {
+export const getSearchCourse = (searchKey, history) => {
   return (dispatch) => {
     dispatch(startLoading());
     axios({
-      method: "",
-      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${courseName}&MaNhom=GP03`,
+      method: "GET",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${searchKey}&MaNhom=GP03`,
     })
       .then((res) => {
         dispatch(getListCourseSuccess(res.data));
+        dispatch(getSearchKey(searchKey));
+        history.push("/search-course");
         dispatch(stopLoading());
+        console.log(res);
       })
       .catch((err) => {
         dispatch(getListCourseFaile(err));
@@ -61,6 +65,12 @@ const getListCourseFaile = (err) => {
   return {
     type: GET_LIST_COURSE_FAILE,
     payload: err,
+  };
+};
+const getSearchKey = (searchKey) => {
+  return {
+    type: GET_SEARCH_KEY,
+    payload: searchKey,
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./_style.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import Sidebar from "../sidebar";
@@ -13,6 +13,7 @@ import Registor from "../../../utils/button/registor";
 import { getSearchCourse } from "../../../store/actions/courses.action";
 
 export default function Header() {
+  const history = useHistory();
   const [isSignin, setIsSignin] = useState(true);
   const [searchKey, setSearchKey] = useState("");
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function Header() {
   };
   const handleSubmitSearch = (event) => {
     event.preventDefault();
-    dispatch(getSearchCourse(searchKey));
+    dispatch(getSearchCourse(searchKey, history));
     setSearchKey("");
   };
 

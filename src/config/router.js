@@ -6,6 +6,7 @@ import Dashboard from "../pages/admin/dashboard";
 import Category from "../pages/main/categories";
 import CourseDetail from "../pages/main/course-detail";
 import Home from "../pages/main/home";
+import SearchCoursePage from "../pages/main/searchCourse";
 import SignIn from "../pages/main/sign-in";
 import SignUp from "../pages/main/sign-up";
 import UserProfile from "../pages/main/user";
@@ -40,6 +41,11 @@ export const mainRouter = [
     path: "/signup",
     exact: true,
     component: SignUp,
+  },
+  {
+    path: "/search-course",
+    exact: true,
+    component: SearchCoursePage,
   },
 ];
 
